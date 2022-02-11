@@ -6,7 +6,11 @@ This repository contains the virtual model of the telemarketing robot developed 
 
 ## Installation
 
-Clone the package into your workspace (in this project ~/catkin_ws/src/telemarket):
+Open a new terminal and type the following path:
+
+    cd ~/catkin_ws/src
+
+Clone the package into your workspace:
 
     https://github.com/ECisneros20/Telemarketing-robot.git
 
