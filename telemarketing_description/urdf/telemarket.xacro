@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<robot name="Telemarket" xmlns:xacro="http://www.ros.org/wiki/xacro">
+  
+  <xacro:include filename="$(find telemarket_description)/urdf/links_joints.xacro" />
+  <xacro:include filename="$(find telemarket_description)/urdf/gazebo.xacro" />
+  
+  <material name="white">
+    <color rgba="1 1 1 1"/>
+  </material>
+
+  <material name="black">
+    <color rgba="0 0 0 1"/>
+  </material>
+
+  <material name="blue">
+    <color rgba="0 0 1 1"/>
+  </material>
+
+  <material name="grey">
+    <color rgba="0.332 0.332 0.332 1"/>
+  </material>
+
+  <material name="orange">
+    <color rgba="0.949 0.361 0.098 1"/>
+  </material>
+
+  <!-- Robot description -->
+  <m_link_mesh name="base_link"
+              origin_rpy="0 0 0" origin_xyz="0 0 0.2355"
+              mass="80"
+              ixx="0.8837" ixy="0" ixz="0"
+              iyy="2.6409" iyz="0"
+              izz="3.0534"
+              material="orange"
+              meshfile="package://telemarket_description/meshes/main_frame.stl"
+              meshscale="0.010335 0.010335 0.010335" />
+
+</robot>

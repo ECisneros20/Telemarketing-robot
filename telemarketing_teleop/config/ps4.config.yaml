@@ -1,0 +1,11 @@
+# Lineal x arriba / abajo L3
+axis_linear: 1  # Left thumb stick vertical
+scale_linear: 0.7
+scale_linear_turbo: 1.5
+
+# Angular z izquierda / derecha R3
+axis_angular: 2  # RIGHT thumb stick horizontal
+scale_angular: 0.7
+
+enable_button: 5  # R1 en vez de Left trigger button
+enable_turbo_button: 4  # L1 en vez de Right trigger button
