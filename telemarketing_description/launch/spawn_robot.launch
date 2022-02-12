@@ -11,7 +11,7 @@
   </include>
 
   <!-- Robot model -->
-  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find telemarket_description)/urdf/telemarket.xacro'" />
+  <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find telemarketing_description)/urdf/telemarketing.xacro'" />
 
   <!-- Spawn the robot model -->
   <node name="movil" pkg="gazebo_ros" type="spawn_model" output="screen" args="-urdf -param robot_description -model telemarket -z 2.0" />

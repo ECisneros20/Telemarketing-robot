@@ -3,7 +3,9 @@
 
 import rospy
 from geometry_msgs.msg import Twist
-from std_msgs.msg import Float64MultiArray
+from std_msgs.msg import Float64MultiArray, Header
+from sensor_msgs.msg import LaserScan
+
 
 ''' Teleop '''
 
@@ -26,7 +28,69 @@ for i in range(num_sensors):
 
 ''' Sensor data publication '''
 
+us_msg_1 = LaserScan()
+us_msg_1.header = Header()
+us_msg_1.header.frame_id = 'us_link_1'
 
+us_msg_2 = LaserScan()
+us_msg_2.header = Header()
+us_msg_2.header.frame_id = 'us_link_2'
+
+us_msg_3 = LaserScan()
+us_msg_3.header = Header()
+us_msg_3.header.frame_id = 'us_link_3'
+
+us_msg_4 = LaserScan()
+us_msg_4.header = Header()
+us_msg_4.header.frame_id = 'us_link_4'
+
+us_msg_5 = LaserScan()
+us_msg_5.header = Header()
+us_msg_5.header.frame_id = 'us_link_5'
+
+us_msg_6 = LaserScan()
+us_msg_6.header = Header()
+us_msg_6.header.frame_id = 'us_link_6'
+
+us_msg_7 = LaserScan()
+us_msg_7.header = Header()
+us_msg_7.header.frame_id = 'us_link_7'
+
+us_msg_8 = LaserScan()
+us_msg_8.header = Header()
+us_msg_8.header.frame_id = 'us_link_8'
+
+ir_msg_1 = LaserScan()
+ir_msg_1.header = Header()
+ir_msg_1.header.frame_id = 'ir_link_1'
+
+ir_msg_2 = LaserScan()
+ir_msg_2.header = Header()
+ir_msg_2.header.frame_id = 'ir_link_2'
+
+ir_msg_3 = LaserScan()
+ir_msg_3.header = Header()
+ir_msg_3.header.frame_id = 'ir_link_3'
+
+ir_msg_4 = LaserScan()
+ir_msg_4.header = Header()
+ir_msg_4.header.frame_id = 'ir_link_4'
+
+ir_msg_5 = LaserScan()
+ir_msg_5.header = Header()
+ir_msg_5.header.frame_id = 'ir_link_5'
+
+ir_msg_6 = LaserScan()
+ir_msg_6.header = Header()
+ir_msg_6.header.frame_id = 'ir_link_6'
+
+ir_msg_7 = LaserScan()
+ir_msg_7.header = Header()
+ir_msg_7.header.frame_id = 'ir_link_7'
+
+ir_msg_8 = LaserScan()
+ir_msg_8.header = Header()
+ir_msg_8.header.frame_id = 'ir_link_8'
 
 
 def callback_teleop(msg):
