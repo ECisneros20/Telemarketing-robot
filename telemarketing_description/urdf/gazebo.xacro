@@ -1,8 +1,66 @@
 <?xml version="1.0" ?>
-<robot name="Telemarket" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="Telemarketing" xmlns:xacro="http://www.ros.org/wiki/xacro">
   
   <gazebo reference="base_link">
-    <material>Gazebo/Orange</material>
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+  <gazebo reference="left_wheel">
+    <mu1>0.9</mu1>
+    <mu2>0.9</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>0.1</maxVel>
+    <fdir1>1 0 0</fdir1>
+    <material>Gazebo/FlatBlack</material>
+  </gazebo>
+
+  <gazebo reference="right_wheel">
+    <mu1>0.9</mu1>
+    <mu2>0.9</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>0.1</maxVel>
+    <fdir1>1 0 0</fdir1>
+    <material>Gazebo/FlatBlack</material>
+  </gazebo>
+
+<!--
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+      <robotNamespace>/thesis</robotNamespace>
+      <legacyModeNS>true</legacyModeNS>
+    </plugin>
+  </gazebo>-->
+  
+  <gazebo>
+    <plugin name='differential_drive_controller' filename='libgazebo_ros_diff_drive.so'>
+      <alwaysOn>true</alwaysOn>
+      <leftJoint>l_wheel_joint</leftJoint>
+      <rightJoint>r_wheel_joint</rightJoint>
+      <updateRate>100</updateRate>
+      <robotBaseFrame>base_link</robotBaseFrame>
+      <covariance_x>0.0001</covariance_x>
+      <covariance_y>0.0001</covariance_y>
+      <covariance_yaw>0.01</covariance_yaw>
+      <wheelSeparation>0.6910</wheelSeparation>
+      <wheelDiameter>0.32766</wheelDiameter>
+      <torque>100</torque>
+      <wheelAcceleration>0.1</wheelAcceleration>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <broadcastTF>true</broadcastTF>
+
+      <publishWheelTF>true</publishWheelTF>
+      <publishOdom>true</publishOdom>
+      <publishWheelJointState>true</publishWheelJointState>
+      <legacyMode>false</legacyMode>
+
+    </plugin>
   </gazebo>
 
 </robot>

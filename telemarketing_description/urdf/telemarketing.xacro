@@ -26,12 +26,12 @@
 
   <!-- Robot description -->
   <m_link_mesh name="base_link"
-              origin_rpy="0 0 0" origin_xyz="0 0 0.2355"
+              origin_rpy="0 1.5708 3.1416" origin_xyz="0 0 0.2355"
               mass="80"
-              ixx="0.8837" ixy="0" ixz="0"
-              iyy="2.6409" iyz="0"
-              izz="3.0534"
-              material="orange"
+              ixx="1177287.158" ixy="-246402.075" ixz="-453961.379"
+              iyy="13057357.025" iyz="-55693.992"
+              izz="13181014.451"
+              material="grey"
               meshfile="package://telemarket_description/meshes/main_frame.stl"
               meshscale="0.010335 0.010335 0.010335" />
 
