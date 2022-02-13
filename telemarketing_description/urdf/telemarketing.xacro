@@ -1,8 +1,8 @@
 <?xml version="1.0" ?>
-<robot name="Telemarket" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="Telemarketing" xmlns:xacro="http://www.ros.org/wiki/xacro">
   
-  <xacro:include filename="$(find telemarket_description)/urdf/links_joints.xacro" />
-  <xacro:include filename="$(find telemarket_description)/urdf/gazebo.xacro" />
+  <xacro:include filename="$(find telemarketing_description)/urdf/links_joints.xacro" />
+  <xacro:include filename="$(find telemarketing_description)/urdf/gazebo.xacro" />
   
   <material name="white">
     <color rgba="1 1 1 1"/>
@@ -26,13 +26,35 @@
 
   <!-- Robot description -->
   <m_link_mesh name="base_link"
-              origin_rpy="0 1.5708 3.1416" origin_xyz="0 0 0.2355"
-              mass="80"
+              origin_rpy="0 0 0" origin_xyz="0 0 0"
+              mass="1"
               ixx="1177287.158" ixy="-246402.075" ixz="-453961.379"
               iyy="13057357.025" iyz="-55693.992"
               izz="13181014.451"
-              material="grey"
-              meshfile="package://telemarket_description/meshes/main_frame.stl"
+              material="white"
+              meshfile="package://telemarketing_description/meshes/main_frame.stl"
               meshscale="0.010335 0.010335 0.010335" />
+
+
+
+<!--
+  <joint name="l_dwheel_joint" type="continuous">
+      <parent link="base_link"/>
+      <child link="l_dwheel"/>
+      <origin xyz="0.311 0.3455 0.1016" rpy="0.0 0.0 0"/>
+      <axis xyz="0 1 0"/>
+  </joint>
+
+  <m_link_mesh name="l_dwheel"
+              origin_rpy="0 0 0" origin_xyz="0 0 0"
+              mass="10"
+              ixx="0.1798" ixy="0" ixz="0"
+              iyy="0.1081" iyz="0"
+              izz="0.1798"
+              material="black"
+              meshfile="package://telemarketing_description/meshes/main_wheel.stl"
+              meshscale="0.010335 0.010335 0.010335" />
+-->
+
 
 </robot>

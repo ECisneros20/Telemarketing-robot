@@ -2,12 +2,12 @@
 <robot name="Telemarketing" xmlns:xacro="http://www.ros.org/wiki/xacro">
   
   <gazebo reference="base_link">
-    <material>Gazebo/Grey</material>
+    <material>Gazebo/White</material>
   </gazebo>
 
-  <gazebo reference="left_wheel">
-    <mu1>0.9</mu1>
-    <mu2>0.9</mu2>
+  <gazebo reference="r_dwheel">
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
     <kp>500000.0</kp>
     <kd>10.0</kd>
     <minDepth>0.001</minDepth>
@@ -16,9 +16,53 @@
     <material>Gazebo/FlatBlack</material>
   </gazebo>
 
-  <gazebo reference="right_wheel">
-    <mu1>0.9</mu1>
-    <mu2>0.9</mu2>
+  <gazebo reference="l_dwheel">
+    <mu1>1.0</mu1>
+    <mu2>1.0</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>0.1</maxVel>
+    <fdir1>1 0 0</fdir1>
+    <material>Gazebo/FlatBlack</material>
+  </gazebo>
+
+  <gazebo reference="fr_cwheel">
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>0.1</maxVel>
+    <fdir1>1 0 0</fdir1>
+    <material>Gazebo/FlatBlack</material>
+  </gazebo>
+
+  <gazebo reference="fl_cwheel">
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>0.1</maxVel>
+    <fdir1>1 0 0</fdir1>
+    <material>Gazebo/FlatBlack</material>
+  </gazebo>
+
+  <gazebo reference="br_cwheel">
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>0.1</maxVel>
+    <fdir1>1 0 0</fdir1>
+    <material>Gazebo/FlatBlack</material>
+  </gazebo>
+
+  <gazebo reference="bl_cwheel">
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
     <kp>500000.0</kp>
     <kd>10.0</kd>
     <minDepth>0.001</minDepth>
@@ -38,28 +82,27 @@
   
   <gazebo>
     <plugin name='differential_drive_controller' filename='libgazebo_ros_diff_drive.so'>
-      <alwaysOn>true</alwaysOn>
-      <leftJoint>l_wheel_joint</leftJoint>
-      <rightJoint>r_wheel_joint</rightJoint>
       <updateRate>100</updateRate>
-      <robotBaseFrame>base_link</robotBaseFrame>
-      <covariance_x>0.0001</covariance_x>
-      <covariance_y>0.0001</covariance_y>
-      <covariance_yaw>0.01</covariance_yaw>
-      <wheelSeparation>0.6910</wheelSeparation>
-      <wheelDiameter>0.32766</wheelDiameter>
-      <torque>100</torque>
+      <leftJoint>l_dwheel_joint</leftJoint>
+      <rightJoint>r_dwheel_joint</rightJoint>
+      <wheelSeparation>0.3219</wheelSeparation>
+      <wheelDiameter>0.2032</wheelDiameter>
       <wheelAcceleration>0.1</wheelAcceleration>
+      <wheelTorque>40</wheelTorque>
       <commandTopic>cmd_vel</commandTopic>
       <odometryTopic>odom</odometryTopic>
       <odometryFrame>odom</odometryFrame>
-      <broadcastTF>true</broadcastTF>
-
+      <robotBaseFrame>base_link</robotBaseFrame>
       <publishWheelTF>true</publishWheelTF>
       <publishOdom>true</publishOdom>
       <publishWheelJointState>true</publishWheelJointState>
       <legacyMode>false</legacyMode>
 
+      <alwaysOn>true</alwaysOn>
+      <covariance_x>0.0001</covariance_x>
+      <covariance_y>0.0001</covariance_y>
+      <covariance_yaw>0.01</covariance_yaw>
+      <broadcastTF>true</broadcastTF>
     </plugin>
   </gazebo>
 
