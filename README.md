@@ -12,9 +12,13 @@ Open a new terminal and type the following path:
 
 Clone the package into your workspace:
 
-    https://github.com/ECisneros20/Telemarketing-robot.git
+    git clone https://github.com/ECisneros20/Telemarketing-robot.git
 
 ## Usage
+
+First spawn the robot in the Gazebo environment:
+
+    roslaunch telemarketing_description spawn_robot.launch
 
 ## Next steps
 
