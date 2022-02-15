@@ -24,9 +24,9 @@
     <color rgba="0.949 0.361 0.098 1"/>
   </material>
 
-  <!-- Robot description -->
+  <!-- Robot description 0.311 0.3455 0.1016 -->
   <m_link_mesh name="base_link"
-              origin_rpy="0 0 0" origin_xyz="0 0 0"
+              origin_rpy="0 1.5708 3.1416" origin_xyz="0 0.158 0.5"
               mass="1"
               ixx="1177287.158" ixy="-246402.075" ixz="-453961.379"
               iyy="13057357.025" iyz="-55693.992"
@@ -35,13 +35,10 @@
               meshfile="package://telemarketing_description/meshes/main_frame.stl"
               meshscale="0.010335 0.010335 0.010335" />
 
-
-
-<!--
   <joint name="l_dwheel_joint" type="continuous">
       <parent link="base_link"/>
       <child link="l_dwheel"/>
-      <origin xyz="0.311 0.3455 0.1016" rpy="0.0 0.0 0"/>
+      <origin xyz="-0.065 -0.144 0.661" rpy="0.0 0.0 0"/>
       <axis xyz="0 1 0"/>
   </joint>
 
@@ -54,7 +51,7 @@
               material="black"
               meshfile="package://telemarketing_description/meshes/main_wheel.stl"
               meshscale="0.010335 0.010335 0.010335" />
--->
+
 
 
 </robot>

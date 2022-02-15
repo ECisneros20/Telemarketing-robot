@@ -31,7 +31,7 @@
   <!-- Visualization of the robot using Rviz 
   <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find telemarketing_description)/rviz/telemarketing.rviz"/>-->
 
-  <!-- TF Transform Broadcaster 
-  <node pkg="telemarketing_gazebo" type="telemarketing_tf_broadcaster.py" name="telemarketing_tf_broadcaster"/>-->
+  <!-- TF Transform Broadcaster -->
+  <node pkg="telemarketing_description" type="telemarketing_tf_broadcaster.py" name="telemarketing_tf_broadcaster"/>
 
 </launch>
