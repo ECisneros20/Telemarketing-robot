@@ -3,7 +3,7 @@
 
   <!-- Gazebo world -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="paused" value="true"/>
+    <arg name="paused" value="false"/>
     <arg name="use_sim_time" value="true"/>
     <arg name="gui" value="true"/>
     <arg name="recording" value="false"/>
@@ -14,7 +14,7 @@
   <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find telemarketing_description)/urdf/telemarketing.xacro'" />
 
   <!-- Spawn the robot model -->
-  <node name="movil" pkg="gazebo_ros" type="spawn_model" output="screen" args="-urdf -param robot_description -model telemarketing -z 1.5" />
+  <node name="movil" pkg="gazebo_ros" type="spawn_model" output="screen" args="-urdf -param robot_description -model telemarketing -z 0" />
   
   <!-- Load controllers -->
   <rosparam file="$(find telemarketing_description)/config/joints.yaml" command="load" />
@@ -28,8 +28,8 @@
     <remap from="/joint_states" to="/telemarketing/joint_states" />
   </node>
 
-  <!-- Visualization of the robot using Rviz 
-  <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find telemarketing_description)/rviz/telemarketing.rviz"/>-->
+  <!-- Visualization of the robot using Rviz -->
+  <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find telemarketing_description)/rviz/telemarketing.rviz"/>
 
   <!-- TF Transform Broadcaster -->
   <node pkg="telemarketing_description" type="telemarketing_tf_broadcaster.py" name="telemarketing_tf_broadcaster"/>

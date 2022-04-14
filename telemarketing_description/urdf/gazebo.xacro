@@ -1,10 +1,12 @@
 <?xml version="1.0" ?>
 <robot name="Telemarketing" xmlns:xacro="http://www.ros.org/wiki/xacro">
   
+  <!-- Base link -->
   <gazebo reference="base_link">
     <material>Gazebo/White</material>
   </gazebo>
 
+  <!-- Right drive wheel -->
   <gazebo reference="r_dwheel">
     <mu1>1.0</mu1>
     <mu2>1.0</mu2>
@@ -16,6 +18,7 @@
     <material>Gazebo/FlatBlack</material>
   </gazebo>
 
+  <!-- Left drive wheel -->
   <gazebo reference="l_dwheel">
     <mu1>1.0</mu1>
     <mu2>1.0</mu2>
@@ -27,6 +30,7 @@
     <material>Gazebo/FlatBlack</material>
   </gazebo>
 
+  <!-- Front right caster wheel -->
   <gazebo reference="fr_cwheel">
     <mu1>0.0</mu1>
     <mu2>0.0</mu2>
@@ -38,6 +42,7 @@
     <material>Gazebo/FlatBlack</material>
   </gazebo>
 
+  <!-- Front left caster wheel -->
   <gazebo reference="fl_cwheel">
     <mu1>0.0</mu1>
     <mu2>0.0</mu2>
@@ -49,6 +54,7 @@
     <material>Gazebo/FlatBlack</material>
   </gazebo>
 
+  <!-- Back right caster wheel -->
   <gazebo reference="br_cwheel">
     <mu1>0.0</mu1>
     <mu2>0.0</mu2>
@@ -60,6 +66,7 @@
     <material>Gazebo/FlatBlack</material>
   </gazebo>
 
+  <!-- Back left caster wheel -->
   <gazebo reference="bl_cwheel">
     <mu1>0.0</mu1>
     <mu2>0.0</mu2>
@@ -71,17 +78,10 @@
     <material>Gazebo/FlatBlack</material>
   </gazebo>
 
-<!--
-  <gazebo>
-    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
-      <robotNamespace>/thesis</robotNamespace>
-      <legacyModeNS>true</legacyModeNS>
-    </plugin>
-  </gazebo>-->
-  
+  <!-- Plugin for differential drive controller -->
   <gazebo>
     <plugin name='differential_drive_controller' filename='libgazebo_ros_diff_drive.so'>
+      <!--<alwaysOn>true</alwaysOn>-->
       <updateRate>100</updateRate>
       <leftJoint>l_dwheel_joint</leftJoint>
       <rightJoint>r_dwheel_joint</rightJoint>
@@ -92,18 +92,48 @@
       <commandTopic>cmd_vel</commandTopic>
       <odometryTopic>odom</odometryTopic>
       <odometryFrame>odom</odometryFrame>
-      <robotBaseFrame>base_link</robotBaseFrame>
+      <robotBaseFrame>base_footprint</robotBaseFrame>
       <publishWheelTF>true</publishWheelTF>
       <publishOdom>true</publishOdom>
+      <robotBaseFrame>base</robotBaseFrame>
       <publishWheelJointState>true</publishWheelJointState>
       <legacyMode>false</legacyMode>
-
-      <alwaysOn>true</alwaysOn>
-      <covariance_x>0.0001</covariance_x>
-      <covariance_y>0.0001</covariance_y>
-      <covariance_yaw>0.01</covariance_yaw>
-      <broadcastTF>true</broadcastTF>
     </plugin>
   </gazebo>
+
+  <!-- LiDAR -->
+  <gazebo reference="lidar_link">
+    <material>Gazebo/Blue</material>
+    <sensor type="ray" name="hokuyo_sensor">
+      <pose>0 0 0 1.5708 0 1.5708</pose>
+      <visualize>true</visualize>
+      <update_rate>40</update_rate>
+      <ray>
+        <scan>
+          <horizontal>
+            <samples>1080</samples>
+            <resolution>0.25</resolution>
+            <min_angle>-2.3562</min_angle>
+            <max_angle>2.3562</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.20</min>
+          <max>16.0</max>
+          <resolution>0.001</resolution>
+        </range>
+        <noise>
+          <type>gaussian</type>
+          <mean>0.0</mean>
+          <stddev>0.01</stddev>
+        </noise>
+      </ray>
+      <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_laser.so">
+        <topicName>/laser_scan</topicName>
+        <frameName>lidar_link</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+
 
 </robot>

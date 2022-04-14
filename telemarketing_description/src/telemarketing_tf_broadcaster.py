@@ -4,10 +4,6 @@ import rospy
 
 if __name__ == '__main__':
 
-  x_scwheel=0.2750
-  y_scwheel=0.1500
-  z_scwheel=0.0595
-
   x_cwheel=0.0240
   y_cwheel=0.0000
   z_cwheel=-0.0420
@@ -21,12 +17,21 @@ if __name__ == '__main__':
   # blink is a contraction of base link
   blink_b = tf.TransformBroadcaster()
   blink_bfprint = tf.TransformBroadcaster()
+  rdrivelink_blink = tf.TransformBroadcaster()
+  ldrivelink_blink = tf.TransformBroadcaster()
+  frcasterlink_blink = tf.TransformBroadcaster()
+  flcasterlink_blink = tf.TransformBroadcaster()
+  brcasterlink_blink = tf.TransformBroadcaster()
+  blcasterlink_blink = tf.TransformBroadcaster()
+  
+
+
   bcamera_blink = tf.TransformBroadcaster()
   brplidar_blink = tf.TransformBroadcaster()
   bfcaster_blink = tf.TransformBroadcaster()
   bbcaster_blink = tf.TransformBroadcaster()
 
-  rate = rospy.Rate(50)
+  #rate = rospy.Rate(100)
 
   while not rospy.is_shutdown():
 
@@ -38,42 +43,50 @@ if __name__ == '__main__':
         tf.transformations.quaternion_from_euler(0, 0, 0),
         rospy.Time.now(),"base","base_footprint")
 
-    bcamera_blink.sendTransform((x_scwheel, -y_scwheel, z_scwheel),
-        tf.transformations.quaternion_from_euler(0, 0, 0),
-        rospy.Time.now(),"fr_scwheel","base_link")
+    rdrivelink_blink.sendTransform((-0.026, -0.174, 0.661),
+        tf.transformations.quaternion_from_euler(1.5708, 0, 0),
+        rospy.Time.now(),"r_dwheel","base_link")
+
+    ldrivelink_blink.sendTransform((-0.007, 0.169, 0.661),
+        tf.transformations.quaternion_from_euler(1.5708, 0, 0),
+        rospy.Time.now(),"l_dwheel","base_link")
+
+    frcasterlink_blink.sendTransform((0.165, -0.186, 0.609),
+        tf.transformations.quaternion_from_euler(1.5708, 0, 0),
+        rospy.Time.now(),"fr_cwheel","base_link")
+
+    flcasterlink_blink.sendTransform((0.165, 0.181, 0.609),
+        tf.transformations.quaternion_from_euler(1.5708, 0, 0),
+        rospy.Time.now(),"fl_cwheel","base_link")
+
+    brcasterlink_blink.sendTransform((-0.199, -0.186, 0.609),
+        tf.transformations.quaternion_from_euler(1.5708, 0, 0),
+        rospy.Time.now(),"br_cwheel","base_link")
+    
+    blcasterlink_blink.sendTransform((-0.199, 0.181, 0.609),
+        tf.transformations.quaternion_from_euler(1.5708, 0, 0),
+        rospy.Time.now(),"bl_cwheel","base_link")
+
+
+'''
+    bcamera_blink.sendTransform((x_dwheel, y_dwheel, z_dwheel),
+        tf.transformations.quaternion_from_euler(1.5708, 0, 0),
+        rospy.Time.now(),"l_dwheel","base_link")
 
     bcamera_blink.sendTransform((x_cwheel, y_cwheel, z_cwheel),
         tf.transformations.quaternion_from_euler(0, 0, 0),
         rospy.Time.now(),"fr_cwheel","fr_scwheel")
 
-    bcamera_blink.sendTransform((x_scwheel, y_scwheel, z_scwheel),
-        tf.transformations.quaternion_from_euler(0, 0, 0),
-        rospy.Time.now(),"fl_scwheel","base_link")
-
     bcamera_blink.sendTransform((x_cwheel, y_cwheel, z_cwheel),
         tf.transformations.quaternion_from_euler(0, 0, 0),
         rospy.Time.now(),"fl_cwheel","fl_scwheel")
-
-    bcamera_blink.sendTransform((-x_scwheel, -y_scwheel, z_scwheel),
-        tf.transformations.quaternion_from_euler(0, 0, 0),
-        rospy.Time.now(),"br_scwheel","base_link")
 
     bcamera_blink.sendTransform((x_cwheel, y_cwheel, z_cwheel),
         tf.transformations.quaternion_from_euler(0, 0, 0),
         rospy.Time.now(),"br_cwheel","br_scwheel")
 
-    bcamera_blink.sendTransform((-x_scwheel, y_scwheel, z_scwheel),
-        tf.transformations.quaternion_from_euler(0, 0, 0),
-        rospy.Time.now(),"bl_scwheel","base_link")
-
     bcamera_blink.sendTransform((x_cwheel, y_cwheel, z_cwheel),
         tf.transformations.quaternion_from_euler(0, 0, 0),
         rospy.Time.now(),"bl_cwheel","bl_scwheel")
 
-    bcamera_blink.sendTransform((x_dwheel, -y_dwheel, z_dwheel),
-        tf.transformations.quaternion_from_euler(1.5708, 0, 0),
-        rospy.Time.now(),"r_dwheel","base_link")
-
-    bcamera_blink.sendTransform((x_dwheel, y_dwheel, z_dwheel),
-        tf.transformations.quaternion_from_euler(1.5708, 0, 0),
-        rospy.Time.now(),"l_dwheel","base_link")
+'''

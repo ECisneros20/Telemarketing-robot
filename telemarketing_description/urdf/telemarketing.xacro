@@ -17,28 +17,45 @@
   </material>
 
   <material name="grey">
-    <color rgba="0.332 0.332 0.332 1"/>
+    <color rgba="0.750 0.750 0.750 1"/>
   </material>
 
   <material name="orange">
     <color rgba="0.949 0.361 0.098 1"/>
   </material>
 
-  <!-- Robot description 0.311 0.3455 0.1016 -->
+  <!-- Robot description -->
   <m_link_mesh name="base_link"
               origin_rpy="0 1.5708 3.1416" origin_xyz="0 0.158 0.5"
               mass="1"
               ixx="1177287.158" ixy="-246402.075" ixz="-453961.379"
               iyy="13057357.025" iyz="-55693.992"
               izz="13181014.451"
-              material="white"
+              material="grey"
               meshfile="package://telemarketing_description/meshes/main_frame.stl"
+              meshscale="0.010335 0.010335 0.010335" />
+
+  <joint name="r_dwheel_joint" type="continuous">
+      <parent link="base_link"/>
+      <child link="r_dwheel"/>
+      <origin xyz="-0.026 -0.174 0.661" rpy="1.5708 0.0 0"/>
+      <axis xyz="0 1 0"/>
+  </joint>
+
+  <m_link_mesh name="r_dwheel"
+              origin_rpy="0 0 0" origin_xyz="0 0 0"
+              mass="10"
+              ixx="0.1798" ixy="0" ixz="0"
+              iyy="0.1081" iyz="0"
+              izz="0.1798"
+              material="black"
+              meshfile="package://telemarketing_description/meshes/main_wheel.stl"
               meshscale="0.010335 0.010335 0.010335" />
 
   <joint name="l_dwheel_joint" type="continuous">
       <parent link="base_link"/>
       <child link="l_dwheel"/>
-      <origin xyz="-0.065 -0.144 0.661" rpy="0.0 0.0 0"/>
+      <origin xyz="-0.007 0.169 0.661" rpy="1.5708 0.0 0"/>
       <axis xyz="0 1 0"/>
   </joint>
 
@@ -52,6 +69,75 @@
               meshfile="package://telemarketing_description/meshes/main_wheel.stl"
               meshscale="0.010335 0.010335 0.010335" />
 
+  <joint name="fr_cwheel_joint" type="continuous">
+      <parent link="base_link"/>
+      <child link="fr_cwheel"/>
+      <origin xyz="0.165 -0.186 0.609" rpy="1.5708 0.0 0"/>
+      <axis xyz="0 1 0"/>
+  </joint>
 
+  <m_link_mesh name="fr_cwheel"
+              origin_rpy="0 0 0" origin_xyz="0 0 0"
+              mass="10"
+              ixx="0.1798" ixy="0" ixz="0"
+              iyy="0.1081" iyz="0"
+              izz="0.1798"
+              material="black"
+              meshfile="package://telemarketing_description/meshes/caster_wheel.stl"
+              meshscale="0.010335 0.010335 0.010335" />
+
+  <joint name="fl_cwheel_joint" type="continuous">
+      <parent link="base_link"/>
+      <child link="fl_cwheel"/>
+      <origin xyz="0.165 0.181 0.609" rpy="1.5708 0.0 0"/>
+      <axis xyz="0 1 0"/>
+  </joint>
+
+  <m_link_mesh name="fl_cwheel"
+              origin_rpy="0 0 0" origin_xyz="0 0 0"
+              mass="10"
+              ixx="0.1798" ixy="0" ixz="0"
+              iyy="0.1081" iyz="0"
+              izz="0.1798"
+              material="black"
+              meshfile="package://telemarketing_description/meshes/caster_wheel.stl"
+              meshscale="0.010335 0.010335 0.010335" />
+
+  <joint name="br_cwheel_joint" type="continuous">
+      <parent link="base_link"/>
+      <child link="br_cwheel"/>
+      <origin xyz="-0.199 -0.186 0.609" rpy="1.5708 0.0 0"/>
+      <axis xyz="0 1 0"/>
+  </joint>
+
+  <m_link_mesh name="br_cwheel"
+              origin_rpy="0 0 0" origin_xyz="0 0 0"
+              mass="10"
+              ixx="0.1798" ixy="0" ixz="0"
+              iyy="0.1081" iyz="0"
+              izz="0.1798"
+              material="black"
+              meshfile="package://telemarketing_description/meshes/caster_wheel.stl"
+              meshscale="0.010335 0.010335 0.010335" />
+
+  <joint name="bl_cwheel_joint" type="continuous">
+      <parent link="base_link"/>
+      <child link="bl_cwheel"/>
+      <origin xyz="-0.199 0.181 0.609" rpy="1.5708 0.0 0"/>
+      <axis xyz="0 1 0"/>
+  </joint>
+
+  <m_link_mesh name="bl_cwheel"
+              origin_rpy="0 0 0" origin_xyz="0 0 0"
+              mass="10"
+              ixx="0.1798" ixy="0" ixz="0"
+              iyy="0.1081" iyz="0"
+              izz="0.1798"
+              material="black"
+              meshfile="package://telemarketing_description/meshes/caster_wheel.stl"
+              meshscale="0.010335 0.010335 0.010335" />
+
+
+              
 
 </robot>
