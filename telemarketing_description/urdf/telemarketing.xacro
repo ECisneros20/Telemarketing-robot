@@ -137,7 +137,70 @@
               meshfile="package://telemarketing_description/meshes/caster_wheel.stl"
               meshscale="0.010335 0.010335 0.010335" />
 
+  <joint name="lidar_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0.1650 0 0.920" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="lidar_link"/>
+  </joint>
 
-              
+  <link name="lidar_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="1.5708 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://telemarketing_description/meshes/lidar.stl" scale="0.010335 0.010335 0.010335"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.5708 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://telemarketing_description/meshes/lidar.stl" scale="0.010335 0.010335 0.010335"/>
+      </geometry>
+      <material name="blue"/>
+    </visual>
+    <inertial>
+      <mass value="0.370" />
+      <origin xyz="0 0 0" rpy="1.5708 0 1.5708"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+  <joint name="depth_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0.165 0 1.417" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="depth_link"/>
+  </joint>
+
+  <link name="depth_link">
+    <collision>
+      <origin xyz="0 0 0" rpy="1.3090 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://telemarketing_description/meshes/depth_camera.stl" scale="0.010335 0.010335 0.010335"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 0" rpy="1.3090 0 1.5708"/>
+      <geometry>
+        <mesh filename="package://telemarketing_description/meshes/depth_camera.stl" scale="0.010335 0.010335 0.010335"/>
+      </geometry>
+      <material name="grey"/>
+    </visual>
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+
+  <joint name="depth_optical_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="-1.5708 0 -1.5708"/>
+    <parent link="depth_link"/>
+    <child link="depth_optical_link"/>
+  </joint>
+
+  <link name="depth_optical_link"/>
+
+             
 
 </robot>
