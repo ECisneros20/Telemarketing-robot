@@ -137,6 +137,8 @@
   </gazebo>
 
   <!-- Depth camera -->
+  <!-- https://www.intelrealsense.com/depth-camera-d435i/ -->
+  <!-- https://www.intel.com/content/dam/support/us/en/documents/emerging-technologies/intel-realsense-technology/Intel-RealSense-D400-Series-Datasheet.pdf -->
   <gazebo reference="depth_link">
     <material>Gazebo/Blue</material>
     <sensor name="depth_camera" type="depth">

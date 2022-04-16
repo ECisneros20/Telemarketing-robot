@@ -39,7 +39,7 @@
       <parent link="base_link"/>
       <child link="r_dwheel"/>
       <origin xyz="-0.026 -0.174 0.661" rpy="1.5708 0.0 0"/>
-      <axis xyz="0 1 0"/>
+      <axis xyz="0 0 -1"/>
   </joint>
 
   <m_link_mesh name="r_dwheel"
@@ -56,7 +56,7 @@
       <parent link="base_link"/>
       <child link="l_dwheel"/>
       <origin xyz="-0.007 0.169 0.661" rpy="1.5708 0.0 0"/>
-      <axis xyz="0 1 0"/>
+      <axis xyz="0 0 -1"/>
   </joint>
 
   <m_link_mesh name="l_dwheel"
