@@ -1,1 +1,3 @@
+numpy
+opencv-python
 tensorflow == 2.5.0

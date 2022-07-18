@@ -4,7 +4,7 @@ Changelog for cansat programming
 
 0.0.2 (2022-07-18)
 ------------------
-* Update several packages.
+* Update sentiment_analysis (complete) and telemarketing_teleop packages (src to do).
 
 0.0.1 (2022-07-18)
 ------------------
