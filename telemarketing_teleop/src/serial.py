@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Fuente: https://www.youtube.com/watch?v=aE7RQNhwnPQ / 7:45
+# Link: https://www.youtube.com/watch?v=aE7RQNhwnPQ / 7:45
 
 import rospy
 from geometry_msgs.msg import Twist
@@ -9,16 +9,17 @@ from sensor_msgs.msg import LaserScan
 
 ''' Teleop '''
 
-R = 0.1016 # Radio de las ruedas en metros
-L = 0.3219 # Distancia entre las ruedas en metros
-vel_motor_der = 0.0 # Velocidad angular para motor derecho
-vel_motor_izq = 0.0 # Velocidad angular para motor izquierdo
+R = 0.1016 # Wheel radius (m)
+L = 0.3219 # Distance between the wheels (m)
+vel_motor_right = 0.0 # Angular velocity for right motor
+vel_motor_left = 0.0 # Angular velocity for left motor
 
 vel_des = Float64MultiArray()
 vel_des.data.append(0.0)
 vel_des.data.append(0.0)
 
-''' Sensor data subscription '''
+
+''' Data sensor subscription '''
 
 num_sensors = 18
 sensor_data = Float64MultiArray()
@@ -26,7 +27,8 @@ sensor_data = Float64MultiArray()
 for i in range(num_sensors):
     sensor_data.data.append(0.0)
 
-''' Sensor data publication '''
+
+''' Data sensor publication '''
 
 us_msg_1 = LaserScan()
 us_msg_1.header = Header()
@@ -95,12 +97,13 @@ ir_msg_8.header.frame_id = 'ir_link_8'
 
 def callback_teleop(msg):
 
-    global L, R, vel_motor_der, vel_motor_izq
+    global L, R, vel_motor_right, vel_motor_left
 
     lineal_x = msg.linear.x
     angular_z = msg.angular.z
-    vel_motor_der = (2 * lineal_x + angular_z * L) / (2 * R)
-    vel_motor_izq = (2 * lineal_x - angular_z * L) / (2 * R)
+    vel_motor_right = (2 * lineal_x + angular_z * L) / (2 * R)
+    vel_motor_left = (2 * lineal_x - angular_z * L) / (2 * R)
+
 
 def callback_sensor(msg):
 
@@ -109,8 +112,7 @@ def callback_sensor(msg):
     print(msg.data)
 
 
-
-def comunicacion_serial():
+def serial_communication():
 
     rospy.init_node('serial_communication')
 
@@ -127,15 +129,16 @@ def comunicacion_serial():
     rate = rospy.Rate(10)
 
     while not rospy.is_shutdown():
-        vel_des.data[0] = vel_motor_izq
-        vel_des.data[1] = vel_motor_der
+        vel_des.data[0] = vel_motor_left
+        vel_des.data[1] = vel_motor_right
         pub_teleop.publish(vel_des)
     #   print('motor_izquierdo: {} \nmotor_derecho: {}'.format(vel_des.data[0], vel_des.data[1]))
     #   rospy.loginfo(vel_des.data)
         rate.sleep()
 
+
 if __name__ == '__main__':
     try:
-        comunicacion_serial()
+        serial_communication()
     except rospy.ROSInterruptException:
         pass

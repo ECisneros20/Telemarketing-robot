@@ -7,7 +7,7 @@ from tensorflow.keras.models import load_model
 cascade = "./haarcascade_frontalface_alt.xml"
 classifier = cv2.CascadeClassifier(cascade)
 
-path = './5.h5'
+path = './models/5.h5'
 new_model = load_model(path)
 new_model.summary()
 
@@ -20,13 +20,13 @@ def camera2Recv():
 
     width = 150
     height = 150
-  
+
     while (cap.isOpened()):
         ret, frame = cap.read()
         if ret == True:
 
-            gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-            faces = classifier.detectMultiScale(gray, 1.3, 5)
+            color = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            faces = classifier.detectMultiScale(color, 1.3, 5)
 
             for (x, y, ancho, alto) in faces:
                 cv2.rectangle(frame, (x,y), (x+ancho, y+alto), (0,255,0), 3)
@@ -45,14 +45,13 @@ def camera2Recv():
 
                         percentage = max(predict)
                         percentage = "{:.0%}".format(percentage)
-                    
+
                         msg = emo_dict[sentimiento] + ' - ' + percentage + ' of confidence'
                         print(msg)
 
                         font = cv2.FONT_HERSHEY_PLAIN
                         cv2.putText(frame, msg, (x,y+alto+25), font, 1, (255,255,255), 2, cv2.LINE_AA)
 
-    #                    cv2.putText(frame, emo_dict[sentimiento], (x,y+alto+25), font, 3, (255,255,255), 2, cv2.LINE_AA)
                 except:
                     pass
 
@@ -62,24 +61,9 @@ def camera2Recv():
                 break
         else:
             break
+
     cap.release()
     cv2.destroyAllWindows()
-
-'''
-            frame_resized = cv2.resize(frame, (width, height))
-            frame_resized = frame_resized[None,:,:]
-
-            predict = new_model.predict(frame_resized)
-            predict = predict[0,:]
-
-            print(predict)
-            sentimiento = np.where(predict == max(predict))[0][0]
-
-            print('The sentiment detect is: ' + emo_dict[sentimiento])
-
-            font = cv2.FONT_HERSHEY_PLAIN
-            cv2.putText(frame, emo_dict[sentimiento], (220,440), font, 3, (255,255,255), 2, cv2.LINE_AA)
-'''
 
 if __name__ == '__main__':
 
