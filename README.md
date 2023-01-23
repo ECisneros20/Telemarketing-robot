@@ -42,13 +42,13 @@ Spawn the robot in the Gazebo environment:
 
 ### After new packages
 
-    - Translate every script.
+- Translate every script.
 
-    - Organize according to the ros naming standard.
+- Organize according to the ros naming standard.
 
-    - Create new packages and ros launch scripts.
+- Create new packages and ros launch scripts.
 
-    - According to the new changes, complete the Usage section.
+- According to the new changes, complete the Usage section.
 
 ## License
 
