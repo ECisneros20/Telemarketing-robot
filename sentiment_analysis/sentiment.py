@@ -13,7 +13,6 @@ new_model = load_model(path)
 
 def camera2Recv():
 
-    # 0: "neutral", 1: "happy", 2: "sad", 3: "surprise", 4: "anger"
     emo_dict = {0: "neutral", 1: "happy", 2: "sad", 3: "surprise", 4: "anger"}
     cap = cv2.VideoCapture(0)
 
