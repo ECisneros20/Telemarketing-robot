@@ -4,8 +4,6 @@
 
  This repository contains the virtual model of a telemarketing robot to evaluate autonomous navigation algorithms, as well as what is needed to perform tests on a physical robot. This project was developed and explained in the papers [1] [2].
 
-</br>
-
 ## <b>Installation</b>
 
 Open a new terminal and type the following path:
@@ -20,23 +18,17 @@ To clone the latest version into your workspace:
 
     git clone -b testing https://github.com/ECisneros20/Telemarketing-robot.git
 
-</br>
-
 ## <b>Usage for virtual tests</b>
 
 Spawn the robot in the Gazebo environment:
 
     roslaunch telemarketing_description spawn_robot.launch
 
-</br>
-
 ## <b>Usage for physical tests</b>
 
 Spawn the robot in the Gazebo environment:
 
     roslaunch telemarketing_description spawn_robot.launch
-
-</br>
 
 ## <b>Next steps</b>
 
@@ -58,13 +50,9 @@ Spawn the robot in the Gazebo environment:
 
     - According to the new changes, complete the Usage section.
 
-</br>
-
 ## <b>License</b>
 
 MIT License
-
-</br>
 
 ## <b>References</b>
 
