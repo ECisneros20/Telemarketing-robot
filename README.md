@@ -1,10 +1,12 @@
 # Telemarketing-robot
 
-## Description
+# 1. Description
 
-This repository contains the virtual model of the telemarketing robot developed for the papers [1] [2].
+This repository contains the virtual model of a telemarketing robot to evaluate autonomous navigation algorithms, as well as what is needed to perform tests on a physical robot. This project was developed and explained in the papers [1] [2].
 
-## Installation
+</br>
+
+# 2. Installation
 
 Open a new terminal and type the following path:
 
@@ -18,40 +20,56 @@ To clone the latest version into your workspace:
 
     git clone -b testing https://github.com/ECisneros20/Telemarketing-robot.git
 
-## Usage
+</br>
 
-First spawn the robot in the Gazebo environment:
+# 3. Usage
+
+* Virtual tests
+
+Spawn the robot in the Gazebo environment:
 
     roslaunch telemarketing_description spawn_robot.launch
 
-## Next steps
+* Physical tests
 
-- Before new packages
+Spawn the robot in the Gazebo environment:
 
-1. Translate every script.
+    roslaunch telemarketing_description spawn_robot.launch
 
-2. Organize according to the ros naming standard [3].
+</br>
 
-3. Create new packages and ros launch scripts.
+# 4. Next steps
 
-- After new packages
+* Before new packages
 
-4. Translate every script.
+    - Translate every script.
 
-5. Organize according to the ros naming standard.
+    - Organize according to the ros naming standard [3].
 
-6. Create new packages and ros launch scripts.
+    - Create new packages and ros launch scripts.
 
-7. According to the new changes, complete the Usage section.
+* After new packages
 
-## License
+    - Translate every script.
+
+    - Organize according to the ros naming standard.
+
+    - Create new packages and ros launch scripts.
+
+    - According to the new changes, complete the Usage section.
+
+</br>
+
+# License
 
 MIT License
 
-## References
+</br>
+
+# References
 
 [1]
 
 [2]
 
-[3]
+[3] <a href = "https://automaticaddison.com/naming-and-organizing-packages-in-large-ros-2-projects/">Naming and Organizing Packages in Large ROS 2 Projects</a>
