@@ -2,6 +2,10 @@
 Changelog for Telemarketing robot
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.0.3 (2023-01-22)
+------------------
+* Update README.md file and some packages.
+
 0.0.2 (2022-07-18)
 ------------------
 * Update sentiment_analysis (complete) and telemarketing_teleop packages (src to do).
