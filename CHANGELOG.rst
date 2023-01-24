@@ -2,6 +2,10 @@
 Changelog for Telemarketing robot
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.0.5 (2023-01-24)
+------------------
+* Changes in telemarketing_microcontroller.
+
 0.0.4 (2023-01-23)
 ------------------
 * Changes in telemarketing_microcontroller.
