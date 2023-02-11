@@ -23,10 +23,17 @@ void loop() {
     for (int i=8; i<=15; i++) {
         sensor_data[i] = read_IR(i);
     }
-
-    for (int i=0; i<=15; i++) {
-        Serial.println(String(sensor_data[i]));
+    Serial.print("US:");
+    for (int i=0; i<=7; i++) {
+        Serial.print((sensor_data[i]));
+        Serial.print("---");
     }
+    Serial.print("IR:");
+    for (int i=8; i<=15; i++) {
+        Serial.print((sensor_data[i]));
+        Serial.print("---");
+    }
+    Serial.println("");
 
 }
 
