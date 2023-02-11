@@ -16,7 +16,7 @@ To clone the latest stable version into your workspace:
 
 To clone the latest version into your workspace:
 
-    git clone -b testing https://github.com/ECisneros20/Telemarketing-robot.git
+    git clone -b release/0.1.0 https://github.com/ECisneros20/Telemarketing-robot.git
 
 ## Usage for virtual tests
 
@@ -56,7 +56,7 @@ MIT License
 
 ## References
 
-[1]
+[1] D. Arce et al., ”Design and Implementation of Telemarketing Robot with Emotion Identification for Human-Robot Interaction,” 2022 Sixth IEEE International Conference on Robotic Computing (IRC), Italy, 2022, pp. 177-180, doi: 10.1109/IRC55401.2022.00037.
 
 [2]
 
