@@ -2,9 +2,13 @@
 const int US[8] = {A0, A1, A2, A3, A4, A5, A6, A7};
 // Infrared sensors
 const int IR[8] = {A8, A9, A10, A11, A12, A13, A14, A15};
+// Array of 16 sensors + bumpers
+float sensor_data[17];
+
 
 void setup() {
     Serial.begin(9600);
+    // Setup of ultrasonic and infrared sensors
     for (int i=0; i<=7; i++) {
         pinMode(US[i],INPUT);
         pinMode(IR[i],INPUT);
@@ -13,16 +17,17 @@ void setup() {
 
 void loop() {
     for (int i=0; i<=7; i++) {
-        Serial.print(" | Sonar"+String(i+1)+": ");
-        Serial.print(String(read_US(i))+"cm");
+        sensor_data[i] = read_US(i);
     }
-    Serial.println();
 
-    for (int i=0; i<=7; i++) {
-        Serial.print(" | IR"+String(i+1)+": ");
-        Serial.print(String(read_IR(i))+"cm");
+    for (int i=8; i<=15; i++) {
+        sensor_data[i] = read_IR(i);
     }
-    Serial.println();
+
+    for (int i=0; i<=15; i++) {
+        Serial.println(String(sensor_data[i]));
+    }
+
 }
 
 float read_IR(int sensor) {
@@ -34,7 +39,7 @@ float read_IR(int sensor) {
         delay(10);
     }
 
-    return distance/10;
+    return distance/1000;
 }
 
 float read_US(int sensor) {
@@ -46,5 +51,5 @@ float read_US(int sensor) {
         delay(10);
     }
 
-    return distance/10;
+    return distance/1000;
 }
