@@ -5,6 +5,19 @@ const int IR[8] = {A8, A9, A10, A11, A12, A13, A14, A15};
 // Array of 16 sensors + bumpers
 float sensor_data[17];
 
+// Variables for odometry calculations
+volatile double vel_lin_x = 0;
+volatile double vel_ang_z = 0;
+volatile double vel_ang_z = 0;
+volatile double pos_lin_x = 0;
+volatile double pos_lin_y = 0;
+volatile double pos_ang_z = 0;
+
+volatile unsigned long currTime = 0;
+volatile unsigned long prevTime = 0;
+volatile unsigned long delta = 0;
+volatile unsigned long pulses = 0;
+
 
 void setup() {
     Serial.begin(9600);
