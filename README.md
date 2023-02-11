@@ -56,7 +56,7 @@ MIT License
 
 ## References
 
-[1] D. Arce et al., ”Design and Implementation of Telemarketing Robot with Emotion Identification for Human-Robot Interaction,” 2022 Sixth IEEE International Conference on Robotic Computing (IRC), Italy, 2022, pp. 177-180, doi: 10.1109/IRC55401.2022.00037.
+[1] D. Arce <em>et al.</em>, ”Design and Implementation of Telemarketing Robot with Emotion Identification for Human-Robot Interaction,” <em>2022 Sixth IEEE International Conference on Robotic Computing (IRC)</em>, Italy, 2022, pp. 177-180, doi: 10.1109/IRC55401.2022.00037.
 
 [2]
 
