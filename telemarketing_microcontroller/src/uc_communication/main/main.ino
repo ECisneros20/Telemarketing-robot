@@ -13,6 +13,13 @@ volatile double pos_lin_x = 0;
 volatile double pos_lin_y = 0;
 volatile double pos_ang_z = 0;
 
+volatile double wR = 0;
+volatile double wL = 0;
+volatile unsigned long ticksR = 0;
+volatile unsigned long ticksL = 0;
+volatile unsigned long TimeBackup = 0;
+
+
 volatile unsigned long currTime = 0;
 volatile unsigned long prevTime = 0;
 volatile unsigned long delta = 0;
