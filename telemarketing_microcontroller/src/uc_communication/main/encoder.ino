@@ -1,23 +1,31 @@
-volatile double velocidad=0;
-volatile unsigned long TiempoActual=0;
-volatile unsigned long TiempoAnt=0;
-volatile unsigned long delta=0;
-volatile unsigned long pulsos=0;
+volatile double wR=0;
+volatile double wL=0;
+volatile unsigned long ticksR=0;
+volatile unsigned long ticksL=0;
+volatile unsigned long TimeBackup=0;
 
+const int encoder[2]={2,3};
 void setup() {
-  Serial.begin(9600);
-  pinMode(2,INPUT);
-  attachInterrupt(digitalPinToInterrupt(2), aea, FALLING);
+  for(int i=0;i<=1;i++)
+    pinMode(encoder[i],INPUT);
+  attachInterrupt(digitalPinToInterrupt(encoder[0]), encoderL, FALLING);
+  attachInterrupt(digitalPinToInterrupt(encoder[1]), encoderR, FALLING);
 }
 
 void loop() {
-  TiempoActual=millis();
-  if(TiempoActual-TiempoAnt>=1000){
-    Serial.println(String((double)pulsos*60/(1000*8))+" rpm");
-    pulsos=0;
-    TiempoAnt=TiempoActual;
+  
+  if(millis()-TimeBackup>=100){ //100 ms  
+    wR=ticksR/(800)*2*PI;
+    wL=ticksL/(800)*2*PI;
+    ticksL=0;
+    ticksR=0;
+    TimeBackup=millis();
   }
 }
-void aea(){
-  pulsos++;
+void encoderL(){
+  ticksL++;
+  }
+
+void encoderR(){
+  ticksR++;
   }
