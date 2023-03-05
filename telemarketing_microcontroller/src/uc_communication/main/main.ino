@@ -5,21 +5,19 @@ const int IR[8] = {A8, A9, A10, A11, A12, A13, A14, A15};
 // Array of 16 sensors + bumpers
 float sensor_data[17];
 
-// Variables for odometry calculations
+// Variables for odometry message
 volatile double vel_lin_x = 0;
-volatile double vel_ang_z = 0;
 volatile double vel_ang_z = 0;
 volatile double pos_lin_x = 0;
 volatile double pos_lin_y = 0;
 volatile double pos_ang_z = 0;
-
+// Variables for odometry calculations
 volatile double wR = 0;
 volatile double wL = 0;
 volatile unsigned long ticksR = 0;
 volatile unsigned long ticksL = 0;
 volatile unsigned long TimeBackup = 0;
-
-
+// Variables
 volatile unsigned long currTime = 0;
 volatile unsigned long prevTime = 0;
 volatile unsigned long delta = 0;
