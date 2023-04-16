@@ -2,6 +2,10 @@
 Changelog for Telemarketing robot
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+0.2.0 (2023-04-15)
+------------------
+* Updates in URDF file, teleop files and arduino and python scripts.
+
 0.1.0 (2023-02-11)
 ------------------
 * First release 0.1.0 with several changes.

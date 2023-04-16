@@ -1,3 +1,13 @@
 numpy
 opencv-python
 tensorflow == 2.5.0
+
+# ROS dependencies
+- joy
+	/joy (sensor_msgs/Joy)
+- teleop_twist_joy
+	/cmd_vel (geometry_msgs/Twist)
+- rplidar
+	/scan (sensor_msgs/LaserScan)
+- realsense2_camera
+	

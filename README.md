@@ -32,18 +32,6 @@ Spawn the robot in the Gazebo environment:
 
 ## Next steps
 
-### Before new packages
-
-- Translate every script.
-
-- Organize according to the ros naming standard [3].
-
-- Create new packages and ros launch scripts.
-
-### After new packages
-
-- Translate every script.
-
 - Organize according to the ros naming standard.
 
 - Create new packages and ros launch scripts.
