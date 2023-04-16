@@ -114,10 +114,7 @@ def callback_sensor(msg):
         else:
             return range
 
-    def get_odom():
-        # TODO: Function that use the raw information from encoder to get the odometry
-        # TODO: Define input and how to interpret
-        # TODO: All the big computation must be done in the pc
+    def get_quaternion():
         pass
 
     global seq
@@ -175,13 +172,14 @@ def callback_sensor(msg):
     ir8.range = get_range(ir8, msg[15])
 
     # TODO: Obtain pose and twist values for the Odometry messages
-    enc1.header.stamp = rospy.Time.now()
-    enc1.pose.pose = 
-    enc1.twist.pose = 
-    enc2.header.stamp = rospy.Time.now()
-    enc2.pose.pose = 
-    enc2.twist.pose = 
-
+    Odometry(pose = PoseWithCovariance(Pose = (position, orientation)), twist = TwistWithCovariance(Twist = (linear, angular)))
+    odom.header.seq = seq
+    odom.header.stamp = rospy.Time.now()
+    odom.pose.pose.position = [x, y, 0]
+    odom.pose.pose.orientation = [0, 0, z, w]
+    odom.twist.twist.linear = [x, 0, 0]
+    odom.twist.twist.angular = [0, 0, z]
+    
     emerg = Bool(data = msg[21])
 
 

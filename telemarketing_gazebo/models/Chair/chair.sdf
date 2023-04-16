@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <model name="my_chair">
+    <static>true</static><!--Object will be completely fixed to the ground wheter static is true-->
+    <link name="chair_link">
+        <collision name="chair_collision">  
+          <geometry>
+            <mesh>
+                <uri>model://chair/meshes/model.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+      
+      <visual name="chair_mesh">
+        <cast_shadows>true</cast_shadows>
+        <geometry>
+            <mesh>
+                <uri>model://chair/meshes/model.dae</uri>
+            </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

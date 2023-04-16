@@ -1,0 +1,24 @@
+<launch>
+
+  <arg name="model" default="$(find telemarketing_description)/urdf/telemarketing.xacro"/>
+  <arg name="gui" default="true"/>
+  <arg name="rvizconfig" default="$(find telemarketing_description)/rviz/urdf_all_sensors.rviz"/>
+
+  <param name="robot_description" command="$(find xacro)/xacro $(arg model)"/>
+  <param name="use_gui" value="$(arg gui)"/>
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+  <!--<node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model telemarketing"/>-->
+  <node name="rviz" pkg="rviz" args="-d $(arg rvizconfig)" type="rviz" required="true"/>
+
+  <include file="$(find rplidar_ros)/launch/rplidar.launch" />
+  <include file="$(find realsense2_camera)/launch/rs_camera.launch" />
+  <!--<include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>-->
+
+</launch>
