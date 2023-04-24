@@ -1,3 +1,27 @@
-numpy
-opencv-python
-tensorflow == 2.5.0
+# sentiment_analysis
+- pip3 install numpy == 
+- pip3 install opencv-python == 
+- [OK] Tensorflow 2.5.0: https://docs.nvidia.com/deeplearning/frameworks/install-tf-jetson-platform/index.html
+
+# telemarketing_description
+- [OK] sudo apt install ros-melodic-joint-state-publisher-gui
+- [OK] sudo apt install ros-melodic-rplidar-ros
+- [OK] sudo apt install ros-melodic-realsense2-camera
+
+# telemarketing_gazebo
+- 
+
+# telemarketing_gui
+- pip3 install PyQt5 == 
+
+# telemarketing_microcontroller
+- [OK] sudo apt install ros-melodic-rosserial-python
+
+# telemarketing_teleop
+- [OK] sudo apt install python3-pip
+- [OK] pip3 install ds4drv
+- [OK] sudo apt install joystick
+- [OK] sudo apt install jstest-gtk
+- [OK] sudo apt install ros-melodic-joy
+- [OK] sudo apt install ros-melodic-teleop-twist-joy
+

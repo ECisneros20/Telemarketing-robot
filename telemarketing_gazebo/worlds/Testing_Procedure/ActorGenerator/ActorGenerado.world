@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<ActorCreado>
+	<actor name="actor0">
+		<skin>
+			<filename>walk.dae</filename>
+		</skin>
+		<animation name="walking">
+			<filename>walk.dae</filename>
+			<interpolate_x>true</interpolate_x>
+		</animation>
+		<script>
+			<trajectory id="0" type="walking">
+				<waypoint>
+					<time>0</time>
+					<pose>1 -7.5 0 0 0 1.5707963267948966</pose>
+				</waypoint>
+				<waypoint>
+					<time>5.0</time>
+					<pose>1.0000000000000002 -4.5 0 0 0 1.5707963267948966</pose>
+				</waypoint>
+				<waypoint>
+					<time>5.5</time>
+					<pose>1.0000000000000002 -4.5 0 0 0 4.71238898038469</pose>
+				</waypoint>
+				<waypoint>
+					<time>10.5</time>
+					<pose>1 -7.5 0 0 0 4.71238898038469</pose>
+				</waypoint>
+				<waypoint>
+					<time>11.0</time>
+					<pose>1 -7.5 0 0 0 1.5707963267948966</pose>
+				</waypoint>
+			</trajectory>
+		</script>
+	</actor>
+</ActorCreado>
+

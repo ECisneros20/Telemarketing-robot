@@ -16,33 +16,19 @@ To clone the latest stable version into your workspace:
 
 To clone the latest version into your workspace:
 
-    git clone -b testing https://github.com/ECisneros20/Telemarketing-robot.git
-
-## Usage for virtual tests
-
-Spawn the robot in the Gazebo environment:
-
-    roslaunch telemarketing_description spawn_robot.launch
+    git clone -b release/1.0.0 https://github.com/ECisneros20/Telemarketing-robot.git
 
 ## Usage for physical tests
 
-Spawn the robot in the Gazebo environment:
+For the local computer (sentiment analysis + microcontroller and computer interaction via python and ino scripts):
 
-    roslaunch telemarketing_description spawn_robot.launch
+    roslaunch telemarketing_bringup telemarketing_bringup_local.launch
+
+For the remote computer (RViz, URDF and Gazebo configuration + gui interaction + teleoperation node):
+
+    roslaunch telemarketing_bringup telemarketing_bringup_remote.launch
 
 ## Next steps
-
-### Before new packages
-
-- Translate every script.
-
-- Organize according to the ros naming standard [3].
-
-- Create new packages and ros launch scripts.
-
-### After new packages
-
-- Translate every script.
 
 - Organize according to the ros naming standard.
 
@@ -56,7 +42,7 @@ MIT License
 
 ## References
 
-[1]
+[1] D. Arce <em>et al.</em>, ”Design and Implementation of Telemarketing Robot with Emotion Identification for Human-Robot Interaction,” <em>2022 Sixth IEEE International Conference on Robotic Computing (IRC)</em>, Italy, 2022, pp. 177-180, doi: 10.1109/IRC55401.2022.00037.
 
 [2]
 

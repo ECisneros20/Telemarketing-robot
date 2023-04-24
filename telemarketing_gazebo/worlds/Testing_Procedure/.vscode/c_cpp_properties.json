@@ -1,0 +1,44 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/zetans/ros_ws/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/zetans/ros_ws/src/arena-rosnav-3D/arena_navigation/all_in_one_global_planner_interface/include/**",
+        "/home/zetans/ros_ws/src/arena-rosnav-3D/arena_navigation/arena_local_planer/model_based/all_in_one_local_planner_interface/include/**",
+        "/home/zetans/ros_ws/src/arena-rosnav-3D/arena_navigation/arena_fake_localization/include/**",
+        "/home/zetans/ros_ws/src/arena-rosnav-3D/arena_navigation/arena_intermediate_planner/include/**",
+        "/home/zetans/ros_ws/src/arena-rosnav-3D/arena_navigation/arena_mapping/include/**",
+        "/home/zetans/ros_ws/src/arena-rosnav-3D/arena_navigation/arena_path_search/include/**",
+        "/home/zetans/ros_ws/src/arena-rosnav-3D/arena_navigation/arena_plan_manager/include/**",
+        "/home/zetans/ros_ws/src/arena-rosnav-3D/arena_navigation/arena_spacial_horizon/include/**",
+        "/home/zetans/ros_ws/src/arena-rosnav-3D/arena_navigation/arena_traj_planner/include/**",
+        "/home/zetans/ros_ws/src/tb3/DynamixelSDK/ros/dynamixel_sdk/include/**",
+        "/home/zetans/ros_ws/src/ford_msgs/include/**",
+        "/home/zetans/ros_ws/src/Telemarketing_Robot/gazebo-plugin-autonomous-actor/include/**",
+        "/home/zetans/ros_ws/src/Telemarketing_Robot/laser_filters/include/**",
+        "/home/zetans/ros_ws/src/arena-rosnav-3D/arena_navigation/arena_local_planer/learning_based/all_in_one_3rd_party/light_scan_sim/include/**",
+        "/home/zetans/ros_ws/src/mantis/mantis_rplidar/include/**",
+        "/home/zetans/ros_ws/src/mpc_local_planner/mpc_local_planner/include/**",
+        "/home/zetans/ros_ws/src/arena-rosnav-3D/utils/plan_visualization/include/**",
+        "/home/zetans/ros_ws/src/roboticsgroup_gazebo_plugins/include/**",
+        "/home/zetans/ros_ws/src/sick_tim/include/**",
+        "/home/zetans/ros_ws/src/arena-rosnav-3D/simulator_setup/include/**",
+        "/home/zetans/ros_ws/src/turtlebot3_simulations/turtlebot3_fake/include/**",
+        "/home/zetans/ros_ws/src/turtlebot3_simulations/turtlebot3_gazebo/include/**",
+        "/home/zetans/ros_ws/src/tb3/turtlebot3/turtlebot3_slam/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}
