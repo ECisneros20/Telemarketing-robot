@@ -1,0 +1,7 @@
+<launch>
+
+  <include file="$(find telemarketing_description)/launch/spawn_robot.launch" />
+  <include file="$(find telemarketing_gui)/launch/telemarketing_gui.launch" />
+  <include file="$(find telemarketing_teleop)/launch/teleop.launch" />
+
+</launch>

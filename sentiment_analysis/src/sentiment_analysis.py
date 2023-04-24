@@ -4,7 +4,7 @@ import numpy as np
 import tensorflow as tf
 from tensorflow.keras.models import load_model
 
-cascade = "./sentiment_analysis/haarcascade_frontalface_alt.xml"
+cascade = "./sentiment_analysis/include/haarcascade_frontalface_alt.xml"
 classifier = cv2.CascadeClassifier(cascade)
 
 path = "./sentiment_analysis/models/5.h5"

@@ -16,19 +16,17 @@ To clone the latest stable version into your workspace:
 
 To clone the latest version into your workspace:
 
-    git clone -b release/0.1.0 https://github.com/ECisneros20/Telemarketing-robot.git
-
-## Usage for virtual tests
-
-Spawn the robot in the Gazebo environment:
-
-    roslaunch telemarketing_description spawn_robot.launch
+    git clone -b release/1.0.0 https://github.com/ECisneros20/Telemarketing-robot.git
 
 ## Usage for physical tests
 
-Spawn the robot in the Gazebo environment:
+For the local computer (sentiment analysis + microcontroller and computer interaction via python and ino scripts):
 
-    roslaunch telemarketing_description spawn_robot.launch
+    roslaunch telemarketing_bringup telemarketing_bringup_local.launch
+
+For the remote computer (RViz, URDF and Gazebo configuration + gui interaction + teleoperation node):
+
+    roslaunch telemarketing_bringup telemarketing_bringup_remote.launch
 
 ## Next steps
 
