@@ -16,6 +16,8 @@
 
 # telemarketing_microcontroller
 - [OK] sudo apt install ros-melodic-rosserial-python
+- [OK] pip3 install simple-pid == 1.0.1
+- [OK] pip3 install pyserial == 3.5
 
 # telemarketing_teleop
 - [OK] sudo apt install python3-pip

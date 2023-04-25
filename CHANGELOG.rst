@@ -1,19 +1,24 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Changelog for Telemarketing robot
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+0.3.2 (2023-04-25)
+------------------
+* Updates in python scripts.
+* (ASP) TODO: Define the python libraries version in the requirements.txt file.
+* (ASP) TODO: Usage of ROS in the telemarketing_gui package in order to check camera image, battery level, velocity, etc.
+* (ASP) TODO: Successful teleoperation via ps4 controller connected to a remote PC with ROS in the telemarketing_microcontroller package
+    - Check Controller.py, ROBOTEQ.py and Serial.py
+    - The subscriber to /cmd_vel topic
+    - The controller algorithm and fine-tunning for driver commands
+    - Feedback from the encoder measurements
+* TODO: Fusion of all sensor data in the same script with the proper subscribers and publishers in telemarketing_microcontroller package.
+* TODO: Define of the algorithm to estimate Odometry message based only in the encoders data and TF messages in telemarketing_microcontroller package.
+* TODO: Include ROS characteristics to sentiment_analysis package.
+
 0.3.1 (2023-04-24)
 ------------------
 * Updates in package organization and requirements.
 * New packages, launch files and python scripts. Especially the bringup package.
-* (ASP) TODO: Define the python libraries version in the requirements.txt file
-* (ASP) TODO: Usage of ROS in the telemarketing_gui package in order to check camera image, battery level, velocity, etc
-* (ASP) TODO: Successful teleoperation via ps4 controller connected to a remote PC with ROS in the telemarketing_microcontroller package
-    - The subscriber to /cmd_vel topic
-    - The controller algorithm and fine-tunning for driver commands
-    - Feedback from the encoder measurements
-* TODO: Fusion of all sensor data in the same script with the proper subscribers and publishers in telemarketing_microcontroller package
-* TODO: Define of the algorithm to stimate Odometry message based only in the encoders data and TF messages in telemarketing_microcontroller package
-* TODO: Include ROS characteristics to sentiment_analysis package
 
 0.3.0 (2023-04-24)
 ------------------

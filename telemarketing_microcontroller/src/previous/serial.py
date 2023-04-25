@@ -4,10 +4,12 @@
 
 import rospy
 from std_msgs.msg import Float64MultiArray, Bool, Header
-from geometry_msgs.msg import PoseWithCovariance, TwistWithCovariance, Pose, Twist, 
+from geometry_msgs.msg import PoseWithCovariance, TwistWithCovariance, Pose, Twist
 from sensor_msgs.msg import Range
 from nav_msgs.msg import Odometry
 from math import pi
+from Controller import MotorController
+from ROBOTEQ import roboteq
 
 # Publisher (19)
 # /servo_vel     -   Float64MultiArray   -   to Microcontroller                      -   Convert from velocities to two-array of servo equivalents (e.g. 1500 ms)
