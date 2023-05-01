@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # Link: https://www.youtube.com/watch?v=aE7RQNhwnPQ / 7:45
 # Link: https://github.com/ev3dev-lang-java/ev3dev-lang-java/issues/347
 
@@ -199,12 +199,12 @@ class SerialCom:
         # Odom publisher
         self.odom.header.seq = self.seq
         self.odom.header.stamp = rospy.Time.now()
-        self.odom.pose.pose.position = [x, y, 0]
-        self.odom.pose.pose.orientation = [0, 0, z, w]
-        self.odom.pose.covariance = 
-        self.odom.twist.twist.linear = [x, 0, 0]
-        self.odom.twist.twist.angular = [0, 0, z]
-        self.odom.twist.covariance = 
+        #self.odom.pose.pose.position = [x, y, 0]
+        #self.odom.pose.pose.orientation = [0, 0, z, w]
+        #self.odom.pose.covariance = 
+        #self.odom.twist.twist.linear = [x, 0, 0]
+        #self.odom.twist.twist.angular = [0, 0, z]
+        #self.odom.twist.covariance = 
 
         # Emergency publisher
         self.emerg.data = msg[21]
