@@ -1,9 +1,9 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Changelog for Telemarketing robot
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-0.3.3 (2023-05-01)
+0.3.4 (2023-05-13)
 ------------------
-* New approach for odometry, pid control and tf calculations.
+* Update of the telemarketing_description package and some other scripts.
 * (ASP) TODO: Define the python libraries version in the requirements.txt file.
 * (ASP) TODO: Usage of ROS in the telemarketing_gui package in order to check camera image, battery level, velocity, etc. Based POO programming from the
     virtual_joystick.py file
@@ -15,6 +15,10 @@ Changelog for Telemarketing robot
 * TODO: Fusion of all sensor data in the same script with the proper subscribers and publishers in telemarketing_microcontroller package.
 * TODO: Define of the algorithm to estimate Odometry message based only in the encoders data and TF messages in telemarketing_microcontroller package.
 * TODO: Include ROS characteristics to sentiment_analysis package.
+
+0.3.3 (2023-05-01)
+------------------
+* New approach for odometry, pid control and tf calculations.
 
 0.3.2 (2023-04-25)
 ------------------
