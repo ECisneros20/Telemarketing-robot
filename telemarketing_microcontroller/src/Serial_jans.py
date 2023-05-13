@@ -60,16 +60,15 @@ class SerialCom:
         self.MAX_RANGE_IR = 0.35
         self.seq = 0
 
-
         rospy.init_node("serial_communication", anonymous=True)
-        
+
         # Susbcribe to array with 22 measurements (8 ultrasonics, 8 infrared, 2 encoder components, 1 bumper)
         self.sub_sensor = rospy.Subscriber("/sensor_data", Float32MultiArray, self.callback_sensor)
         # Subscribe to linear velocity x and angular velocity z from main computer or PS4 controller
         #self.sub_teleop = rospy.Subscriber("/cmd_vel", Twist, self.callback_teleop)
         # Rate set
         #self.rate = rospy.Rate(10)ultrasonido1_1
-        
+
         # Messages to publish
         self.sonar_1 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "ultrasonido1_1"), radiation_type = 0, field_of_view = self.FIELD_OF_VIEW_US,
                          min_range = self.MIN_RANGE_US, max_range = self.MAX_RANGE_US, range = 0)
@@ -111,7 +110,7 @@ class SerialCom:
                              twist = TwistWithCovariance(twist = Twist(linear = Vector3(x = 0.0, y = 0.0, z = 0.0),
                                                                        angular = Vector3(x = 0.0, y = 0.0, z = 0.0)),
                                                          covariance = Float32MultiArray(data = self.covariance)))
-        
+
         self.emerg = Bool(data = 0)
         print("ksajdkasjd ")
 
@@ -219,7 +218,7 @@ class SerialCom:
         driver.setMotors("A", int(PWM_Output_left), True); driver.setMotors("B", int(PWM_Output_right), True)
 
 
-    def publisherFunctions(self):        
+    def publisherFunctions(self):
         # Publish the array of 19 values in 18 different topics
         pub_sonar_1 = rospy.Publisher("/sonar_1", Range, queue_size = 10)
         pub_sonar_2 = rospy.Publisher("/sonar_2", Range, queue_size = 10)
@@ -271,6 +270,6 @@ if __name__ == "__main__":
         rate = rospy.Rate(10)
         com.publisherFunctions()
         rospy.spin()
-        
+
     except rospy.ROSInterruptException:
         pass
