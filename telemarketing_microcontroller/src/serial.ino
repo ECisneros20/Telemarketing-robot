@@ -13,16 +13,18 @@ const int encoderR[2] = {3, 2}; // {channelA, channelB}
 const int encoderL[2] = {19, 18}; // {channelA, channelB}
 const int encoder_minimum = -32768;
 const int encoder_maximum = 32767;
+volatile unsigned long TimeBackup = 0;
 // Array of 16 sensors + bumpers
 float sensor_data[19];
-
 // Motors
 Servo MotorR;
 Servo MotorL;
 
-volatile unsigned long TimeBackup = 0;
+// ROS node declaration
 ros::NodeHandle nh;
-
+// ROS subscriber
+ros::Subscriber<std_msgs::Float32MultiArray> sub("/servo_vel", &messageCb);
+// ROS publisher
 std_msgs::Float32MultiArray msg;
 ros::Publisher pub("/sensor_data", &msg);
 
@@ -30,6 +32,7 @@ void setup() {
 
     nh.initNode();
     nh.advertise(pub);
+    nh.subscribe(sub);
 
     for (int i=0; i<=1; i++) {
         pinMode(encoderR[i], INPUT);
@@ -140,5 +143,12 @@ void setMotorR(int pulse){
 void setMotorL(int pulse){
 
     MotorL.writeMicroseconds(pulse);
+
+}
+
+void messageCb(const std_msgs::Float32MultiArray& msg) {
+
+    setMotorR(msg[0]);
+    setMotorL(msg[1]);
 
 }
