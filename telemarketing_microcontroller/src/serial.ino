@@ -1,5 +1,6 @@
 #include <ros.h>
 #include <std_msgs/Float32MultiArray.h>
+#include <std_msgs/Int32MultiArray.h>
 #include <Servo.h>
 
 // Infrared sensors
@@ -14,7 +15,7 @@ const int encoderL[2] = {19, 18}; // {channelA, channelB}
 const int encoder_minimum = -32768;
 const int encoder_maximum = 32767;
 volatile unsigned long TimeBackup = 0;
-// Array of 16 sensors + bumpers
+// Array of 16 sensors + 2 encoder signals + bumpers
 float sensor_data[19];
 // Motors
 Servo MotorR;
@@ -23,7 +24,7 @@ Servo MotorL;
 // ROS node declaration
 ros::NodeHandle nh;
 // ROS subscriber
-ros::Subscriber<std_msgs::Float32MultiArray> sub("/servo_vel", &messageCb);
+ros::Subscriber<std_msgs::Int32MultiArray> sub("/servo_vel", &messageCb);
 // ROS publisher
 std_msgs::Float32MultiArray msg;
 ros::Publisher pub("/sensor_data", &msg);
@@ -58,8 +59,8 @@ void loop() {
 
     if (millis()-TimeBackup>=100) { //100 ms
 
-        sensor_data[16] = ticksL;
-        sensor_data[17] = ticksR;
+        sensor_data[16] = ticksR;
+        sensor_data[17] = ticksL;
 
         // Set the message data
         msg.data_length = 18;
@@ -146,7 +147,7 @@ void setMotorL(int pulse){
 
 }
 
-void messageCb(const std_msgs::Float32MultiArray& msg) {
+void messageCb(const std_msgs::Int32MultiArray& msg) {
 
     setMotorR(msg[0]);
     setMotorL(msg[1]);

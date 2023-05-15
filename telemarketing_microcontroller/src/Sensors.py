@@ -26,7 +26,7 @@ from math import pi
 # /emerg         -   Bool                -   to Main Computer                        -   Separate array of 19 measurements (1)
 
 # Subscriber (1)
-# /sensor_data   -   Float32MultiArray   -   from Microcontroller                    -   Array with 19 measurements (8 ultrasonics, 8 infrared, 2 encoder components, 1 bumper)
+# /sensor_data   -   Float32MultiArray   -   from Microcontroller                    -   Array with 19 measurements (8 ultrasonics, 8 infrared, 2 encoder signals, 1 bumper)
 
 class SerialComSensors:
 
@@ -41,9 +41,9 @@ class SerialComSensors:
         self.MAX_RANGE_IR = 0.35
         self.seq = 0
 
-        rospy.init_node("serial_communication_sensors", anonymous = True)
+        rospy.init_node("serial_communication_sensors", anonymous = False)
 
-        # Susbcribe to array with 19 measurements (8 ultrasonics, 8 infrared, 2 encoder components, 1 bumper)
+        # Susbcribe to array with 19 measurements (8 ultrasonics, 8 infrared, 2 encoder signals, 1 bumper)
         self.sub_sensor = rospy.Subscriber("/sensor_data", Float32MultiArray, self.callback_sensor)
 
         # Messages to publish
@@ -146,9 +146,11 @@ class SerialComSensors:
         self.ir_8.header.seq = self.seq
         self.ir_8.header.stamp = rospy.Time.now()
         self.ir_8.range = get_range(self.ir_8, msg.data[15])
+        #print("US: ", self.sonar_1.range, "-", self.sonar_2.range, "-", self.sonar_3.range, "-", self.sonar_4.range, "-", self.sonar_5.range, "-", self.sonar_6.range, "-", self.sonar_7.range, "-", self.sonar_8.range)
+        #print("IR: ", self.ir_1.range, "-", self.ir_2.range, "-", self.ir_3.range, "-", self.ir_4.range, "-", self.ir_5.range, "-", self.ir_6.range, "-", self.ir_7.range, "-", self.ir_8.range)
 
         # Emergency publisher
-        self.emerg.data = msg.data[16]
+        self.emerg.data = msg.data[18]
 
 
     def publisherFunctions(self):

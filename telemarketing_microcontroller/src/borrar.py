@@ -7,7 +7,7 @@ class PubBorrar:
 
     def __init__(self):
 
-        rospy.init_node("pub_borrar", anonymous=True)
+        rospy.init_node("pub_borrar", anonymous = False)
 
 
     def publisherFunctions(self):
@@ -31,9 +31,9 @@ class PubBorrar:
                       0.20,
                       0.20,
                       0.20,
-                      0.0,
                       50,
-                      50])
+                      50,
+                      0])
 
         self.rate = rospy.Rate(10)
 
