@@ -5,8 +5,17 @@
     <param name="baud" value="57600"/>
   </node> -->
 
-  <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop_twist_keyboard">
+  <node pkg="telemarketing_microcontroller" type="borrar.py" name="pub_borrar">
   </node>
+
+  <node pkg="telemarketing_microcontroller" type="Sensors.py" name="serial_communication_sensors">
+  </node>
+
+  <node pkg="telemarketing_microcontroller" type="Controller.py" name="serial_communication_controller">
+  </node>
+
+  <!-- <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop_twist_keyboard">
+  </node> -->
 
   <!-- <node pkg="telemarketing_microcontroller" type="diff_tf.py" name="diff_tf">
   </node> -->
@@ -14,8 +23,8 @@
   <!-- <node pkg="telemarketing_microcontroller" type="pid_velocity.py" name="pid_velocity">
   </node> -->
 
-  <node pkg="telemarketing_microcontroller" type="twist_to_motors.py" name="twist_to_motors">
-  </node>
+  <!-- <node pkg="telemarketing_microcontroller" type="twist_to_motors.py" name="twist_to_motors">
+  </node> -->
 
   <!-- <node pkg="telemarketing_microcontroller" type="wheel_loopback.py" name="wheel_loopback">
   </node> -->

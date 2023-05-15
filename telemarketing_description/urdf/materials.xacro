@@ -5,4 +5,12 @@
   <color rgba="0.700 0.700 0.700 1.000"/>
 </material>
 
+<material name="ultrasound_default">
+  <color rgba="1.000 0.000 0.000 0.500"/>
+</material>
+
+<material name="infrared_default">
+  <color rgba="0.000 1.000 0.000 0.500"/>
+</material>
+
 </robot>

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import rospy
-from std_msgs.msg import Header, Float32MultiArray
+from std_msgs.msg import Float32MultiArray
 
 class PubBorrar:
 
@@ -15,7 +15,7 @@ class PubBorrar:
         pub_borrar = rospy.Publisher("/sensor_data", Float32MultiArray, queue_size = 10)
 
         self.array = Float32MultiArray(data = 
-                     [0.19,
+                     [0.20,
                       0.20,
                       0.20,
                       0.20,
