@@ -25,9 +25,29 @@ Servo MotorL;
 
 volatile unsigned long TimeBackup=0;
 ros::NodeHandle nh;
-
 std_msgs::Float32MultiArray msg;
 ros::Publisher pub("/sensor_data", &msg);
+std_msgs::Float32MultiArray msg2;
+ros::Publisher pub("/feedback_motor", &msg2);
+
+
+void messageCb(const std_msgs::Float32MultiArray& msg) {
+
+  if (msg.data[0] > 2) {
+    digitalWrite(13, HIGH);
+  }
+  float arr[2] = {msg.data[0], msg.data[1]};
+  msg2.data = arr;
+
+    setMotorR(msg.data[0]);
+    setMotorL(msg.data[1]);
+
+}
+
+
+// ROS subscriber
+ros::Subscriber<std_msgs::Float32MultiArray> sub("/vel_motors", messageCb);
+
 
 void setup()
 { nh.initNode();
@@ -67,6 +87,7 @@ void loop()
   
     // Publish the message
     pub.publish(&msg);
+    pub.publish(&msg2);
     nh.spinOnce();
     TimeBackup=millis();
   }
@@ -137,16 +158,16 @@ void encoderRcallback(){
 
 void setMotorR(int pulse){
   if(pulse>0)
-    pulse=map(pulse,0,0.3,1550,1600);
+    pulse=map(pulse,0,2.92,1550,1600);
   else
-    pulse=map(pulse,-0.3,0,1400,1450);
+    pulse=map(pulse,-2.92,0,1400,1450);
   MotorR.writeMicroseconds(pulse);
 }
 
 void setMotorL(int pulse){
   if(pulse>0)
-    pulse=map(pulse,0,0.3,1550,1600);
+    pulse=map(pulse,0,2.92,1550,1600);
   else
-    pulse=map(pulse,-0.3,0,1400,1450);
+    pulse=map(pulse,-2.92,0,1400,1450);
   MotorL.writeMicroseconds(pulse);
 }

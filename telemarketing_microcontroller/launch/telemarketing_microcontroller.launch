@@ -5,14 +5,17 @@
     <param name="baud" value="57600"/>
   </node>
 
-  <node pkg="telemarketing_microcontroller" type="borrar.py" name="pub_borrar">
+  <!-- <node pkg="telemarketing_microcontroller" type="borrar.py" name="pub_borrar">
+  </node> -->
+
+  <!-- <node pkg="telemarketing_microcontroller" type="Sensors.py" name="serial_communication_sensors">
+  </node>-->
+
+  <node pkg="telemarketing_microcontroller" type="borrar2.py" name="serial_communication_controller">
   </node>
 
-  <node pkg="telemarketing_microcontroller" type="Sensors.py" name="serial_communication_sensors">
-  </node>
-
-  <node pkg="telemarketing_microcontroller" type="Controller.py" name="serial_communication_controller">
-  </node>
+  <!--<node pkg="telemarketing_microcontroller" type="Controller.py" name="serial_communication_controller">
+  </node>-->
 
   <!-- <node pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" name="teleop_twist_keyboard">
   </node> -->
