@@ -31,7 +31,9 @@ ros::Publisher pub("/sensor_data", &msg);
 
 void setup() {
 
+    Serial.begin(57600);
     nh.initNode();
+    nh.getHardware()->setBaud(57600);
     nh.advertise(pub);
     nh.subscribe(sub);
 

@@ -1,5 +1,6 @@
 #include <ros.h>
 #include <std_msgs/Float32MultiArray.h>
+#include <std_msgs/Bool.h>
 #include <Servo.h>
 //Bumper signals
 const int reset=48;
@@ -7,7 +8,6 @@ const int aviso=50;
 // Infrared sensors
 const int IR[8] = {7, 6, 4, 0, 1, 2, 3, 5};
 // Ultrasonic sensors
-//const int US[8] = {8, 9, 10, 11, 12, 13, 14, 15};
 const int US[8] = {9, 11, 14, 12, 8, 10, 13, 15};
 // Encoder ticks
 volatile int ticksR=0;
@@ -16,7 +16,7 @@ const int encoderR[2]={3,2}; //{channelA, channelB}
 const int encoderL[2]={19,18}; //{channelA, channelB}
 const int encoder_minimum = -32768;
 const int encoder_maximum = 32767;
-// Array of 16 sensors + bumpers
+// Array of 16 sensors + 2 encoders + 1 bumpers
 float sensor_data[19];
 
 //Motors
@@ -27,31 +27,28 @@ volatile unsigned long TimeBackup=0;
 ros::NodeHandle nh;
 std_msgs::Float32MultiArray msg;
 ros::Publisher pub("/sensor_data", &msg);
-std_msgs::Float32MultiArray msg2;
-ros::Publisher pub("/feedback_motor", &msg2);
 
+void messageBool(const std_msgs::Bool& emergReset) {
+   digitalWrite(reset, emergReset.data);
+    }
+// ROS subscriber    
+ros::Subscriber<std_msgs::Bool> sub_reset("/reset", &messageBool);
 
-void messageCb(const std_msgs::Float32MultiArray& msg) {
-
-  if (msg.data[0] > 2) {
-    digitalWrite(13, HIGH);
-  }
-  float arr[2] = {msg.data[0], msg.data[1]};
-  msg2.data = arr;
-
-    setMotorR(msg.data[0]);
-    setMotorL(msg.data[1]);
-
-}
-
-
+void messageCb(const std_msgs::Float32MultiArray& vel_msg) {
+    setMotorR(vel_msg.data[0]);
+    setMotorL(vel_msg.data[1]);   
+    }
 // ROS subscriber
-ros::Subscriber<std_msgs::Float32MultiArray> sub("/vel_motors", messageCb);
+ros::Subscriber<std_msgs::Float32MultiArray> sub("/vel_motors", &messageCb);
 
 
 void setup()
-{ nh.initNode();
+{ Serial.begin(57600);
+  nh.initNode();
+  nh.getHardware()->setBaud(57600);
   nh.advertise(pub);
+  nh.subscribe(sub);
+  nh.subscribe(sub_reset);
   for(int i=0;i<=1;i++){
     pinMode(encoderR[i],INPUT);
     pinMode(encoderL[i],INPUT);}
@@ -59,13 +56,13 @@ void setup()
   MotorL.attach(6);
   attachInterrupt(digitalPinToInterrupt(encoderL[0]), encoderLcallback, FALLING);
   attachInterrupt(digitalPinToInterrupt(encoderR[0]), encoderRcallback, FALLING);
-
-  //
+  //Bumper signals
    pinMode(reset, OUTPUT);
    pinMode(aviso, INPUT);
-
-   digitalWrite(reset,HIGH);
    digitalWrite(reset,LOW);
+   digitalWrite(reset,HIGH); 
+   setMotorR(0);
+   setMotorL(0);                                                                                 
 }
 
 void loop()
@@ -80,18 +77,26 @@ void loop()
     
     sensor_data[16]=ticksL;
     sensor_data[17]=ticksR;
-    
+
+    //Set Bumper
+    if (digitalRead(aviso)==HIGH){
+      sensor_data[18]=1; //Motors Activate
+    }
+
+    else{
+      sensor_data[18]=0; //Motors Deactivate
+    }
+
     // Set the message data
-    msg.data_length = 18;
+    msg.data_length = 19;
     msg.data = sensor_data;
   
     // Publish the message
     pub.publish(&msg);
-    pub.publish(&msg2);
-    nh.spinOnce();
+    //nh.spinOnce();
     TimeBackup=millis();
   }
-  
+  nh.spinOnce();
 }
 
 float read_IR(int sensor) {

@@ -24,6 +24,7 @@ from math import pi
 # /ir7           -   Range               -   to Main Computer                        -   Separate array of 19 measurements (1)
 # /ir8           -   Range               -   to Main Computer                        -   Separate array of 19 measurements (1)
 # /emerg         -   Bool                -   to Main Computer                        -   Separate array of 19 measurements (1)
+# /reset         -   Bool                -   to Microcontroller                 -   Separate array of 19 measurements (
 
 # Subscriber (1)
 # /sensor_data   -   Float32MultiArray   -   from Microcontroller                    -   Array with 19 measurements (8 ultrasonics, 8 infrared, 2 encoder signals, 1 bumper)
@@ -36,51 +37,55 @@ class SerialComSensors:
         self.FIELD_OF_VIEW_US = pi/6
         self.MIN_RANGE_US = 0.20
         self.MAX_RANGE_US = 5.00
-        self.FIELD_OF_VIEW_IR = 0.00
+        self.FIELD_OF_VIEW_IR = pi/12
         self.MIN_RANGE_IR = 0.00
         self.MAX_RANGE_IR = 0.35
         self.seq = 0
+    	self.reset = Bool(data = 1)
 
         rospy.init_node("serial_communication_sensors", anonymous = False)
 
         # Susbcribe to array with 19 measurements (8 ultrasonics, 8 infrared, 2 encoder signals, 1 bumper)
         self.sub_sensor = rospy.Subscriber("/sensor_data", Float32MultiArray, self.callback_sensor)
+	self.sub_resetBumper = rospy.Subscriber("/reset_gui", Bool, self.callback_resetBumper)
 
         # Messages to publish
         self.sonar_1 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "ultrasonido1_1"), radiation_type = 0, field_of_view = self.FIELD_OF_VIEW_US,
                          min_range = self.MIN_RANGE_US, max_range = self.MAX_RANGE_US, range = self.MIN_RANGE_US)
-        self.sonar_2 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "ultrasonido2_1"), radiation_type = 0, field_of_view = self.FIELD_OF_VIEW_US,
+        self.sonar_2 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "ultrasonido2_change_frame"), radiation_type = 0, field_of_view = self.FIELD_OF_VIEW_US,
                          min_range = self.MIN_RANGE_US, max_range = self.MAX_RANGE_US, range = self.MIN_RANGE_US)
-        self.sonar_3 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "ultrasonido3_1"), radiation_type = 0, field_of_view = self.FIELD_OF_VIEW_US,
+        self.sonar_3 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "ultrasonido3_change_frame"), radiation_type = 0, field_of_view = self.FIELD_OF_VIEW_US,
                          min_range = self.MIN_RANGE_US, max_range = self.MAX_RANGE_US, range = self.MIN_RANGE_US)
-        self.sonar_4 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "ultrasonido4_1"), radiation_type = 0, field_of_view = self.FIELD_OF_VIEW_US,
+        self.sonar_4 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "ultrasonido4_change_frame"), radiation_type = 0, field_of_view = self.FIELD_OF_VIEW_US,
                          min_range = self.MIN_RANGE_US, max_range = self.MAX_RANGE_US, range = self.MIN_RANGE_US)
-        self.sonar_5 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "ultrasonido5_1"), radiation_type = 0, field_of_view = self.FIELD_OF_VIEW_US,
+        self.sonar_5 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "ultrasonido5_change_frame"), radiation_type = 0, field_of_view = self.FIELD_OF_VIEW_US,
                          min_range = self.MIN_RANGE_US, max_range = self.MAX_RANGE_US, range = self.MIN_RANGE_US)
-        self.sonar_6 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "ultrasonido6_1"), radiation_type = 0, field_of_view = self.FIELD_OF_VIEW_US,
+        self.sonar_6 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "ultrasonido6_change_frame"), radiation_type = 0, field_of_view = self.FIELD_OF_VIEW_US,
                          min_range = self.MIN_RANGE_US, max_range = self.MAX_RANGE_US, range = self.MIN_RANGE_US)
-        self.sonar_7 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "ultrasonido7_1"), radiation_type = 0, field_of_view = self.FIELD_OF_VIEW_US,
+        self.sonar_7 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "ultrasonido7_change_frame"), radiation_type = 0, field_of_view = self.FIELD_OF_VIEW_US,
                          min_range = self.MIN_RANGE_US, max_range = self.MAX_RANGE_US, range = self.MIN_RANGE_US)
-        self.sonar_8 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "ultrasonido8_1"), radiation_type = 0, field_of_view = self.FIELD_OF_VIEW_US,
+        self.sonar_8 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "ultrasonido8_change_frame"), radiation_type = 0, field_of_view = self.FIELD_OF_VIEW_US,
                          min_range = self.MIN_RANGE_US, max_range = self.MAX_RANGE_US, range = self.MIN_RANGE_US)
-        self.ir_1 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "infrarrojo1_1"), radiation_type = 1, field_of_view = self.FIELD_OF_VIEW_IR,
+        self.ir_1 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "infrarrojo1_change_frame"), radiation_type = 1, field_of_view = self.FIELD_OF_VIEW_IR,
                          min_range = self.MIN_RANGE_IR, max_range = self.MAX_RANGE_IR, range = self.MIN_RANGE_IR)
-        self.ir_2 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "infrarrojo2_1"), radiation_type = 1, field_of_view = self.FIELD_OF_VIEW_IR,
+        self.ir_2 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "infrarrojo2_change_frame"), radiation_type = 1, field_of_view = self.FIELD_OF_VIEW_IR,
                          min_range = self.MIN_RANGE_IR, max_range = self.MAX_RANGE_IR, range = self.MIN_RANGE_IR)
-        self.ir_3 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "infrarrojo3_1"), radiation_type = 1, field_of_view = self.FIELD_OF_VIEW_IR,
+        self.ir_3 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "infrarrojo3_change_frame"), radiation_type = 1, field_of_view = self.FIELD_OF_VIEW_IR,
                          min_range = self.MIN_RANGE_IR, max_range = self.MAX_RANGE_IR, range = self.MIN_RANGE_IR)
-        self.ir_4 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "infrarrojo4_1"), radiation_type = 1, field_of_view = self.FIELD_OF_VIEW_IR,
+        self.ir_4 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "infrarrojo4_change_frame"), radiation_type = 1, field_of_view = self.FIELD_OF_VIEW_IR,
                          min_range = self.MIN_RANGE_IR, max_range = self.MAX_RANGE_IR, range = self.MIN_RANGE_IR)
-        self.ir_5 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "infrarrojo5_1"), radiation_type = 1, field_of_view = self.FIELD_OF_VIEW_IR,
+        self.ir_5 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "infrarrojo5_change_frame"), radiation_type = 1, field_of_view = self.FIELD_OF_VIEW_IR,
                          min_range = self.MIN_RANGE_IR, max_range = self.MAX_RANGE_IR, range = self.MIN_RANGE_IR)
-        self.ir_6 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "infrarrojo6_1"), radiation_type = 1, field_of_view = self.FIELD_OF_VIEW_IR,
+        self.ir_6 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "infrarrojo6_change_frame"), radiation_type = 1, field_of_view = self.FIELD_OF_VIEW_IR,
                          min_range = self.MIN_RANGE_IR, max_range = self.MAX_RANGE_IR, range = self.MIN_RANGE_IR)
-        self.ir_7 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "infrarrojo7_1"), radiation_type = 1, field_of_view = self.FIELD_OF_VIEW_IR,
+        self.ir_7 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "infrarrojo7_change_frame"), radiation_type = 1, field_of_view = self.FIELD_OF_VIEW_IR,
                          min_range = self.MIN_RANGE_IR, max_range = self.MAX_RANGE_IR, range = self.MIN_RANGE_IR)
-        self.ir_8 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "infrarrojo8_1"), radiation_type = 1, field_of_view = self.FIELD_OF_VIEW_IR,
+        self.ir_8 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "infrarrojo8_change_frame"), radiation_type = 1, field_of_view = self.FIELD_OF_VIEW_IR,
                          min_range = self.MIN_RANGE_IR, max_range = self.MAX_RANGE_IR, range = self.MIN_RANGE_IR)
         self.emerg = Bool(data = 0)
 
+    def callback_resetBumper(self, msg):
+    	self.reset = Bool(data = msg.data)
 
     def callback_sensor(self, msg):
 
@@ -173,6 +178,7 @@ class SerialComSensors:
         pub_ir_7 = rospy.Publisher("/ir_7", Range, queue_size = 10)
         pub_ir_8 = rospy.Publisher("/ir_8", Range, queue_size = 10)
         pub_emerg = rospy.Publisher("/emerg", Bool, queue_size = 10)
+        pub_reset = rospy.Publisher("/reset", Bool, queue_size = 10)
 
         self.rate = rospy.Rate(10)
 
@@ -194,6 +200,7 @@ class SerialComSensors:
             pub_ir_7.publish(self.ir_7)
             pub_ir_8.publish(self.ir_8)
             pub_emerg.publish(self.emerg)
+            pub_reset.publish(self.reset)
             rospy.loginfo("Executing!")
             self.rate.sleep()
 
