@@ -4,9 +4,9 @@
 - [OK] Tensorflow 2.5.0: https://docs.nvidia.com/deeplearning/frameworks/install-tf-jetson-platform/index.html
 
 # telemarketing_description
-- [OK] sudo apt install ros-melodic-joint-state-publisher-gui
-- [OK] sudo apt install ros-melodic-rplidar-ros
-- [OK] sudo apt install ros-melodic-realsense2-camera
+- [OK] sudo apt install ros-noetic-joint-state-publisher-gui
+- [OK] sudo apt install ros-noetic-rplidar-ros
+- [OK] sudo apt install ros-noetic-realsense2-camera
 
 # telemarketing_gazebo
 - 
@@ -15,7 +15,7 @@
 - pip3 install PyQt5 == 
 
 # telemarketing_microcontroller
-- [OK] sudo apt install ros-melodic-rosserial-python
+- [OK] sudo apt install ros-noetic-rosserial-python
 - [OK] pip3 install simple-pid == 1.0.1
 - [OK] pip3 install pyserial == 3.5
 
@@ -24,6 +24,6 @@
 - [OK] pip3 install ds4drv
 - [OK] sudo apt install joystick
 - [OK] sudo apt install jstest-gtk
-- [OK] sudo apt install ros-melodic-joy
-- [OK] sudo apt install ros-melodic-teleop-twist-joy
+- [OK] sudo apt install ros-noetic-joy
+- [OK] sudo apt install ros-noetic-teleop-twist-joy
 
