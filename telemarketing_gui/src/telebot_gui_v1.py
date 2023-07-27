@@ -8,6 +8,7 @@
 #
 # WARNING! All changes made in this file will be lost!
 
+#comentario para git
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import *
