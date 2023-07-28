@@ -1,7 +1,10 @@
 # sentiment_analysis
-- pip3 install numpy == 
-- pip3 install opencv-python == 
-- [OK] Tensorflow 2.5.0: https://docs.nvidia.com/deeplearning/frameworks/install-tf-jetson-platform/index.html
+- [NOTOK] pip3 install numpy == 
+- [NOTOK] pip3 install opencv-python == 
+- [NOTOK] Tensorflow 2.5.0: https://docs.nvidia.com/deeplearning/frameworks/install-tf-jetson-platform/index.html
+
+# telemarketing_bringup
+- 
 
 # telemarketing_description
 - [OK] sudo apt install ros-noetic-joint-state-publisher-gui
@@ -12,12 +15,12 @@
 - 
 
 # telemarketing_gui
-- pip3 install PyQt5 == 
+- [OK] pip3 install PyQt5 == 5.14.1
 
 # telemarketing_microcontroller
 - [OK] sudo apt install ros-noetic-rosserial-python
-- [OK] pip3 install simple-pid == 1.0.1
-- [OK] pip3 install pyserial == 3.5
+- [OK] pip3 install simple-pid==1.0.1
+- [OK] pip3 install pyserial==3.4
 
 # telemarketing_teleop
 - [OK] sudo apt install python3-pip
@@ -26,4 +29,3 @@
 - [OK] sudo apt install jstest-gtk
 - [OK] sudo apt install ros-noetic-joy
 - [OK] sudo apt install ros-noetic-teleop-twist-joy
-
