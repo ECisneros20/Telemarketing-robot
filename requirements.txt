@@ -1,24 +1,24 @@
 # sentiment_analysis (Jetson Xavier NX)
-- [OK] pip3 install numpy == 1.16.5
-- [OK] pip3 install opencv-python == 4.5.4
-- [OK] Tensorflow 2.5.0: https://docs.nvidia.com/deeplearning/frameworks/install-tf-jetson-platform/index.html
+- [OK] pip3 install numpy==1.16.5
+- [OK] pip3 install opencv-python==4.5.4
+- [OK] Tensorflow 2.12.0: https://docs.nvidia.com/deeplearning/frameworks/install-tf-jetson-platform/index.html
 
-# telemarketing_bringup (Jetson Xavier NX, Jetson Nano and PC)
+# telemarketing_bringup (Jetson Nano, Jetson Xavier NX and PC)
 - 
 
 # telemarketing_description (Jetson Nano)
-- [OK] sudo apt install ros-noetic-joint-state-publisher-gui
-- [OK] sudo apt install ros-noetic-rplidar-ros
-- [OK] sudo apt install ros-noetic-realsense2-camera
+- [OK] sudo apt install ros-melodic-joint-state-publisher-gui
+- [OK] sudo apt install ros-melodic-rplidar-ros
+- [OK] sudo apt install ros-melodic-realsense2-camera
 
 # telemarketing_gazebo (PC)
 - 
 
-# telemarketing_gui (PC and Raspberry Pi 4B)
-- [OK] pip3 install PyQt5 == 5.14.1
+# telemarketing_gui (Jetson Xavier NX and PC)
+- [OK] pip3 install PyQt5==5.14.1
 
 # telemarketing_microcontroller (Jetson Nano)
-- [OK] sudo apt install ros-noetic-rosserial-python
+- [OK] sudo apt install ros-melodic-rosserial-python
 - [OK] pip3 install simple-pid==1.0.1
 - [OK] pip3 install pyserial==3.4
 
