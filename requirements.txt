@@ -1,7 +1,7 @@
 # sentiment_analysis (Jetson Xavier NX)
-- [NOTOK] pip3 install numpy == 
-- [NOTOK] pip3 install opencv-python == 
-- [NOTOK] Tensorflow 2.5.0: https://docs.nvidia.com/deeplearning/frameworks/install-tf-jetson-platform/index.html
+- [OK] pip3 install numpy == 1.16.5
+- [OK] pip3 install opencv-python == 4.5.4
+- [OK] Tensorflow 2.5.0: https://docs.nvidia.com/deeplearning/frameworks/install-tf-jetson-platform/index.html
 
 # telemarketing_bringup (Jetson Xavier NX, Jetson Nano and PC)
 - 
