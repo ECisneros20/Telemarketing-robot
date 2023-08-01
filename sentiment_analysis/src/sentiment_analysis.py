@@ -1,8 +1,8 @@
-import cv2
-import numpy as np
-
 import tensorflow as tf
 from tensorflow.keras.models import load_model
+
+import cv2
+import numpy as np
 
 cascade = "./sentiment_analysis/include/haarcascade_frontalface_alt.xml"
 classifier = cv2.CascadeClassifier(cascade)
