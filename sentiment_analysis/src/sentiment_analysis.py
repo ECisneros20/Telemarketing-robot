@@ -1,24 +1,24 @@
 #!/usr/bin/env python3
 
+import tensorflow as tf
+from tensorflow.keras.models import load_model
+
 import rospy
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
 from std_msgs.msg import String
-
-import tensorflow as tf
-from tensorflow.keras.models import load_model
 
 import cv2
 import numpy as np
 
 class sentimentAnalysis:
 
-    def __init__(self):
+    def __init__(self, path):
 
         # Model setup
-        self.cascade_path = "./sentiment_analysis/include/haarcascade_frontalface_alt.xml"
+        self.cascade_path = path + "/include/haarcascade_frontalface_alt.xml"
         self.classifier = cv2.CascadeClassifier(self.cascade_path)
-        self.model_path = "./sentiment_analysis/models/5.h5"
+        self.model_path = path + "/models/5.h5"
         self.new_model = load_model(self.model_path)
         # new_model.summary()
         self.emo_dict = {0: "neutral", 1: "happy", 2: "sad", 3: "surprise", 4: "anger"}
@@ -28,7 +28,7 @@ class sentimentAnalysis:
         # ROS setup
         rospy.init_node("sentiment_analysis_node", anonymous = False)
         self.sub_image = rospy.Subscriber("/usb_cam/image_raw", Image, self.callback_image)
-        self.pub_sentiment = rospy.Publisher("/sentiment_detected", String)
+        self.pub_sentiment = rospy.Publisher("/sentiment_detected", String, queue_size=10)
         self.sentiment_msg = String()
         self.bridge = CvBridge()
 
@@ -36,7 +36,7 @@ class sentimentAnalysis:
 
         # Validate correct encoding
         try:
-            cv_image = self.bridge.imgmsg_to_cv(msg, "bgr8")
+            cv_image = self.bridge.imgmsg_to_cv2(msg, "bgr8")
         except CvBridgeError as e:
             print(e)
 
@@ -63,7 +63,7 @@ class sentimentAnalysis:
                     percentage = "{:.0%}".format(percentage)
 
                     msg = self.emo_dict[sentiment] + " - " + percentage + " of confidence"
-                    self.sentiment_msg.data= sentiment
+                    self.sentiment_msg.data= self.emo_dict[sentiment]
                     #print(msg)
 
                     font = cv2.FONT_HERSHEY_PLAIN
@@ -81,7 +81,7 @@ class sentimentAnalysis:
         while not rospy.is_shutdown():
             self.pub_sentiment.publish(self.sentiment_msg)
             rospy.loginfo("Executing!")
-            self.rate.sleep()
+            #self.rate.sleep()
 
         cv2.DestroyAllWindows()
 
@@ -90,7 +90,8 @@ if __name__ == "__main__":
     try:
         print("Analyzing real time video")
         # Node initialization
-        sentiment = sentimentAnalysis()
+        path = rospy.get_param("sentiment_analysis_node/path")
+        sentiment = sentimentAnalysis(path)
         rate = rospy.Rate(10)
         sentiment.publisherFunctions()
         rospy.spin()

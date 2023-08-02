@@ -3,6 +3,7 @@
 - [OK] pip3 install opencv-python==4.5.4
 - [OK] Tensorflow 2.12.0: https://docs.nvidia.com/deeplearning/frameworks/install-tf-jetson-platform/index.html
 - [OK] sudo apt install ros-noetic-usb-cam
+- [OK] sudo apt install ros-noetic-image-view
 
 # telemarketing_bringup (Jetson Nano, Jetson Xavier NX and PC)
 - 
