@@ -4,7 +4,6 @@ Changelog for Telemarketing robot
 0.3.9 (2023-07-31)
 ------------------
 * New version of telemarketing_teleop, telemarketing_microcontroller and telemarketing_bringup packages.
-* (ASP) TODO: Define the python libraries version in the requirements.txt file.
 * (ASP) TODO: Usage of ROS in the telemarketing_gui package in order to check camera image, battery level, velocity, etc. Based POO programming from the
     virtual_joystick.py file
 * (ASP) TODO: Successful teleoperation via ps4 controller connected to a remote PC with ROS in the telemarketing_microcontroller package

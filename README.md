@@ -10,29 +10,31 @@ Open a new terminal and type the following path:
 
     cd ~/catkin_ws/src
 
-To clone the latest stable version into your workspace:
+To clone the most stable release into your workspace:
 
     git clone https://github.com/ECisneros20/Telemarketing-robot.git
 
-To clone the latest version into your workspace:
+To clone the latest release into your workspace:
 
     git clone -b release/1.0.0 https://github.com/ECisneros20/Telemarketing-robot.git
 
 ## Usage for physical tests
 
-For the local computer (sentiment analysis + microcontroller and computer interaction via python and ino scripts):
+For the Jetson Xavier NX local computer (sentiment analysis + clients gui interaction):
 
-    roslaunch telemarketing_bringup telemarketing_bringup_local.launch
+    roslaunch telemarketing_bringup telemarketing_bringup_local_xavier.launch
 
-For the remote computer (RViz, URDF and Gazebo configuration + gui interaction + teleoperation node):
+For the Jetson Nano local computer (microcontroller and computer interaction via python and ino scripts):
+
+    roslaunch telemarketing_bringup telemarketing_bringup_local_nano.launch
+
+For the remote computer (RViz, URDF and Gazebo configuration + operator gui interaction + teleoperation node):
 
     roslaunch telemarketing_bringup telemarketing_bringup_remote.launch
 
 ## Next steps
 
-- Organize according to the ros naming standard.
-
-- Create new packages and ros launch scripts.
+- Create new packages and roslaunch scripts.
 
 - According to the new changes, complete the Usage section.
 

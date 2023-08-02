@@ -1,5 +1,5 @@
 <launch>
 
-  <node pkg="sentiment_analysis" name="sentiment_analysis" type="sent_analysis_node" />
+  <node pkg="sentiment_analysis" type="sentiment_analysis.py" name="sentiment_analysis_node"/>
 
 </launch>
