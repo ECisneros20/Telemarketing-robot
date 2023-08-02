@@ -27,7 +27,7 @@ class sentimentAnalysis:
 
         # ROS setup
         rospy.init_node("sentiment_analysis_node", anonymous = False)
-        self.sub_image = rospy.Subscriber("/image_topic", Image, self.callback_image)
+        self.sub_image = rospy.Subscriber("/usb_cam/image_raw", Image, self.callback_image)
         self.pub_sentiment = rospy.Publisher("/sentiment_detected", String)
         self.sentiment_msg = String()
         self.bridge = CvBridge()
