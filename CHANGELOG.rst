@@ -1,19 +1,26 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Changelog for Telemarketing robot
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-0.3.9 (2023-07-31)
+0.3.9 (2023-08-04)
 ------------------
 * New version of telemarketing_teleop, telemarketing_microcontroller and telemarketing_bringup packages.
-* (ASP) TODO: Usage of ROS in the telemarketing_gui package in order to check camera image, battery level, velocity, etc. Based POO programming from the
-    virtual_joystick.py file
-* (ASP) TODO: Successful teleoperation via ps4 controller connected to a remote PC with ROS in the telemarketing_microcontroller package
+* Include ROS characteristics to sentiment_analysis package.
+* (ASP) TODO: Use of ROS in the telemarketing_gui package in two scripts, one for each gui. The operator's gui is to check the 3D camera image, battery
+    level, speed and detected sentiment. The customer's gui is for displaying advertisements and other related information. The development will be based in
+    the virtual_joystick.py file: https://github.com/jfstepha/differential-drive/blob/master/scripts/virtual_joystick.py
+* (ASP) TODO: Basic teleoperation via ps4 controller connected to a remote PC with ROS in the telemarketing_microcontroller package
+    - Python script with the subscriber to /cmd_vel and the publisher to the .ino file
+* TODO: Successful teleoperation via ps4 controller connected to a remote PC with ROS in the telemarketing_microcontroller package
     - Check Controller.py, ROBOTEQ.py and Serial.py
     - The subscriber to /cmd_vel topic
     - The controller algorithm and fine-tunning for driver commands
     - Feedback from the encoder measurements
-* TODO: Fusion of all sensor data in the same script with the proper subscribers and publishers in telemarketing_microcontroller package.
 * TODO: Define of the algorithm to estimate Odometry message based only in the encoders data and TF messages in telemarketing_microcontroller package.
-* TODO: Include ROS characteristics to sentiment_analysis package.
+* TODO: Fusion of all sensor data in the same script with the proper subscribers and publishers in telemarketing_microcontroller package.
+    - Lidar
+    - Encoders
+    - IMU
+* TODO: Use tensorRT in order to simplify the sentiment analysis model and speed up while executing it
 
 0.3.8 (2023-07-27)
 ------------------
