@@ -11,8 +11,11 @@
   <node pkg="telemarketing_microcontroller" type="Sensors.py" name="serial_communication_sensors">
   </node>
 
-  <!--<node pkg="telemarketing_microcontroller" type="borrar2.py" name="serial_communication_controller">
-  </node>-->
+  <node pkg="telemarketing_microcontroller" type="borrar2.py" name="serial_communication_controller">
+  </node>
+
+  <node pkg="telemarketing_microcontroller" type="borrar3_alvites.py" name="serial_communication_controller" output="screen">
+  </node>
 
   <!--<node pkg="telemarketing_microcontroller" type="Controller.py" name="serial_communication_controller">
   </node>-->
