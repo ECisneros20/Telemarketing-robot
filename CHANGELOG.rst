@@ -3,7 +3,8 @@ Changelog for Telemarketing robot
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 0.3.9 (2023-08-04)
 ------------------
-* New version of telemarketing_teleop, telemarketing_microcontroller and telemarketing_bringup packages.
+* Several updates of sentiment_analysis, telemarketing_bringup, telemarketing_description, telemarketing_gazebo, telemarketing_microcontroller,
+    telemarketing_teleop packages.
 * Include ROS characteristics to sentiment_analysis package.
 * (ASP) TODO: Use of ROS in the telemarketing_gui package in two scripts, one for each gui. The operator's gui is to check the 3D camera image, battery
     level, speed and detected sentiment. The customer's gui is for displaying advertisements and other related information. The development will be based in
