@@ -1,22 +1,24 @@
 <launch>
-  <arg name="x_pos" default="-3"/>
-  <arg name="y_pos" default="-15"/>
+
+  <arg name="rvizconfig" default="urdf_ir_us"/>
+  <arg name="rviz" default="$(find telemarketing_description)/rviz/$(arg rvizconfig).rviz"/>
+  <arg name="show_rviz" default="False"/>
+  <arg name="x_pos" default="-3.0"/>
+  <arg name="y_pos" default="-15.0"/>
   <arg name="z_pos" default="0.0"/>
   <arg name="roll" default="0.0"/>
   <arg name="pitch" default="0.0"/>
-  <arg name="yaw" default="0"/> 
-
+  <arg name="yaw" default="0.0"/>
   <arg name="nombre_archivo" default="MundoConcentrado"/>
-  
   <arg name="numero_obstaculos" default="4"/>
   <arg name="velocidad" default="0.2"/>
   <arg name="tipo_movimiento" default="0_Aleatorio"/>
 
   <!--Building a world with input requirements-->
   <node pkg="telemarketing_gazebo" type="AutomatizacionCreacionDeMundo.py" name="AutomatizacionCreacionDeMundo" output="screen">
-    <param name="number_dynamic_obstacles" type="int" value="$(arg numero_obstaculos)" />
-    <param name="speed_dynamic_obstacles" type="double" value="$(arg velocidad)" />
-    <param name="turning_time" type="double" value="0.5" />
+    <param name="number_dynamic_obstacles" type="int" value="$(arg numero_obstaculos)"/>
+    <param name="speed_dynamic_obstacles" type="double" value="$(arg velocidad)"/>
+    <param name="turning_time" type="double" value="0.5"/>
     <param name="nombre_archivo" type="str" value="$(arg nombre_archivo)"/>
     <param name="tipo_movimiento" type="str" value="$(arg tipo_movimiento)"/>
   </node>
@@ -30,14 +32,19 @@
     <arg name="debug" value="false"/>
   </include>
 
-  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find telemarketing_description)/urdf/telemarketing.xacro" />
+  <group if="$(eval show_rviz == True)">
 
-  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model telemarketing -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw) -param robot_description" />
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find telemarketing_description)/urdf/telemarketing.xacro"/>
 
-   <!-- Convert joint states to TF transforms for RViz, position of the robot, etc -->
-  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
-    <param name="publish_frequency" type="double" value="50.0" />
-    <param name="tf_prefix" value="" />
-  </node>
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model telemarketing -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw) -param robot_description"/>
+    <!-- Convert joint states to TF transforms for RViz, position of the robot, etc -->
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+      <param name="publish_frequency" type="double" value="50.0"/>
+      <param name="tf_prefix" value=""/>
+    </node>
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher"/>
+    <node name="rviz" pkg="rviz" args="-d $(arg rviz)" type="rviz" required="true"/>
+
+  </group>
 
 </launch>
