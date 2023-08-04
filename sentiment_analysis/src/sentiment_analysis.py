@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Check camera capabilities: v4l2-ctl --device=0 --list-formats-ext
 
 import tensorflow as tf
 from tensorflow.keras.models import load_model
