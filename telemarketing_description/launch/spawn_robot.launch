@@ -22,7 +22,7 @@
 
   </group>
 
-  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find telemarketing_description)/urdf/telemarketing.xacro"/>
+  <param name="robot_description" command="$(find xacro)/xacro $(find telemarketing_description)/urdf/telemarketing.xacro"/>
 
   <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model telemarketing -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -R $(arg roll) -P $(arg pitch) -Y $(arg yaw) -param robot_description"/>
   <!-- Convert joint states to TF transforms for RViz, position of the robot, etc -->
