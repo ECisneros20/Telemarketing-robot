@@ -1,7 +1,7 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Changelog for Telemarketing robot
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-0.3.9 (2023-08-04)
+0.3.9 (2023-08-07)
 ------------------
 * Several updates of sentiment_analysis, telemarketing_bringup, telemarketing_description, telemarketing_gazebo, telemarketing_microcontroller,
     telemarketing_teleop packages.
