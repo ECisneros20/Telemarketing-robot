@@ -1,0 +1,6 @@
+<launch>
+
+  <!--<include file="$(find sentiment_analysis)/launch/sentiment_analysis.launch"/>-->
+  <include file="$(find telemarketing_gui)/launch/telemarketing_gui_customers.launch"/>
+
+</launch>
