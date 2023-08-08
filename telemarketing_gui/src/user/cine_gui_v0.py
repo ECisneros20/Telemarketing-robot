@@ -60,7 +60,7 @@ class Ui_MainWindow(object):
         self.layout_inicio.addWidget(self.label_button1)
         verticalSpacer1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.MinimumExpanding)
         self.layout_inicio.addItem(verticalSpacer1)
-        layout_h = QtWidgets.QHBoxLayout()
+        layout_h = QtWidgets.QHBoxLayout(self.label_inicio)
         layout_h.setObjectName("layout_h")
         horizontalSpacer1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         horizontalSpacer2 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
