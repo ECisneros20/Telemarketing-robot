@@ -2,7 +2,8 @@
 # Link: https://github.com/ev3dev-lang-java/ev3dev-lang-java/issues/347
 
 import rospy
-from std_msgs.msg import Int16MultiArray, Twist
+from std_msgs.msg import Int16MultiArray
+from geometry_msgs.msg import Twist
 from math import pi
 
 # Publisher (1)
@@ -42,8 +43,10 @@ class SerialComSensors:
 
     def publisherFunctions(self):
 
+        self.rate = rospy.Rate(10)
+
         while not rospy.is_shutdown():
-            self.pub_servo_vel.publish(self.servo_vel)
+            self.pub_servo_vel.publish(self.servo_msg)
             rospy.loginfo("Executing!")
             self.rate.sleep()
 
