@@ -1,12 +1,13 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # Link: https://github.com/ev3dev-lang-java/ev3dev-lang-java/issues/347
 
 import rospy
-from std_msgs.msg import Int16MultiArray, Twist
+from std_msgs.msg import Int32MultiArray
+from geometry_msgs.msg import Twist
 from math import pi
 
 # Publisher (1)
-# /servo_vel     -   Int16MultiArray     -   to Microcontroller      -   Array of two motor velocities
+# /servo_vel     -   Int32MultiArray     -   to Microcontroller      -   Array of two motor velocities
 
 # Subscriber (1)
 # /cmd_vel       -   Twist               -   from PS4 controller     -   Linear velocity x and angular velocity z
@@ -26,10 +27,10 @@ class SerialComSensors:
         # Subscribe to linear velocity x and angular velocity z from main computer or PS4 controller
         self.sub_teleop = rospy.Subscriber("/cmd_vel", Twist, self.callback_teleop)
         # Publish the array of motor velocities
-        self.pub_servo_vel = rospy.Publisher("/servo_vel", Int16MultiArray, queue_size = 10)
+        self.pub_servo_vel = rospy.Publisher("/servo_vel", Int32MultiArray, queue_size = 10)
 
         # Messages to publish
-        self.servo_msg = Int16MultiArray()
+        self.servo_msg = Int32MultiArray()
 
     def callback_teleop(self, msg):
 
@@ -38,14 +39,17 @@ class SerialComSensors:
         # max angular z = 1.5708 rad/s
         self.v_r = -(2 * msg.linear.x + msg.angular.z * self.L) / (2 * self.R)
         self.v_l = (2 * msg.linear.x - msg.angular.z * self.L) / (2 * self.R)
-        self.servo_msg.data = {self.v_r, self.v_l}
+        self.servo_msg.data = {int(50.80 * self.v_r + 1500), int(50.80 * self.v_l + 1500)}
 
     def publisherFunctions(self):
 
+        self.rate = rospy.Rate(10)
+
         while not rospy.is_shutdown():
-            self.pub_servo_vel.publish(self.servo_vel)
+            self.pub_servo_vel.publish(self.servo_msg)
             rospy.loginfo("Executing!")
             self.rate.sleep()
+        self.pub_servo_vel.publish(Int32MultiArray(data=[0, 0]))
 
 
 if __name__ == "__main__":
