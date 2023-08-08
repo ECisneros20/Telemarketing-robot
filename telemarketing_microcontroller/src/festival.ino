@@ -24,8 +24,8 @@ void setup() {
     MotorL.attach(6);
     digitalWrite(reset,LOW);
    digitalWrite(reset,HIGH); 
-   setMotorR(0);
-   setMotorL(0); 
+   setMotorR(1500);
+   setMotorL(1500); 
 }
 
 void loop() {
