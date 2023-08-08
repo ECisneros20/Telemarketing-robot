@@ -5,7 +5,7 @@
     <param name="baud" value="57600"/>
   </node>
 
-  <node pkg="telemarketing_microcontroller" type="festival.py" name="serial_communication_sensors">
+  <node pkg="telemarketing_microcontroller" type="festival.py" name="serial_communication_teleop">
   </node>
 
   <!--<node pkg="telemarketing_microcontroller" type="borrar.py" name="pub_borrar">
