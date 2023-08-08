@@ -39,7 +39,7 @@ class SerialComSensors:
         # max angular z = 1.5708 rad/s
         self.v_r = -(2 * msg.linear.x + msg.angular.z * self.L) / (2 * self.R)
         self.v_l = (2 * msg.linear.x - msg.angular.z * self.L) / (2 * self.R)
-        self.servo_msg.data = {int(60.96 * self.v_r + 1500), int(60.96 * self.v_l + 1500)}
+        self.servo_msg.data = {int(50.80 * self.v_r + 1500), int(50.80 * self.v_l + 1500)}
 
     def publisherFunctions(self):
 
