@@ -49,6 +49,7 @@ class SerialComSensors:
             self.pub_servo_vel.publish(self.servo_msg)
             rospy.loginfo("Executing!")
             self.rate.sleep()
+        self.pub_servo_vel.publish(Int32MultiArray(data=[0, 0]))
 
 
 if __name__ == "__main__":
