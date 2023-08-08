@@ -2,12 +2,12 @@
 # Link: https://github.com/ev3dev-lang-java/ev3dev-lang-java/issues/347
 
 import rospy
-from std_msgs.msg import Int16MultiArray
+from std_msgs.msg import Int32MultiArray
 from geometry_msgs.msg import Twist
 from math import pi
 
 # Publisher (1)
-# /servo_vel     -   Int16MultiArray     -   to Microcontroller      -   Array of two motor velocities
+# /servo_vel     -   Int32MultiArray     -   to Microcontroller      -   Array of two motor velocities
 
 # Subscriber (1)
 # /cmd_vel       -   Twist               -   from PS4 controller     -   Linear velocity x and angular velocity z
@@ -27,10 +27,10 @@ class SerialComSensors:
         # Subscribe to linear velocity x and angular velocity z from main computer or PS4 controller
         self.sub_teleop = rospy.Subscriber("/cmd_vel", Twist, self.callback_teleop)
         # Publish the array of motor velocities
-        self.pub_servo_vel = rospy.Publisher("/servo_vel", Int16MultiArray, queue_size = 10)
+        self.pub_servo_vel = rospy.Publisher("/servo_vel", Int32MultiArray, queue_size = 10)
 
         # Messages to publish
-        self.servo_msg = Int16MultiArray()
+        self.servo_msg = Int32MultiArray()
 
     def callback_teleop(self, msg):
 
