@@ -79,6 +79,8 @@ class sentimentAnalysis:
 
     def publisherFunctions(self):
 
+        self.rate = rospy.Rate(10)
+
         while not rospy.is_shutdown():
             self.pub_sentiment.publish(self.sentiment_msg)
             rospy.loginfo("Executing!")
