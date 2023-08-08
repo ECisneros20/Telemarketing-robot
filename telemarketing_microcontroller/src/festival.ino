@@ -6,6 +6,8 @@
 Servo MotorR;
 Servo MotorL;
 
+const int reset=48;
+
 void messageCb(const std_msgs::Int32MultiArray& msg);
 
 ros::NodeHandle nh;
@@ -17,9 +19,13 @@ void setup() {
     nh.initNode();
     nh.getHardware()->setBaud(57600);
     nh.subscribe(sub);
-
+    pinMode(reset,OUTPUT);
     MotorR.attach(5);
     MotorL.attach(6);
+    digitalWrite(reset,LOW);
+   digitalWrite(reset,HIGH); 
+   setMotorR(0);
+   setMotorL(0); 
 }
 
 void loop() {
