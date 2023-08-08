@@ -25,7 +25,7 @@ void setup() {
     digitalWrite(reset,LOW);
    digitalWrite(reset,HIGH); 
    setMotorR(1500);
-   setMotorL(1500); 
+   setMotorL(1500);
 }
 
 void loop() {
