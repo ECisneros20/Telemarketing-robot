@@ -25,7 +25,7 @@ class SerialComTeleop:
         self.sub_teleop = rospy.Subscriber("/cmd_vel", Twist, self.callback_teleop)
         self.pub_servo_vel = rospy.Publisher("/servo_vel", Int32MultiArray, queue_size = 10)
         self.servo_msg = Int32MultiArray()
-        self.rate = rospy.Rate(10)
+        self.rate = rospy.Rate(0.5)
 
     def callback_teleop(self, msg):
 
@@ -43,7 +43,7 @@ class SerialComTeleop:
             rospy.loginfo("Executing!")
             self.rate.sleep()
 
-        self.pub_servo_vel.publish(Int32MultiArray(data=[0, 0]))
+        self.pub_servo_vel.publish(Int32MultiArray(data=[1500, 1500]))
 
 
 if __name__ == "__main__":
@@ -52,7 +52,6 @@ if __name__ == "__main__":
         # Node initialization
         com = SerialComTeleop()
         com.publisherFunctions()
-        rospy.spin()
 
     except rospy.ROSInterruptException:
         pass
