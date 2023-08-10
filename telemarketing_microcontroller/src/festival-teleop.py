@@ -34,7 +34,7 @@ class SerialComTeleop:
         # max angular z = 1.5708 rad/s
         self.v_r = -(2 * msg.linear.x + msg.angular.z * self.L) / (2 * self.R)
         self.v_l = (2 * msg.linear.x - msg.angular.z * self.L) / (2 * self.R)
-        rospy.loginfo(str(self.v_r), str(self.v_l))
+        rospy.loginfo(str(self.v_r) + str(self.v_l))
         self.servo_msg.data[0] = int(50.80 * self.v_r + 1500)
         self.servo_msg.data[1] = int(50.80 * self.v_l + 1500)
 
