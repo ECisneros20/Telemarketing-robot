@@ -8,6 +8,12 @@
   <node pkg="telemarketing_microcontroller" type="festival.py" name="serial_communication_teleop">
   </node>
 
+  <!--<node pkg="telemarketing_microcontroller" type="festival-teleop.py" name="serial_com_teleop_node">
+  </node>-->
+
+  <!--<node pkg="telemarketing_microcontroller" type="festival-controller.py" name="serial_com_controller_node">
+  </node>-->
+
   <!--<node pkg="telemarketing_microcontroller" type="borrar.py" name="pub_borrar">
   </node>-->
 
