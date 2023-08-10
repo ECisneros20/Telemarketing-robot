@@ -8,7 +8,7 @@
   <!--<node pkg="telemarketing_microcontroller" type="festival.py" name="serial_communication_teleop">
   </node>-->
 
-  <node pkg="telemarketing_microcontroller" type="festival-teleop.py" name="serial_com_teleop_node">
+  <node pkg="telemarketing_microcontroller" type="festival-teleop.py" name="serial_com_teleop_node" output="screen">
   </node>
 
   <!--<node pkg="telemarketing_microcontroller" type="festival-controller.py" name="serial_com_controller_node">
