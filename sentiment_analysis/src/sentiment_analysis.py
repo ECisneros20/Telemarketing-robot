@@ -12,7 +12,13 @@ from std_msgs.msg import String
 import cv2
 import numpy as np
 
-class sentimentAnalysis:
+# Publisher (1)
+# /sentiment_detected     -   String     -   to GUI's remote PC     -   String with the detected sentiment and its percentage of confidence
+
+# Subscriber (1)
+# /usb_cam/image_raw      -   Image      -   from usb camera        -   Raw image for detecting sentiment purposes
+
+class SentimentAnalysis:
 
     def __init__(self, path):
 
@@ -29,8 +35,9 @@ class sentimentAnalysis:
         # ROS setup
         rospy.init_node("sentiment_analysis_node", anonymous = False)
         self.sub_image = rospy.Subscriber("/usb_cam/image_raw", Image, self.callback_image)
-        self.pub_sentiment = rospy.Publisher("/sentiment_detected", String, queue_size=10)
+        self.pub_sentiment = rospy.Publisher("/sentiment_detected", String, queue_size = 10)
         self.sentiment_msg = String()
+        self.rate = rospy.Rate(10)
         self.bridge = CvBridge()
 
     def callback_image(self, msg):
@@ -39,22 +46,22 @@ class sentimentAnalysis:
         try:
             cv_image = self.bridge.imgmsg_to_cv2(msg, "bgr8")
         except CvBridgeError as e:
-            print(e)
+            self.sentiment_msg.data = f"Error {e} - 0% of confidence"
 
         faces = self.classifier.detectMultiScale(cv_image, 1.3, 5)
 
         for (x, y, ancho, alto) in faces:
 
-            cv2.rectangle(cv_image, (x,y), (x+ancho, y+alto), (0,255,0), 3)
-            face = cv_image[x:x+ancho, y:y+alto]
+            cv2.rectangle(cv_image, (x, y), (x + ancho, y + alto), (0, 255, 0), 3)
+            face = cv_image[x : x + ancho, y : y + alto]
 
             try:
 
                 face_resized = cv2.resize(face, (self.width, self.height))
-                face_resized = face_resized[None,:,:,:]
+                face_resized = face_resized[None, :, :, :]
 
                 predict = self.new_model.predict(face_resized)
-                predict = predict[0,:]
+                predict = predict[0, :]
 
                 if (max(predict) > 0.4):
 
@@ -64,38 +71,34 @@ class sentimentAnalysis:
                     percentage = "{:.0%}".format(percentage)
 
                     msg = self.emo_dict[sentiment] + " - " + percentage + " of confidence"
-                    self.sentiment_msg.data= self.emo_dict[sentiment]
-                    #print(msg)
+                    self.sentiment_msg.data = msg
 
                     font = cv2.FONT_HERSHEY_PLAIN
-                    cv2.putText(cv_image, msg, (x,y+alto+25), font, 1, (255,255,255), 2, cv2.LINE_AA)
+                    cv2.putText(cv_image, msg, (x, y + alto + 25), font, 1, (255, 255, 255), 2, cv2.LINE_AA)
 
             except:
 
-                pass
+                self.sentiment_msg.data = "Error - 0% of conficence"
 
         cv2.imshow("Frame", cv_image)
         cv2.waitKey(3)
 
     def publisherFunctions(self):
 
-        self.rate = rospy.Rate(10)
-
         while not rospy.is_shutdown():
             self.pub_sentiment.publish(self.sentiment_msg)
             rospy.loginfo("Executing!")
-            #self.rate.sleep()
+            self.rate.sleep()
 
         cv2.DestroyAllWindows()
+
 
 if __name__ == "__main__":
 
     try:
-        print("Analyzing real time video")
         # Node initialization
         path = rospy.get_param("sentiment_analysis_node/path")
-        sentiment = sentimentAnalysis(path)
-        rate = rospy.Rate(10)
+        sentiment = SentimentAnalysis(path)
         sentiment.publisherFunctions()
         rospy.spin()
 
