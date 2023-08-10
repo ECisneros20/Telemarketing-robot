@@ -37,7 +37,7 @@ class SentimentAnalysis:
         self.sub_image = rospy.Subscriber("/usb_cam/image_raw", Image, self.callback_image)
         self.pub_sentiment = rospy.Publisher("/sentiment_detected", String, queue_size = 10)
         self.sentiment_msg = String()
-        self.rate = rospy.Rate(10)
+        self.rate = rospy.Rate(1)
         self.bridge = CvBridge()
 
     def callback_image(self, msg):
@@ -100,7 +100,6 @@ if __name__ == "__main__":
         path = rospy.get_param("sentiment_analysis_node/path")
         sentiment = SentimentAnalysis(path)
         sentiment.publisherFunctions()
-        rospy.spin()
 
     except rospy.ROSInterruptException:
         pass
