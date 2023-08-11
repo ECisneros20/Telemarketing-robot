@@ -9,7 +9,7 @@ from simple_pid import PID
 # /servo_vel_controlled     -   Int32MultiArray       -   to microcontroller          -   Array of two motor velocities with control
 
 # Subscriber (2)
-# /vel_setpoint             -   Int32MultiArray       -   from festival-teleop.py     -   Array of two motor velocity setpoints
+# /vel_setpoint             -   Float32MultiArray       -   from festival-teleop.py     -   Array of two motor velocity setpoints
 # /encoder_data             -   Float32MultiArray     -   from microcontroller        -   Array of two motor angular velocities
 
 class SerialComController:
@@ -30,7 +30,7 @@ class SerialComController:
 
         # ROS setup
         rospy.init_node("serial_com_controller_node")
-        self.sub_vel_setpoint = rospy.Subscriber("/vel_setpoint", Int32MultiArray, self.callback_vel_setpoint)
+        self.sub_vel_setpoint = rospy.Subscriber("/vel_setpoint", Float32MultiArray, self.callback_vel_setpoint)
         self.sub_encoder = rospy.Subscriber("/encoder_data", Float32MultiArray, self.callback_encoder)
         self.pub_servo_vel_control = rospy.Publisher("/servo_vel_controlled", Int32MultiArray, queue_size = 10)
         self.servo_controlled_msg = Int32MultiArray()
