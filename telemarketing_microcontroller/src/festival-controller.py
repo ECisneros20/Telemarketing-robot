@@ -6,10 +6,10 @@ from std_msgs.msg import Int32MultiArray, Float32MultiArray
 from simple_pid import PID
 
 # Publisher (1)
-# /servo_vel_controlled     -   Int32MultiArray     -   to microcontroller          -   Array of two motor velocities with control
+# /servo_vel_controlled     -   Int32MultiArray       -   to microcontroller          -   Array of two motor velocities with control
 
 # Subscriber (2)
-# /vel_setpoint             -   Int32MultiArray     -   from festival-teleop.py     -   Array of two motor velocity setpoints
+# /vel_setpoint             -   Int32MultiArray       -   from festival-teleop.py     -   Array of two motor velocity setpoints
 # /encoder_data             -   Float32MultiArray     -   from microcontroller        -   Array of two motor angular velocities
 
 class SerialComController:
