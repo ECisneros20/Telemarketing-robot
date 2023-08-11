@@ -35,8 +35,7 @@ class SerialComTeleop:
         self.v_r = -(2 * msg.linear.x + msg.angular.z * self.L) / (2 * self.R)
         self.v_l = (2 * msg.linear.x - msg.angular.z * self.L) / (2 * self.R)
         rospy.loginfo(str(self.v_r) + str(self.v_l))
-        self.servo_msg.data[0] = int(50.80 * self.v_r + 1500)
-        self.servo_msg.data[1] = int(50.80 * self.v_l + 1500)
+        self.servo_msg.data = [int(50.80 * self.v_r + 1500), int(50.80 * self.v_l + 1500)]
 
     def publisherFunctions(self):
 
@@ -54,7 +53,6 @@ if __name__ == "__main__":
         # Node initialization
         com = SerialComTeleop()
         com.publisherFunctions()
-        rospy.spin()
 
     except rospy.ROSInterruptException:
         pass
