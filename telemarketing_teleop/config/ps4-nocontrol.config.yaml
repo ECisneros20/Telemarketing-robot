@@ -1,6 +1,6 @@
 # Linear x up / down L3
 axis_linear: 1 # Left thumb stick vertical
-scale_linear: 0.10
+scale_linear: 0.20
 scale_linear_turbo: 0.15
 
 # Angular z left / right R3
