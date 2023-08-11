@@ -1,11 +1,11 @@
 # Linear x up / down L3
 axis_linear: 1 # Left thumb stick vertical
-scale_linear: 0.15
-scale_linear_turbo: 0.2
+scale_linear: 0.20
+scale_linear_turbo: 0.25
 
 # Angular z left / right R3
 axis_angular: 3 # Right thumb stick horizontal
-scale_angular: 1
+scale_angular: 1.2
 
 enable_button: 5 # R1 button
 enable_turbo_button: 4 # L1 button
