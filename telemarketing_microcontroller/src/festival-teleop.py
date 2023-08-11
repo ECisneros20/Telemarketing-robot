@@ -25,7 +25,7 @@ class SerialComTeleop:
         self.sub_teleop = rospy.Subscriber("/cmd_vel", Twist, self.callback_teleop)
         self.pub_servo_vel = rospy.Publisher("/servo_vel", Int32MultiArray, queue_size = 10)
         self.servo_msg = Int32MultiArray(data = [1500, 1500])
-        self.rate = rospy.Rate(6)
+        self.rate = rospy.Rate(10)
 
     def callback_teleop(self, msg):
 
