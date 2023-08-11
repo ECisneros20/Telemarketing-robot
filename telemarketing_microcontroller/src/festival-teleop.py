@@ -54,7 +54,6 @@ if __name__ == "__main__":
         # Node initialization
         com = SerialComTeleop()
         com.publisherFunctions()
-        rospy.spin()
 
     except rospy.ROSInterruptException:
         pass
