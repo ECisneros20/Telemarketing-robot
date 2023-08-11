@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 import rospy
-from std_msgs.msg import Int32MultiArray
+from std_msgs.msg import Int32MultiArray, Float32MultiArray
 
 from simple_pid import PID
 
@@ -10,7 +10,7 @@ from simple_pid import PID
 
 # Subscriber (2)
 # /vel_setpoint             -   Int32MultiArray     -   from festival-teleop.py     -   Array of two motor velocity setpoints
-# /encoder_data             -   Int32MultiArray     -   from microcontroller        -   Array of two motor encoder counters
+# /encoder_data             -   Float32MultiArray     -   from microcontroller        -   Array of two motor angular velocities
 
 class SerialComController:
 
@@ -31,7 +31,7 @@ class SerialComController:
         # ROS setup
         rospy.init_node("serial_com_controller_node")
         self.sub_vel_setpoint = rospy.Subscriber("/vel_setpoint", Int32MultiArray, self.callback_vel_setpoint)
-        self.sub_encoder = rospy.Subscriber("/encoder_data", Int32MultiArray, self.callback_encoder)
+        self.sub_encoder = rospy.Subscriber("/encoder_data", Float32MultiArray, self.callback_encoder)
         self.pub_servo_vel_control = rospy.Publisher("/servo_vel_controlled", Int32MultiArray, queue_size = 10)
         self.servo_controlled_msg = Int32MultiArray()
         self.rate = rospy.Rate(10)
@@ -53,6 +53,7 @@ class SerialComController:
     def callback_encoder(self, msg):
 
         self.velRightWheel, self.velLeftWheel = msg.data
+        rospy.loginfo(str(self.velRightWheel) + str(self.velLeftWheel))
         self.servo_controlled_msg.data = self.calculate_servo_velocity()
 
     def publisherFunctions(self):
