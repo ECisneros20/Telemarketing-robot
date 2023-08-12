@@ -21,7 +21,7 @@ void messageCb(const std_msgs::Int32MultiArray &msg);
 
 ros::NodeHandle nh;
 
-ros::Subscriber<std_msgs::Int32MultiArray> sub("/servo_vel", &messageCb);
+ros::Subscriber<std_msgs::Int32MultiArray> sub("/servo_vel_controlled", &messageCb);
 
 // ROS publisher
 std_msgs::Float32MultiArray msg; // Cambiar a Float32MultiArray

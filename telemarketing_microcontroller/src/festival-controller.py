@@ -17,10 +17,10 @@ class SerialComController:
     def __init__(self):
 
         # Controller constants
-        self.Kp_r = 0.275
+        self.Kp_r = 0.12
         self.Ki_r = 0.0
         self.Kd_r = 0.0
-        self.Kp_l = 0.25
+        self.Kp_l = 0.1
         self.Ki_l = 0.0
         self.Kd_l = 0.0
         self.setpointR = 0
@@ -37,6 +37,7 @@ class SerialComController:
         self.rate = rospy.Rate(10)
 
     def calculate_servo_velocity(self):
+
         pid_R = PID(self.Kp_r, self.Ki_r, self.Kd_r, setpoint = self.setpointR)
         pid_L = PID(self.Kp_l, self.Ki_l, self.Kd_l, setpoint = self.setpointL)
         pid_R.output_limits = (1200, 1800)
