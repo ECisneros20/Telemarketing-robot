@@ -8,7 +8,7 @@ import cv2
 
 
 #Sizes for LG Display
-'''
+
 WIDTH_FULL = 980
 HEIGHT_FULL = 1860
 
@@ -17,8 +17,15 @@ HEIGHT_BUTTON_HOME = 400
 
 WIDTH_BUTTON_SHORTSMENU = 400
 HEIGHT_BUTTON_SHORTSMENU = 400
-'''
 
+WIDTH_BUTTON_BACKTOHOME = 100
+HEIGHT_BUTTON_BACKTOHOME = 100
+
+DISTANCE_MAIN_TOP = 450
+DISTANCE_BUTTONS_TOP = 550
+
+
+'''
 #Sizes for Develop
 WIDTH_FULL = 500
 HEIGHT_FULL = 900
@@ -28,6 +35,7 @@ HEIGHT_BUTTON_HOME = 200
 
 WIDTH_BUTTON_SHORTSMENU = 200
 HEIGHT_BUTTON_SHORTSMENU = 200
+'''
 
 class QLabelClickable(QLabel):
     clicked = pyqtSignal()
@@ -91,7 +99,7 @@ class Ui_MainWindow(object):
         self.layout_inicio.setObjectName("layout_inicio")
         self.layout_inicio.addWidget(self.label_button1)
         #Spacer de los 2 botones en el menu principal
-        verticalSpacer1 = QtWidgets.QSpacerItem(20, 450, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
+        verticalSpacer1 = QtWidgets.QSpacerItem(20, DISTANCE_MAIN_TOP, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
         self.layout_inicio.addItem(verticalSpacer1)
         layout_h = QtWidgets.QHBoxLayout()
         layout_h.setObjectName("layout_h")
@@ -138,13 +146,13 @@ class Ui_MainWindow(object):
         horizontalLayout_home = QtWidgets.QHBoxLayout()
         self.label_buttonHome = QLabelClickable(self.label_cortometraje)
         self.label_buttonHome.setObjectName("label_buttonHome")
-        pixmap_home = QPixmap("src/user/images/home1.png")
-        pixmap_home = pixmap_home.scaled(50,50)
+        pixmap_home = QPixmap("src/user/images/home.jpg")
+        pixmap_home = pixmap_home.scaled(WIDTH_BUTTON_BACKTOHOME,HEIGHT_BUTTON_BACKTOHOME)
         self.label_buttonHome.setPixmap(pixmap_home)
         self.label_back = QLabelClickable(self.label_cortometraje)
         self.label_back.setObjectName("label_back")
-        pixmap_back = QPixmap("src/user/images/back.jpeg")
-        pixmap_back = pixmap_back.scaled(50,50)
+        pixmap_back = QPixmap("src/user/images/back.jpg")
+        pixmap_back = pixmap_back.scaled(WIDTH_BUTTON_BACKTOHOME,HEIGHT_BUTTON_BACKTOHOME)
         self.label_back.setPixmap(pixmap_back)
         #self.label_buttonHome.setScaledContents(True)
         horizontalLayout_home.addWidget(self.label_buttonHome)
@@ -264,16 +272,16 @@ class Ui_MainWindow(object):
             hlayout_home = QtWidgets.QHBoxLayout()
             label_buttonHome = QLabelClickable()
             label_buttonHome.setObjectName("label_buttonHome"+str(i+1))
-            pixmap_home = QPixmap("src/user/images/home1.png")
-            pixmap_home = pixmap_home.scaled(50,50)
+            pixmap_home = QPixmap("src/user/images/home.jpg")
+            pixmap_home = pixmap_home.scaled(WIDTH_BUTTON_BACKTOHOME,HEIGHT_BUTTON_BACKTOHOME)
             label_buttonHome.setPixmap(pixmap_home)
             #label_buttonHome.setScaledContents(True)
             self.labelHomelist.append(label_buttonHome)
             #self.label_buttonHome.setScaledContents(True)
             label_back = QLabelClickable()
             label_back.setObjectName("label_back"+str(i+1))
-            pixmap_back = QPixmap("src/user/images/back.jpeg")
-            pixmap_back = pixmap_back.scaled(50,50)
+            pixmap_back = QPixmap("src/user/images/back.jpg")
+            pixmap_back = pixmap_back.scaled(WIDTH_BUTTON_BACKTOHOME,HEIGHT_BUTTON_BACKTOHOME)
             label_back.setPixmap(pixmap_back)
             self.labelBacklist.append(label_back)
             hlayout_home.addWidget(label_buttonHome)
@@ -282,14 +290,14 @@ class Ui_MainWindow(object):
             hlayout_home.addWidget(label_back)
             gridImage = QtWidgets.QGridLayout()
             gridImage.setObjectName("gridImage"+str(i+1))
-            verticalSpacerIm = QtWidgets.QSpacerItem(20, 350, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
+            verticalSpacerIm = QtWidgets.QSpacerItem(20, DISTANCE_BUTTONS_TOP, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
             verticalSpacerIm2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
             horizontalSpacerIm = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
             ##Boton Izquierda
             self.label_izq = QLabelClickable()#self.label_nacional1)
             self.label_izq.setObjectName("label_izq")
             pixmap_izq1 = QPixmap("src/user/images/izquierda.png")
-            pixmap_izq1=pixmap_izq1.scaled(60,60)
+            pixmap_izq1=pixmap_izq1.scaled(100,100)
             self.label_izq.setPixmap(pixmap_izq1)
             self.label_izq.setStyleSheet("background-color: transparent;")
             #self.label_izq1.setScaledContents(True)
@@ -297,7 +305,7 @@ class Ui_MainWindow(object):
             self.label_der = QLabelClickable()#self.label_nacional1)
             self.label_der.setObjectName("label_der")
             pixmap_der1 = QPixmap("src/user/images/derecha.png")
-            pixmap_der1=pixmap_der1.scaled(60,60)
+            pixmap_der1=pixmap_der1.scaled(100,100)
             self.label_der.setPixmap(pixmap_der1)
             self.label_der.setStyleSheet("background-color: transparent;")
             #self.label_der1.setScaledContents(True)
@@ -389,10 +397,13 @@ if __name__ == "__main__":
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)
-    MainWindow.show()
-
+    #MainWindow.show()
+    MainWindow.showMaximized()
     #img_grayscale = cv2.imread('Cat03.jpg')
     #cv2.imshow('image',img_grayscale)
     #cv2.waitKey(0)
+
+    # xinput set-prop "Multi touch   Multi touch overlay device" --type=float "Coordinate Transformation Matrix" 0 -1 1 1 0 0 0 0 1
+
 
     sys.exit(app.exec_())
