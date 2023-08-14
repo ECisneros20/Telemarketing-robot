@@ -24,7 +24,6 @@ HEIGHT_BUTTON_BACKTOHOME = 100
 DISTANCE_MAIN_TOP = 450
 DISTANCE_BUTTONS_TOP = 550
 
-
 '''
 #Sizes for Develop
 WIDTH_FULL = 500
@@ -35,6 +34,12 @@ HEIGHT_BUTTON_HOME = 200
 
 WIDTH_BUTTON_SHORTSMENU = 200
 HEIGHT_BUTTON_SHORTSMENU = 200
+
+WIDTH_BUTTON_BACKTOHOME = 200
+HEIGHT_BUTTON_BACKTOHOME = 200
+
+DISTANCE_MAIN_TOP = 200
+DISTANCE_BUTTONS_TOP = 300
 '''
 
 class QLabelClickable(QLabel):
@@ -296,7 +301,7 @@ class Ui_MainWindow(object):
             ##Boton Izquierda
             self.label_izq = QLabelClickable()#self.label_nacional1)
             self.label_izq.setObjectName("label_izq")
-            pixmap_izq1 = QPixmap("src/user/images/izquierda.png")
+            pixmap_izq1 = QPixmap("src/user/images/left.jpg")
             pixmap_izq1=pixmap_izq1.scaled(100,100)
             self.label_izq.setPixmap(pixmap_izq1)
             self.label_izq.setStyleSheet("background-color: transparent;")
@@ -304,7 +309,7 @@ class Ui_MainWindow(object):
             ##Boton derecha
             self.label_der = QLabelClickable()#self.label_nacional1)
             self.label_der.setObjectName("label_der")
-            pixmap_der1 = QPixmap("src/user/images/derecha.png")
+            pixmap_der1 = QPixmap("src/user/images/right.jpg")
             pixmap_der1=pixmap_der1.scaled(100,100)
             self.label_der.setPixmap(pixmap_der1)
             self.label_der.setStyleSheet("background-color: transparent;")
@@ -327,6 +332,87 @@ class Ui_MainWindow(object):
         self.label_nacional4.setLayout(self.layoutImagesList[3])
         self.label_nacional5.setLayout(self.layoutImagesList[4])
 
+        #Ibero Americana
+        # INDEX 2
+        label_iberoamericana_list = []
+        self.labels_iberoamericana = []
+        self.labelBacklist_ibero = []
+        self.layoutImagesListIbero = []
+        self.labelHomelistIbero = []
+        for i in range(7):
+            page = QtWidgets.QWidget()
+            page.setObjectName("page_"+str(i+8))
+            verticaliberoamericana = QtWidgets.QVBoxLayout(page)
+            verticaliberoamericana.setObjectName("verticaliberoamericana"+str(i+1))
+            label_iberoamericana = QtWidgets.QLabel(page)
+            label_iberoamericana.setObjectName("label_iberoamericana"+str(i+1))
+            file = "iberoamericana"+str(i+1)+".png"
+            pixmap_iberoamericana = QPixmap("src/user/images/iberoamericana/"+file)
+            pixmap_iberoamericana=pixmap_iberoamericana.scaled(WIDTH_FULL,HEIGHT_FULL)
+            label_iberoamericana.setPixmap(pixmap_iberoamericana)
+            label_iberoamericana.setScaledContents(True)
+            label_iberoamericana_list.append(label_iberoamericana)
+            verticaliberoamericana.addWidget(label_iberoamericana)
+            self.stackedWidget.addWidget(page)
+
+            ##Layout en cada hoja
+            vlayout_image = QtWidgets.QVBoxLayout()
+            vlayout_image.setObjectName("vlayout_image"+str(i+6))
+            hlayout_home = QtWidgets.QHBoxLayout()
+            label_buttonHome = QLabelClickable()
+            label_buttonHome.setObjectName("label_buttonHome"+str(i+6))
+            pixmap_home = QPixmap("src/user/images/home.jpg")
+            pixmap_home = pixmap_home.scaled(WIDTH_BUTTON_BACKTOHOME,HEIGHT_BUTTON_BACKTOHOME)
+            label_buttonHome.setPixmap(pixmap_home)
+            #label_buttonHome.setScaledContents(True)
+            self.labelHomelistIbero.append(label_buttonHome)
+            #self.label_buttonHome.setScaledContents(True)
+            label_back = QLabelClickable()
+            label_back.setObjectName("label_back"+str(i+6))
+            pixmap_back = QPixmap("src/user/images/back.jpg")
+            pixmap_back = pixmap_back.scaled(WIDTH_BUTTON_BACKTOHOME,HEIGHT_BUTTON_BACKTOHOME)
+            label_back.setPixmap(pixmap_back)
+            self.labelBacklist_ibero.append(label_back)
+            hlayout_home.addWidget(label_buttonHome)
+            horizontalSpacerHome = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+            hlayout_home.addItem(horizontalSpacerHome)
+            hlayout_home.addWidget(label_back)
+            gridImage = QtWidgets.QGridLayout()
+            gridImage.setObjectName("gridImage"+str(i+6))
+            verticalSpacerIm = QtWidgets.QSpacerItem(20, DISTANCE_BUTTONS_TOP, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
+            verticalSpacerIm2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+            horizontalSpacerIm = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+            ##Boton Izquierda
+            self.label_izq = QLabelClickable()#self.label_nacional1)
+            self.label_izq.setObjectName("label_izq")
+            pixmap_izq1 = QPixmap("src/user/images/left.jpg")
+            pixmap_izq1=pixmap_izq1.scaled(100,100)
+            self.label_izq.setPixmap(pixmap_izq1)
+            self.label_izq.setStyleSheet("background-color: transparent;")
+            #self.label_izq1.setScaledContents(True)
+            ##Boton derecha
+            self.label_der = QLabelClickable()#self.label_nacional1)
+            self.label_der.setObjectName("label_der")
+            pixmap_der1 = QPixmap("src/user/images/right.jpg")
+            pixmap_der1=pixmap_der1.scaled(100,100)
+            self.label_der.setPixmap(pixmap_der1)
+            self.label_der.setStyleSheet("background-color: transparent;")
+            #self.label_der1.setScaledContents(True)
+            labels=[self.label_izq,self.label_der]
+            self.labels_iberoamericana.append(labels)
+            gridImage.addItem(verticalSpacerIm,0,1)
+            gridImage.addWidget(self.label_izq,1,0)
+            gridImage.addItem(horizontalSpacerIm,1,1)
+            gridImage.addWidget(self.label_der,1,2)
+            gridImage.addItem(verticalSpacerIm2,2,1)
+            vlayout_image.addLayout(hlayout_home)
+            vlayout_image.addLayout(gridImage)
+            self.layoutImagesListIbero.append(vlayout_image)
+
+        for i in range(len(label_iberoamericana_list)):
+            label_iberoamericana_list[i].setLayout(self.layoutImagesListIbero[i])
+        
+        ####
         self.verticalLayout.addWidget(self.stackedWidget)
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -343,10 +429,13 @@ class Ui_MainWindow(object):
 
         self.label_button2.clicked.connect(self.gotoCortometrajesMenu)
         self.label_corto1.clicked.connect(self.gotoNacional)
+        self.label_corto2.clicked.connect(self.gotoIberoamericana)
         self.label_buttonHome.clicked.connect(self.gotoHome)
         self.label_back.clicked.connect(self.goback)
 
         for label in self.labelHomelist:
+            label.clicked.connect(self.gotoHome)
+        for label in self.labelHomelistIbero:
             label.clicked.connect(self.gotoHome)
 
         #self.label_izq1.clicked.connect(self.gotoPrevious)
@@ -356,15 +445,27 @@ class Ui_MainWindow(object):
             label_der = labels[1]
             label_izq.clicked.connect(self.gotoPrevious)
             label_der.clicked.connect(self.gotoNext)
+
+        for labels in self.labels_iberoamericana:
+            label_izq = labels[0]
+            label_der = labels[1]
+            label_izq.clicked.connect(self.gotoPreviousIbero)
+            label_der.clicked.connect(self.gotoNextIbero)
         
         for label in self.labelBacklist:
             label.clicked.connect(self.goback)
+        
+        for label in self.labelBacklist_ibero:
+            label.clicked.connect(self.goback)
+
+    def gotoIberoamericana(self):
+        self.stackedWidget.setCurrentIndex(7)
 
     def goback(self):
         actual_index = self.stackedWidget.currentIndex()
         if actual_index==1:
             self.gotoHome()
-        elif actual_index>=2 and actual_index<=6:
+        elif actual_index>=2 and actual_index<=13:
             self.gotoCortometrajesMenu()
 
     def gotoCortometrajesMenu(self):
@@ -384,12 +485,26 @@ class Ui_MainWindow(object):
         else:
             self.stackedWidget.setCurrentIndex(2)
 
+    def gotoNextIbero(self):
+        actual_index = self.stackedWidget.currentIndex()
+        if actual_index<13:
+            self.stackedWidget.setCurrentIndex(actual_index+1)
+        else:
+            self.stackedWidget.setCurrentIndex(7)
+
     def gotoPrevious(self):
         actual_index = self.stackedWidget.currentIndex()
         if actual_index>2:
             self.stackedWidget.setCurrentIndex(actual_index-1)
         else:
             self.stackedWidget.setCurrentIndex(6)
+
+    def gotoPreviousIbero(self):
+        actual_index = self.stackedWidget.currentIndex()
+        if actual_index>7:
+            self.stackedWidget.setCurrentIndex(actual_index-1)
+        else:
+            self.stackedWidget.setCurrentIndex(13)
 
 if __name__ == "__main__":
     import sys
