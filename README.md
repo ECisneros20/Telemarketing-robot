@@ -130,7 +130,7 @@ Analyze the response for each motor
 
 <br/>
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/88266673/260391956-c1d8686e-5757-42ea-9be7-48fef25caff0.png" width="400">
+  <img src="https://user-images.githubusercontent.com/88266673/260391956-c1d8686e-5757-42ea-9be7-48fef25caff0.png" width="1000">
 </p>
 
 ## Next steps
