@@ -120,6 +120,19 @@ To clone the latest release into your workspace:
 
     roslaunch telemarketing_bringup telemarketing_bringup_remote.launch
 
+### Motor controller fine-tunning
+
+Use the following command
+
+    rosbag record -O ./catkin_ws/src/Telemarketing-robot/telemarketing_microcontroller/tests/test1.bag /vel_setpoint /encoder_data
+
+Analyze the response for each motor
+
+<br/>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/88266673/260391956-c1d8686e-5757-42ea-9be7-48fef25caff0.png" width="400">
+</p>
+
 ## Next steps
 
 - Create new packages and roslaunch scripts.
