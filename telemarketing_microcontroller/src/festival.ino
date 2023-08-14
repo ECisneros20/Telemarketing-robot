@@ -12,7 +12,7 @@ void messageCb(const std_msgs::Int32MultiArray& msg);
 
 ros::NodeHandle nh;
 
-ros::Subscriber<std_msgs::Int32MultiArray> sub("/servo_vel_controlled", &messageCb);
+ros::Subscriber<std_msgs::Int32MultiArray> sub("/servo_vel", &messageCb);
 
 void setup() {
     Serial.begin(57600);
