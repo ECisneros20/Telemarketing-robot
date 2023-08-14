@@ -2,6 +2,7 @@
 #include <std_msgs/Int32MultiArray.h>
 #include <std_msgs/Float32MultiArray.h>
 #include <Servo.h>
+// Link: https://www.researchgate.net/figure/Encoder-Channel-Description-The-encoder-read-values-for-channel-A-and-channel-B-can-be_fig3_329479537
 
 // Encoders setup
 volatile long int ticksR = 0;
@@ -90,6 +91,7 @@ void encoderRcallback() {
     }
 }
 
+// Assuming a counter-intuitive reasoning
 void encoderLcallback() {
     if (digitalRead(encoderL[0]) != digitalRead(encoderL[1])) {
         ticksL--;
