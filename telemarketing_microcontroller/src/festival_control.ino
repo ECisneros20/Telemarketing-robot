@@ -91,9 +91,9 @@ void encoderRcallback() {
 
 void encoderLcallback() {
     if (digitalRead(encoderL[0]) != digitalRead(encoderL[1])) {
-        ticksL++;
+        ticksL--;
     }
     else {
-        ticksL--;
+        ticksL++;
     }
 }
