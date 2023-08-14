@@ -1,206 +1,945 @@
 <?xml version="1.0" ?>
-<robot name="Telemarketing" xmlns:xacro="http://www.ros.org/wiki/xacro">
-  
-  <xacro:include filename="$(find telemarketing_description)/urdf/links_joints.xacro" />
-  <xacro:include filename="$(find telemarketing_description)/urdf/gazebo.xacro" />
-  
-  <material name="white">
-    <color rgba="1 1 1 1"/>
-  </material>
+<robot name="telemarketing" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <material name="black">
-    <color rgba="0 0 0 1"/>
-  </material>
+<xacro:include filename="$(find telemarketing_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find telemarketing_description)/urdf/telemarketing.trans" />
+<xacro:include filename="$(find telemarketing_description)/urdf/telemarketing.gazebo" />
 
-  <material name="blue">
-    <color rgba="0 0 1 1"/>
-  </material>
 
-  <material name="grey">
-    <color rgba="0.750 0.750 0.750 1"/>
-  </material>
+<link name="base_footprint"/>
 
-  <material name="orange">
-    <color rgba="0.949 0.361 0.098 1"/>
-  </material>
+<joint name="base_joint" type="fixed">
+  <parent link="base_footprint"/>
+  <child link="base_link"/>
+  <origin xyz="0.0 0.0 0.010" rpy="0 0 0"/>
+</joint>
 
-  <!-- Robot description -->
-  <m_link_mesh name="base_link"
-              origin_rpy="0 1.5708 3.1416" origin_xyz="0 0.158 0.5"
-              mass="1"
-              ixx="1177287.158" ixy="-246402.075" ixz="-453961.379"
-              iyy="13057357.025" iyz="-55693.992"
-              izz="13181014.451"
-              material="grey"
-              meshfile="package://telemarketing_description/meshes/main_frame.stl"
-              meshscale="0.010335 0.010335 0.010335" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="-0.01582626281068255 0.009388301039198908 0.44638888098941787" rpy="0 0 0"/>
+    <mass value="46.607412382470756"/>
+    <inertia ixx="12.436477" iyy="12.532565" izz="1.513354" ixy="-0.016849" iyz="-0.015147" ixz="-0.779216"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver_default"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0.15" rpy="0 0 0"/>
+    <geometry>
+      <box size="0.64 0.64 0.2"/>
+    </geometry>
+  </collision>
+</link>
 
-  <joint name="r_dwheel_joint" type="continuous">
-      <parent link="base_link"/>
-      <child link="r_dwheel"/>
-      <origin xyz="-0.026 -0.174 0.661" rpy="1.5708 0.0 0"/>
-      <axis xyz="0 0 -1"/>
-  </joint>
+<link name="ur_caster_1">
+  <inertial>
+    <origin xyz="-0.013500301733120085 0.001981288366912748 -0.03169998393160654" rpy="0 0 0"/>
+    <mass value="0.17193166725129566"/>
+    <inertia ixx="7.6e-05" iyy="7.9e-05" izz="6.9e-05" ixy="-0.0" iyz="-1e-05" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.187574 0.182783 -0.062266" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/ur_caster_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver_default"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.02 -0.002 -0.038" rpy="0 1.5708 0"/>
+    <geometry>
+      <cylinder length="0.05" radius="0.025"/>
+    </geometry>
+  </collision>
+</link>
 
-  <m_link_mesh name="r_dwheel"
-              origin_rpy="0 0 0" origin_xyz="0 0 0"
-              mass="10"
-              ixx="0.1798" ixy="0" ixz="0"
-              iyy="0.1081" iyz="0"
-              izz="0.1798"
-              material="black"
-              meshfile="package://telemarketing_description/meshes/main_wheel.stl"
-              meshscale="0.010335 0.010335 0.010335" />
+<link name="br_caster_1">
+  <inertial>
+    <origin xyz="-0.013500301733128883 0.001981288366923961 -0.03169998393161214" rpy="0 0 0"/>
+    <mass value="0.17193166725129566"/>
+    <inertia ixx="7.6e-05" iyy="7.9e-05" izz="6.9e-05" ixy="-0.0" iyz="-1e-05" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.164426 0.182783 -0.062266" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/br_caster_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver_default"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.02 -0.002 -0.038" rpy="0 1.5708 0"/>
+    <geometry>
+      <cylinder length="0.05" radius="0.025"/>
+    </geometry>
+  </collision>
+</link>
 
-  <joint name="l_dwheel_joint" type="continuous">
-      <parent link="base_link"/>
-      <child link="l_dwheel"/>
-      <origin xyz="-0.007 0.169 0.661" rpy="1.5708 0.0 0"/>
-      <axis xyz="0 0 -1"/>
-  </joint>
+<link name="lidar_1">
+  <inertial>
+    <origin xyz="-0.00024518499825737505 -4.4098690871012536e-07 0.019173061203674013" rpy="0 0 0"/>
+    <mass value="0.44874442633887374"/>
+    <inertia ixx="0.000208" iyy="0.000205" izz="0.000295" ixy="0.0" iyz="0.0" ixz="1e-06"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.17441 -0.010703 -0.348266" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver_default"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0.02" rpy="0 0 0"/>
+    <geometry>
+      <cylinder length="0.04" radius="0.04"/>
+    </geometry>
+  </collision>
+</link>
 
-  <m_link_mesh name="l_dwheel"
-              origin_rpy="0 0 0" origin_xyz="0 0 0"
-              mass="10"
-              ixx="0.1798" ixy="0" ixz="0"
-              iyy="0.1081" iyz="0"
-              izz="0.1798"
-              material="black"
-              meshfile="package://telemarketing_description/meshes/main_wheel.stl"
-              meshscale="0.010335 0.010335 0.010335" />
+<link name="lwheel_1">
+  <inertial>
+    <origin xyz="2.3484289615694973e-07 -0.020637673074518137 -2.649612852456684e-07" rpy="0 0 0"/>
+    <mass value="2.17648405302028"/>
+    <inertia ixx="0.006799" iyy="0.013191" izz="0.006799" ixy="-0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.002351 -0.203581 -0.100116" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/rwheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver_default"/>
+  </visual>
+  <collision>
+    <origin xyz="0 -0.02 0" rpy="1.5708 0 0"/>
+    <geometry>
+      <cylinder length="0.04" radius="0.101"/>
+    </geometry>
+  </collision>
+</link>
 
-  <joint name="fr_cwheel_joint" type="continuous">
-      <parent link="base_link"/>
-      <child link="fr_cwheel"/>
-      <origin xyz="0.165 -0.186 0.609" rpy="1.5708 0.0 0"/>
-      <axis xyz="0 1 0"/>
-  </joint>
+<link name="rwheel_1">
+  <inertial>
+    <origin xyz="2.3448188038715373e-07 0.02063732699882273 -2.6520921700412536e-07" rpy="0 0 0"/>
+    <mass value="2.176484032133544"/>
+    <inertia ixx="0.006799" iyy="0.013191" izz="0.006799" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.002351 0.187147 -0.100116" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/lwheel_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver_default"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0.02 0" rpy="1.5708 0 0"/>
+    <geometry>
+      <cylinder length="0.04" radius="0.101"/>
+    </geometry>
+  </collision>
+</link>
 
-  <m_link_mesh name="fr_cwheel"
-              origin_rpy="0 0 0" origin_xyz="0 0 0"
-              mass="10"
-              ixx="0.1798" ixy="0" ixz="0"
-              iyy="0.1081" iyz="0"
-              izz="0.1798"
-              material="black"
-              meshfile="package://telemarketing_description/meshes/caster_wheel.stl"
-              meshscale="0.010335 0.010335 0.010335" />
+<link name="real_sense_1">
+  <inertial>
+    <origin xyz="-0.012419790832103733 -0.031108525619316624 -0.004151097658603442" rpy="0 0 0"/>
+    <mass value="0.03621223064538649"/>
+    <inertia ixx="2.3e-05" iyy="3e-06" izz="2.3e-05" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.247213 -0.044075 -0.587532" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/real_sense_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver_default"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.247213 -0.044075 -0.587532" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/real_sense_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
 
-  <joint name="fl_cwheel_joint" type="continuous">
-      <parent link="base_link"/>
-      <child link="fl_cwheel"/>
-      <origin xyz="0.165 0.181 0.609" rpy="1.5708 0.0 0"/>
-      <axis xyz="0 1 0"/>
-  </joint>
+<joint name="realsense_change" type="fixed">
+    <origin xyz="0.1 0 0" rpy="0 0 0"/>
+    <parent link="real_sense_1"/>
+    <child link="realsense_change_frame"/>
+</joint>
+<link name="realsense_change_frame"/>
 
-  <m_link_mesh name="fl_cwheel"
-              origin_rpy="0 0 0" origin_xyz="0 0 0"
-              mass="10"
-              ixx="0.1798" ixy="0" ixz="0"
-              iyy="0.1081" iyz="0"
-              izz="0.1798"
-              material="black"
-              meshfile="package://telemarketing_description/meshes/caster_wheel.stl"
-              meshscale="0.010335 0.010335 0.010335" />
+<link name="monitor1_1">
+  <inertial>
+    <origin xyz="0.06578759810161444 -0.01804654339422243 -2.6549572273992794e-07" rpy="0 0 0"/>
+    <mass value="19.65717622219914"/>
+    <inertia ixx="1.169049" iyy="0.903033" izz="0.279972" ixy="-0.007106" iyz="-1e-06" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.030574 -0.010717 -1.090271" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/monitor1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver_default"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.030574 -0.010717 -1.090271" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/monitor1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
 
-  <joint name="br_cwheel_joint" type="continuous">
-      <parent link="base_link"/>
-      <child link="br_cwheel"/>
-      <origin xyz="-0.199 -0.186 0.609" rpy="1.5708 0.0 0"/>
-      <axis xyz="0 1 0"/>
-  </joint>
+<link name="monitor2_1">
+  <inertial>
+    <origin xyz="0.0039472962291229735 -1.7301517323507765e-07 0.011109558387593976" rpy="0 0 0"/>
+    <mass value="1.087331660982632"/>
+    <inertia ixx="0.018585" iyy="0.005499" izz="0.01344" ixy="0.0" iyz="-0.0" ixz="0.000935"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.118841 -0.010717 -1.663148" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/monitor2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver_default"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.118841 -0.010717 -1.663148" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/monitor2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
 
-  <m_link_mesh name="br_cwheel"
-              origin_rpy="0 0 0" origin_xyz="0 0 0"
-              mass="10"
-              ixx="0.1798" ixy="0" ixz="0"
-              iyy="0.1081" iyz="0"
-              izz="0.1798"
-              material="black"
-              meshfile="package://telemarketing_description/meshes/caster_wheel.stl"
-              meshscale="0.010335 0.010335 0.010335" />
+<link name="screen_1">
+  <inertial>
+    <origin xyz="0.0025002349962530424 -3.247109095494416e-09 -3.981949106002247e-07" rpy="0 0 0"/>
+    <mass value="7.614563000001394"/>
+    <inertia ixx="0.421393" iyy="0.316678" izz="0.105509" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.126474 -0.018765 -1.090271" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/screen_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver_default"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.126474 -0.018765 -1.090271" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/screen_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
 
-  <joint name="bl_cwheel_joint" type="continuous">
-      <parent link="base_link"/>
-      <child link="bl_cwheel"/>
-      <origin xyz="-0.199 0.181 0.609" rpy="1.5708 0.0 0"/>
-      <axis xyz="0 1 0"/>
-  </joint>
+<link name="bl_caster_1">
+  <inertial>
+    <origin xyz="0.015500771725656087 0.02501836560271653 -0.03169998393161695" rpy="0 0 0"/>
+    <mass value="0.17193166725129566"/>
+    <inertia ixx="7.6e-05" iyy="7.9e-05" izz="6.9e-05" ixy="-0.0" iyz="1e-05" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.191426 -0.172217 -0.062266" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/bl_caster_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver_default"/>
+  </visual>
+  <collision>
+    <origin xyz="0.02 0.028 -0.038" rpy="0 1.5708 0"/>
+    <geometry>
+      <cylinder length="0.05" radius="0.025"/>
+    </geometry>
+  </collision>
+</link>
 
-  <m_link_mesh name="bl_cwheel"
-              origin_rpy="0 0 0" origin_xyz="0 0 0"
-              mass="10"
-              ixx="0.1798" ixy="0" ixz="0"
-              iyy="0.1081" iyz="0"
-              izz="0.1798"
-              material="black"
-              meshfile="package://telemarketing_description/meshes/caster_wheel.stl"
-              meshscale="0.010335 0.010335 0.010335" />
+<link name="ul_caster_1">
+  <inertial>
+    <origin xyz="0.013500771725657917 0.025018365602712422 -0.03169998393161138" rpy="0 0 0"/>
+    <mass value="0.17193166725129566"/>
+    <inertia ixx="7.6e-05" iyy="7.9e-05" izz="6.9e-05" ixy="-0.0" iyz="1e-05" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.160574 -0.172217 -0.062266" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/ul_caster_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver_default"/>
+  </visual>
+  <collision>
+    <origin xyz="0.02 0.028 -0.038" rpy="0 1.5708 0"/>
+    <geometry>
+      <cylinder length="0.05" radius="0.025"/>
+    </geometry>
+  </collision>
+</link>
 
-  <joint name="lidar_joint" type="fixed">
-    <axis xyz="0 1 0" />
-    <origin xyz="0.1650 0 0.920" rpy="0 0 0"/>
-    <parent link="base_link"/>
-    <child link="lidar_link"/>
-  </joint>
+<link name="carca_v1_1">
+  <inertial>
+    <origin xyz="-0.026623864904255612 0.01162950416657161 0.6556856784924985" rpy="0 0 0"/>
+    <mass value="14.376793205730248"/>
+    <inertia ixx="3.921435" iyy="3.881619" izz="1.126764" ixy="-0.000105" iyz="-2e-05" ixz="0.172016"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.003017 0.002692 -0.001484" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/carca_v1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver_default"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.003017 0.002692 -0.001484" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/carca_v1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
 
-  <link name="lidar_link">
-    <collision>
-      <origin xyz="0 0 0" rpy="1.5708 0 1.5708"/>
-      <geometry>
-        <mesh filename="package://telemarketing_description/meshes/lidar.stl" scale="0.010335 0.010335 0.010335"/>
-      </geometry>
-    </collision>
-    <visual>
-      <origin xyz="0 0 0" rpy="1.5708 0 1.5708"/>
-      <geometry>
-        <mesh filename="package://telemarketing_description/meshes/lidar.stl" scale="0.010335 0.010335 0.010335"/>
-      </geometry>
-      <material name="blue"/>
-    </visual>
-    <inertial>
-      <mass value="0.370" />
-      <origin xyz="0 0 0" rpy="1.5708 0 1.5708"/>
-      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
-    </inertial>
-  </link>
+<!--US sensors-->
+<link name="ultrasonido1_1">
+  <inertial>
+    <origin xyz="-0.008131564817623615 -0.00015614934345834636 -1.3572289353752653e-05" rpy="0 0 0"/>
+    <mass value="0.00345686723884091"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="-0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.332694 -0.009126 -0.216435" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/ultrasonido1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="ultrasound_default"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.332694 -0.009126 -0.216435" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/ultrasonido1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
 
-  <joint name="depth_joint" type="fixed">
-    <axis xyz="0 1 0" />
-    <origin xyz="0.165 0 1.417" rpy="0 0 0"/>
-    <parent link="base_link"/>
-    <child link="depth_link"/>
-  </joint>
+<link name="ultrasonido2_1">
+  <inertial>
+    <origin xyz="-0.0058601479149654745 0.005639569074984807 -1.3472289347393751e-05" rpy="0 0 0"/>
+    <mass value="0.00345686723884091"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.281357 0.274456 -0.214093" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/ultrasonido2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="ultrasound_default"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.281357 0.274456 -0.214093" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/ultrasonido2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
 
-  <link name="depth_link">
-    <collision>
-      <origin xyz="0 0 0" rpy="1.3090 0 1.5708"/>
-      <geometry>
-        <mesh filename="package://telemarketing_description/meshes/depth_camera.stl" scale="0.010335 0.010335 0.010335"/>
-      </geometry>
-    </collision>
-    <visual>
-      <origin xyz="0 0 0" rpy="1.3090 0 1.5708"/>
-      <geometry>
-        <mesh filename="package://telemarketing_description/meshes/depth_camera.stl" scale="0.010335 0.010335 0.010335"/>
-      </geometry>
-      <material name="grey"/>
-    </visual>
-    <inertial>
-      <mass value="1e-5" />
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
-    </inertial>
-  </link>
+<joint name="ultrasonido2_change" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 -0.78539816339"/>
+    <parent link="ultrasonido2_1"/>
+    <child link="ultrasonido2_change_frame"/>
+</joint>
+<link name="ultrasonido2_change_frame"/>
 
-  <joint name="depth_optical_joint" type="fixed">
-    <origin xyz="0 0 0" rpy="-1.5708 0 -1.5708"/>
-    <parent link="depth_link"/>
-    <child link="depth_optical_link"/>
-  </joint>
+<link name="ultrasonido3_1">
+  <inertial>
+    <origin xyz="1.3755639639101728e-05 0.008131952612597249 -0.0001559539659602982" rpy="0 0 0"/>
+    <mass value="0.00345686723884091"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="-0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.001697 0.325367 -0.216435" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/ultrasonido3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="ultrasound_default"/>
+  </visual>
+  <collision>
+    <origin xyz="0.001697 0.325367 -0.216435" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/ultrasonido3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
 
-  <link name="depth_optical_link"/>
+<joint name="ultrasonido3_change" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 -1.5708"/>
+    <parent link="ultrasonido3_1"/>
+    <child link="ultrasonido3_change_frame"/>
+</joint>
+<link name="ultrasonido3_change_frame"/>
 
-             
+<link name="ultrasonido4_1">
+  <inertial>
+    <origin xyz="0.005759849917563065 0.005740923090441663 -0.0001558539659626268" rpy="0 0 0"/>
+    <mass value="0.00345686723884091"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.285269 0.27402 -0.214093" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/ultrasonido4_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="ultrasound_default"/>
+  </visual>
+  <collision>
+    <origin xyz="0.285269 0.27402 -0.214093" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/ultrasonido4_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="ultrasonido4_change" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 -2.35619449019"/>
+    <parent link="ultrasonido4_1"/>
+    <child link="ultrasonido4_change_frame"/>
+</joint>
+<link name="ultrasonido4_change_frame"/>
+
+<link name="ultrasonido5_1">
+  <inertial>
+    <origin xyz="0.008131890209084391 0.0001555998975551285 -1.357228935408572e-05" rpy="0 0 0"/>
+    <mass value="0.00345686723884091"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.336189 -0.009024 -0.216435" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/ultrasonido5_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="ultrasound_default"/>
+  </visual>
+  <collision>
+    <origin xyz="0.336189 -0.009024 -0.216435" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/ultrasonido5_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="ultrasonido5_change" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 -3.14159265359"/>
+    <parent link="ultrasonido5_1"/>
+    <child link="ultrasonido5_change_frame"/>
+</joint>
+<link name="ultrasonido5_change_frame"/>
+
+<link name="ultrasonido6_1">
+  <inertial>
+    <origin xyz="0.0057597942573728855 -0.005740797569937839 0.000155495275053541" rpy="0 0 0"/>
+    <mass value="0.00345686723884091"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="-0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.284852 -0.292606 -0.214093" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/ultrasonido6_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="ultrasound_default"/>
+  </visual>
+  <collision>
+    <origin xyz="0.284852 -0.292606 -0.214093" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/ultrasonido6_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="ultrasonido6_change" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 2.35619449019"/>
+    <parent link="ultrasonido6_1"/>
+    <child link="ultrasonido6_change_frame"/>
+</joint>
+<link name="ultrasonido6_change_frame"/>
+
+<link name="ultrasonido7_1">
+  <inertial>
+    <origin xyz="1.3155639621531892e-05 -0.008131502236305932 0.00015539527505287198" rpy="0 0 0"/>
+    <mass value="0.00345686723884091"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.001798 -0.343516 -0.216435" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/ultrasonido7_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="ultrasound_default"/>
+  </visual>
+  <collision>
+    <origin xyz="0.001798 -0.343516 -0.216435" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/ultrasonido7_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="ultrasonido7_change" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 1.5708"/>
+    <parent link="ultrasonido7_1"/>
+    <child link="ultrasonido7_change_frame"/>
+</joint>
+<link name="ultrasonido7_change_frame"/>
+
+<link name="ultrasonido8_1">
+  <inertial>
+    <origin xyz="-0.010972071584232024 -0.010990617717569928 0.00015549527505340222" rpy="0 0 0"/>
+    <mass value="0.00345686723884091"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.287479 -0.297874 -0.214093" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/ultrasonido8_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="ultrasound_default"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.287479 -0.297874 -0.214093" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/ultrasonido8_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="ultrasonido8_change" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0.78539816339"/>
+    <parent link="ultrasonido8_1"/>
+    <child link="ultrasonido8_change_frame"/>
+</joint>
+<link name="ultrasonido8_change_frame"/>
+
+<!--Camera-->
+<link name="camera_1">
+  <inertial>
+    <origin xyz="-0.012963772701559462 -0.000378964113321072 0.005457195280088367" rpy="0 0 0"/>
+    <mass value="0.04478754313317344"/>
+    <inertia ixx="2.7e-05" iyy="5e-06" izz="2.6e-05" ixy="0.0" iyz="-1e-06" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.145457 -0.012637 -1.500777" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/camera_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver_default"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.145457 -0.012637 -1.500777" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/camera_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="camera_change" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="camera_1"/>
+    <child link="camera_change_frame"/>
+</joint>
+<link name="camera_change_frame"/>
+
+<!--IR sensors-->
+<link name="infrarrojo1_1">
+  <inertial>
+    <origin xyz="-0.004221676728246027 -0.014229536111874025 -0.0005101082796235556" rpy="0 0 0"/>
+    <mass value="0.0029706855489660677"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.33083 -0.177625 -0.21525" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/infrarrojo1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="infrared_default"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.33083 -0.177625 -0.21525" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/infrarrojo1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="infrarrojo1_change" type="fixed">
+    <origin xyz="0.01 0 0" rpy="0 0 0"/>
+    <parent link="infrarrojo1_1"/>
+    <child link="infrarrojo1_change_frame"/>
+</joint>
+<link name="infrarrojo1_change_frame"/>
+
+<link name="infrarrojo2_1">
+  <inertial>
+    <origin xyz="-0.0042218397045332146 -0.014229536111874108 -0.0005099892304969433" rpy="0 0 0"/>
+    <mass value="0.0029706855489660677"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.331013 0.130925 -0.21525" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/infrarrojo2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="infrared_default"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.331013 0.130925 -0.21525" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/infrarrojo2_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="infrarrojo2_change" type="fixed">
+    <origin xyz="0.01 0 0" rpy="0 0 0"/>
+    <parent link="infrarrojo2_1"/>
+    <child link="infrarrojo2_change_frame"/>
+</joint>
+<link name="infrarrojo2_change_frame"/>
+
+<link name="infrarrojo3_1">
+  <inertial>
+    <origin xyz="-0.014229598693192402 0.004222275817001131 -0.0005104892300623887" rpy="0 0 0"/>
+    <mass value="0.0029706855489660677"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.162553 0.323647 -0.215249" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/infrarrojo3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="infrared_default"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.162553 0.323647 -0.215249" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/infrarrojo3_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="infrarrojo3_change" type="fixed">
+    <origin xyz="0 -0.01 0" rpy="0 0 -1.5708"/>
+    <parent link="infrarrojo3_1"/>
+    <child link="infrarrojo3_change_frame"/>
+</joint>
+<link name="infrarrojo3_change_frame"/>
+
+<link name="infrarrojo4_1">
+  <inertial>
+    <origin xyz="-0.014229598693192208 0.004222182392508489 -0.0005104892304962916" rpy="0 0 0"/>
+    <mass value="0.0029706855489660677"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="-0.0" iyz="-0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.137447 0.323686 -0.215249" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/infrarrojo4_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="infrared_default"/>
+  </visual>
+  <collision>
+    <origin xyz="0.137447 0.323686 -0.215249" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/infrarrojo4_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="infrarrojo4_change" type="fixed">
+    <origin xyz="0 -0.01 0" rpy="0 0 -1.5708"/>
+    <parent link="infrarrojo4_1"/>
+    <child link="infrarrojo4_change_frame"/>
+</joint>
+<link name="infrarrojo4_change_frame"/>
+
+<link name="infrarrojo5_1">
+  <inertial>
+    <origin xyz="0.004222002119707524 0.014228986665970833 -0.0005101082796150902" rpy="0 0 0"/>
+    <mass value="0.0029706855489660677"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.334325 0.159475 -0.21525" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/infrarrojo5_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="infrared_default"/>
+  </visual>
+  <collision>
+    <origin xyz="0.334325 0.159475 -0.21525" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/infrarrojo5_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="infrarrojo5_change" type="fixed">
+    <origin xyz="-0.01 0 0" rpy="0 0 -3.141592"/>
+    <parent link="infrarrojo5_1"/>
+    <child link="infrarrojo5_change_frame"/>
+</joint>
+<link name="infrarrojo5_change_frame"/>
+
+<link name="infrarrojo6_1">
+  <inertial>
+    <origin xyz="0.004222165095993657 0.014228986665970694 -0.0005099892305054643" rpy="0 0 0"/>
+    <mass value="0.0029706855489660677"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.334508 -0.149075 -0.21525" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/infrarrojo6_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="infrared_default"/>
+  </visual>
+  <collision>
+    <origin xyz="0.334508 -0.149075 -0.21525" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/infrarrojo6_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="infrarrojo6_change" type="fixed">
+    <origin xyz="-0.01 0 0" rpy="0 0 -3.141592"/>
+    <parent link="infrarrojo6_1"/>
+    <child link="infrarrojo6_change_frame"/>
+</joint>
+<link name="infrarrojo6_change_frame"/>
+
+<link name="infrarrojo7_1">
+  <inertial>
+    <origin xyz="0.014228924084652872 -0.004221763627657749 -0.0005104892300819563" rpy="0 0 0"/>
+    <mass value="0.0029706855489660677"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="-0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0.165997 -0.341797 -0.215249" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/infrarrojo7_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="infrared_default"/>
+  </visual>
+  <collision>
+    <origin xyz="0.165997 -0.341797 -0.215249" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/infrarrojo7_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="infrarrojo7_change" type="fixed">
+    <origin xyz="0 0.01 0" rpy="0 0 1.5708"/>
+    <parent link="infrarrojo7_1"/>
+    <child link="infrarrojo7_change_frame"/>
+</joint>
+<link name="infrarrojo7_change_frame"/>
+
+<link name="infrarrojo8_1">
+  <inertial>
+    <origin xyz="0.014228924084652678 -0.004221731838412013 -0.0005104892305156927" rpy="0 0 0"/>
+    <mass value="0.0029706855489660677"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="-0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.134003 -0.341835 -0.215249" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/infrarrojo8_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="infrared_default"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.134003 -0.341835 -0.215249" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://telemarketing_description/meshes/infrarrojo8_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="infrarrojo8_change" type="fixed">
+    <origin xyz="0 0.01 0" rpy="0 0 1.5708"/>
+    <parent link="infrarrojo8_1"/>
+    <child link="infrarrojo8_change_frame"/>
+</joint>
+<link name="infrarrojo8_change_frame"/>
+
+<joint name="ur_joint" type="fixed">
+  <origin xyz="0.187574 -0.182783 0.062266" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="ur_caster_1"/>
+</joint>
+
+<joint name="br_joint" type="fixed">
+  <origin xyz="-0.164426 -0.182783 0.062266" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="br_caster_1"/>
+</joint>
+
+<joint name="lidar_joint" type="fixed">
+  <origin xyz="0.17441 0.010703 0.38" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="lidar_1"/>
+</joint>
+
+<joint name="left_motor" type="continuous">
+  <origin xyz="-0.002351 0.203581 0.100116" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="lwheel_1"/>
+  <axis xyz="0.0 1.0 -0.0"/>
+</joint>
+
+<joint name="right_motor" type="continuous">
+  <origin xyz="-0.002351 -0.187147 0.100116" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="rwheel_1"/>
+  <axis xyz="-0.0 1.0 0.0"/>
+</joint>
+
+<joint name="realsense_joint" type="fixed">
+  <origin xyz="0.244196 0.046767 0.586048" rpy="0 0 0"/>
+  <parent link="carca_v1_1"/>
+  <child link="real_sense_1"/>
+</joint>
+
+<joint name="monitor1_joint" type="fixed">
+  <origin xyz="0.030574 0.010717 1.090271" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="monitor1_1"/>
+</joint>
+
+<joint name="monitor2_joint" type="fixed">
+  <origin xyz="0.118841 0.010717 1.663148" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="monitor2_1"/>
+</joint>
+
+<joint name="screen_joint" type="fixed">
+  <origin xyz="0.0959 0.008048 0.0" rpy="0 0 0"/>
+  <parent link="monitor1_1"/>
+  <child link="screen_1"/>
+</joint>
+
+<joint name="bl_joint" type="fixed">
+  <origin xyz="-0.191426 0.172217 0.062266" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="bl_caster_1"/>
+</joint>
+
+<joint name="ul_joint" type="fixed">
+  <origin xyz="0.160574 0.172217 0.062266" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="ul_caster_1"/>
+</joint>
+
+<joint name="carcasa_joint" type="fixed">
+  <origin xyz="0.003 -0.003 0" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="carca_v1_1"/>
+</joint>
+
+<joint name="ultrasonic1_joint" type="fixed">
+  <origin xyz="0.329677 0.011818 0.214951" rpy="0 0 0"/>
+  <parent link="carca_v1_1"/>
+  <child link="ultrasonido1_1"/>
+</joint>
+
+<joint name="ultrasonic2_joint" type="fixed">
+  <origin xyz="0.27834 -0.271764 0.212609" rpy="0 0 0"/>
+  <parent link="carca_v1_1"/>
+  <child link="ultrasonido2_1"/>
+</joint>
+
+<joint name="ultrasonic3_joint" type="fixed">
+  <origin xyz="-0.004714 -0.322675 0.214951" rpy="0 0 0"/>
+  <parent link="carca_v1_1"/>
+  <child link="ultrasonido3_1"/>
+</joint>
+
+<joint name="ultrasonic4_joint" type="fixed">
+  <origin xyz="-0.288286 -0.271328 0.212609" rpy="0 0 0"/>
+  <parent link="carca_v1_1"/>
+  <child link="ultrasonido4_1"/>
+</joint>
+
+<joint name="ultrasonic5_joint" type="fixed">
+  <origin xyz="-0.339206 0.011716 0.214951" rpy="0 0 0"/>
+  <parent link="carca_v1_1"/>
+  <child link="ultrasonido5_1"/>
+</joint>
+
+<joint name="ultrasonic6_joint" type="fixed">
+  <origin xyz="-0.287869 0.295298 0.212609" rpy="0 0 0"/>
+  <parent link="carca_v1_1"/>
+  <child link="ultrasonido6_1"/>
+</joint>
+
+<joint name="ultrasonic7_joint" type="fixed">
+  <origin xyz="-0.004815 0.346208 0.214951" rpy="0 0 0"/>
+  <parent link="carca_v1_1"/>
+  <child link="ultrasonido7_1"/>
+</joint>
+
+<joint name="ultrasonic8_joint" type="fixed">
+  <origin xyz="0.284462 0.300566 0.212609" rpy="0 0 0"/>
+  <parent link="carca_v1_1"/>
+  <child link="ultrasonido8_1"/>
+</joint>
+
+<joint name="camera_joint" type="fixed">
+  <origin xyz="0.145457 0.012637 1.500777" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="camera_1"/>
+</joint>
+
+<joint name="infrarrojo1_joint" type="fixed">
+  <origin xyz="0.327813 0.180317 0.213766" rpy="0 0 0"/>
+  <parent link="carca_v1_1"/>
+  <child link="infrarrojo1_1"/>
+</joint>
+
+<joint name="infrarrojo2_joint" type="fixed">
+  <origin xyz="0.327996 -0.128233 0.213766" rpy="0 0 0"/>
+  <parent link="carca_v1_1"/>
+  <child link="infrarrojo2_1"/>
+</joint>
+
+<joint name="infrarrojo3_joint" type="fixed">
+  <origin xyz="0.159536 -0.320955 0.213765" rpy="0 0 0"/>
+  <parent link="carca_v1_1"/>
+  <child link="infrarrojo3_1"/>
+</joint>
+
+<joint name="infrarrojo4_joint" type="fixed">
+  <origin xyz="-0.140464 -0.320994 0.213765" rpy="0 0 0"/>
+  <parent link="carca_v1_1"/>
+  <child link="infrarrojo4_1"/>
+</joint>
+
+<joint name="infrarrojo5_joint" type="fixed">
+  <origin xyz="-0.337342 -0.156783 0.213766" rpy="0 0 0"/>
+  <parent link="carca_v1_1"/>
+  <child link="infrarrojo5_1"/>
+</joint>
+
+<joint name="infrarrojo6_joint" type="fixed">
+  <origin xyz="-0.337525 0.151767 0.213766" rpy="0 0 0"/>
+  <parent link="carca_v1_1"/>
+  <child link="infrarrojo6_1"/>
+</joint>
+
+<joint name="infrarrojo7_joint" type="fixed">
+  <origin xyz="-0.169014 0.344489 0.213765" rpy="0 0 0"/>
+  <parent link="carca_v1_1"/>
+  <child link="infrarrojo7_1"/>
+</joint>
+
+<joint name="infrarrojo8_joint" type="fixed">
+  <origin xyz="0.130986 0.344527 0.213765" rpy="0 0 0"/>
+  <parent link="carca_v1_1"/>
+  <child link="infrarrojo8_1"/>
+</joint>
 
 </robot>

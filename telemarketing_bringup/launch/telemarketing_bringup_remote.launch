@@ -1,0 +1,29 @@
+<launch>
+
+  <arg name="rvizconfig" default="urdf_ir_us"/>
+  <arg name="show_gazebo" default="False"/>
+  <arg name="show_rviz" default="False"/>
+  <arg name="joy_config" default="ps4"/>
+  <arg name="show_gui_operator" default="False"/>
+
+  <include file="$(find telemarketing_description)/launch/spawn_robot.launch">
+
+    <arg name="rvizconfig" value="$(arg rvizconfig)"/>
+    <arg name="show_gazebo" value="$(arg show_gazebo)"/>
+    <arg name="show_rviz" value="$(arg show_rviz)"/>
+
+  </include>
+
+  <group if="$(eval show_gui_operator == True)">
+
+    <include file="$(find telemarketing_gui)/launch/telemarketing_gui_operator.launch"/>
+
+  </group>
+
+  <include file="$(find telemarketing_teleop)/launch/teleop.launch">
+
+    <arg name="joy_config" value="$(arg joy_config)"/>
+
+  </include>
+
+</launch>

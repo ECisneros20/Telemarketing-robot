@@ -1,3 +1,33 @@
-numpy
-opencv-python
-tensorflow == 2.5.0
+# sentiment_analysis (Jetson Xavier NX)
+- [OK] pip3 install numpy==1.16.5
+- [OK] pip3 install opencv-python==4.5.4
+- [OK] Tensorflow 2.12.0: https://docs.nvidia.com/deeplearning/frameworks/install-tf-jetson-platform/index.html
+- [OK] sudo apt install ros-noetic-usb-cam
+- [OK] sudo apt install ros-noetic-image-view
+
+# telemarketing_bringup (Jetson Nano, Jetson Xavier NX and PC)
+* Jetson Nano
+- [OK] sudo apt install ros-melodic-rplidar-ros
+- [OK] sudo apt install ros-melodic-realsense2-camera
+
+# telemarketing_description (PC)
+- [OK] sudo apt install ros-noetic-joint-state-publisher-gui
+
+# telemarketing_gazebo (PC)
+- 
+
+# telemarketing_gui (Jetson Xavier NX and PC)
+- [OK] pip3 install PyQt5==5.14.1
+
+# telemarketing_microcontroller (Jetson Nano)
+- [OK] sudo apt install ros-melodic-rosserial-python
+- [OK] pip3 install simple-pid==1.0.1
+- [OK] pip3 install pyserial==3.4
+
+# telemarketing_teleop (PC)
+- [OK] sudo apt install python3-pip
+- [OK] pip3 install ds4drv
+- [OK] sudo apt install joystick
+- [OK] sudo apt install jstest-gtk
+- [OK] sudo apt install ros-noetic-joy
+- [OK] sudo apt install ros-noetic-teleop-twist-joy
