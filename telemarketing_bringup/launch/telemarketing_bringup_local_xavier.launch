@@ -1,6 +1,18 @@
 <launch>
 
-  <!--<include file="$(find sentiment_analysis)/launch/sentiment_analysis.launch"/>-->
-  <include file="$(find telemarketing_gui)/launch/telemarketing_gui_customers.launch"/>
+  <arg name="show_sentiment_analysis" default="False"/>
+  <arg name="show_gui_customers" default="False"/>
+
+  <group if="$(eval show_sentiment_analysis == True)">
+
+    <include file="$(find sentiment_analysis)/launch/sentiment_analysis.launch"/>
+
+  </group>
+
+  <group if="$(eval show_gui_customers == True)">
+
+    <include file="$(find telemarketing_gui)/launch/telemarketing_gui_customers.launch"/>
+
+  </group>
 
 </launch>
