@@ -4,13 +4,14 @@
 #include <Servo.h>
 
 // Encoders setup
-const int reset = 48;
 volatile long int ticksR = 0;
 volatile long int ticksL = 0;
 unsigned long TimeBackup = 0;
 const int encoderR[2] = {3, 2}; // {channelA, channelB}
 const int encoderL[2] = {19, 18}; // {channelA, channelB}
 const int TICKS_PER_REVOLUTION = 8000;
+// Reset bumper
+const int reset = 48;
 // Motors
 Servo MotorR;
 Servo MotorL;
