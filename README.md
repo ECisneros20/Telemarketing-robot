@@ -133,6 +133,16 @@ Analyze the response for each motor
   <img src="https://user-images.githubusercontent.com/88266673/260391956-c1d8686e-5757-42ea-9be7-48fef25caff0.png" width="1000">
 </p>
 
+### Software changes for customers' GUI
+
+List the input options
+
+    xinput -list
+
+Change the input for the multi touch
+
+    xinput set-prop "Multi touch   Multi touch overlay device" --type=float "Coordinate Transformation Matrix" 0 -1 1 1 0 0 0 0 1
+
 ## Next steps
 
 - Create new packages and roslaunch scripts.
