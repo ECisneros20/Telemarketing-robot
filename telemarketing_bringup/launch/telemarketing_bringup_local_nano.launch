@@ -1,0 +1,31 @@
+<launch>
+
+  <arg name="use_sensors" default="none"/>
+  <arg name="use_arduino" default="True"/>
+
+  <group if="$(eval use_sensors == 'only_lidar')">
+
+    <include file="$(find rplidar_ros)/launch/rplidar.launch"/>
+
+  </group>
+
+  <group if="$(eval use_sensors == 'only_camera')">
+
+    <include file="$(find realsense2_camera)/launch/rs_camera.launch"/>
+
+  </group>
+
+  <group if="$(eval use_sensors == 'both')">
+
+    <include file="$(find rplidar_ros)/launch/rplidar.launch"/>
+    <include file="$(find realsense2_camera)/launch/rs_camera.launch"/>
+
+  </group>
+
+  <include file="$(find telemarketing_microcontroller)/launch/telemarketing_microcontroller.launch">
+
+    <arg name="use_arduino" value="$(arg use_arduino)"/>
+
+  </include>
+
+</launch>

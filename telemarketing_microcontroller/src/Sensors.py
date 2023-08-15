@@ -41,13 +41,13 @@ class SerialComSensors:
         self.MIN_RANGE_IR = 0.00
         self.MAX_RANGE_IR = 0.35
         self.seq = 0
-    	self.reset = Bool(data = 1)
+        self.reset = Bool(data = 1)
 
         rospy.init_node("serial_communication_sensors", anonymous = False)
 
         # Susbcribe to array with 19 measurements (8 ultrasonics, 8 infrared, 2 encoder signals, 1 bumper)
         self.sub_sensor = rospy.Subscriber("/sensor_data", Float32MultiArray, self.callback_sensor)
-	self.sub_resetBumper = rospy.Subscriber("/reset_gui", Bool, self.callback_resetBumper)
+        self.sub_resetBumper = rospy.Subscriber("/reset_gui", Bool, self.callback_resetBumper)
 
         # Messages to publish
         self.sonar_1 = Range(header = Header(seq = self.seq, stamp = rospy.Time.now(), frame_id = "ultrasonido1_1"), radiation_type = 0, field_of_view = self.FIELD_OF_VIEW_US,

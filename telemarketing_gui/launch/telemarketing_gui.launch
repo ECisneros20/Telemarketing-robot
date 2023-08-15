@@ -1,5 +1,0 @@
-<launch>
-
-  <node pkg="telemarketing_gui" name="telemarketing_gui" type="gui_node" />
-
-</launch>
