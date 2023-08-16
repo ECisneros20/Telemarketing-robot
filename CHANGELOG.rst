@@ -13,7 +13,7 @@ Changelog for Telemarketing robot
     - Python script (teleop) with the subscriber to /cmd_vel and the publisher /servo_vel to the .ino file
     - .ino file with the subscriber to /servo_vel in order to use the servo commands for each motor
 * (ASP) TODO: First upgrade in teleoperation, second file in charge of the controller.
-    - Python script (controller) with the subscriber to /encoder_data and /servo_vel, and the publisher /servo_vel_controlled to the .ino file
+    - Python script (controller) with the subscriber to /encoder_data and /vel_setpoint, and the publisher /servo_vel_controlled to the .ino file
     - .ino file with the subscriber to /servo_vel_controlled and include the two encoder counters for the publisher /encoder_data
     - The controller algorithm and fine-tunning for driver commands
     - Check Controller.py, ROBOTEQ.py and Serial.py
