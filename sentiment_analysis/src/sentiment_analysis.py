@@ -33,10 +33,10 @@ class SentimentAnalysis:
         self.height = 150
 
         # ROS setup
-        rospy.init_node("sentiment_analysis_node", anonymous = False)
+        rospy.init_node("sentiment_analysis_node")
         self.sub_image = rospy.Subscriber("/usb_cam/image_raw", Image, self.callback_image)
         self.pub_sentiment = rospy.Publisher("/sentiment_detected", String, queue_size = 10)
-        self.sentiment_msg = String()
+        self.sentiment_msg = String(data = "")
         self.rate = rospy.Rate(1)
         self.bridge = CvBridge()
 
@@ -90,6 +90,7 @@ class SentimentAnalysis:
             rospy.loginfo("Executing!")
             self.rate.sleep()
 
+        self.pub_sentiment.publish(String(data = ""))
         cv2.DestroyAllWindows()
 
 
