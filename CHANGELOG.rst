@@ -1,7 +1,7 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Changelog for Telemarketing robot
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-0.3.9 (2023-08-14)
+0.3.9 (2023-08-16)
 ------------------
 * New folder for motor controller fine-tunning
 * Improve the README file documentation.
