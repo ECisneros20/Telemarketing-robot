@@ -48,8 +48,8 @@ class SerialComTeleop:
             rospy.loginfo("Executing!")
             self.rate.sleep()
 
-        self.pub_servo_vel.publish(Int32MultiArray(data=[1500, 1500]))
-        self.pub_vel_setpoint.publish(Float32MultiArray(data=[0, 0]))
+        self.pub_servo_vel.publish(Int32MultiArray(data = [1500, 1500]))
+        self.pub_vel_setpoint.publish(Float32MultiArray(data = [0, 0]))
 
 
 if __name__ == "__main__":

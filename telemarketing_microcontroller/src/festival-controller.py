@@ -9,7 +9,7 @@ from simple_pid import PID
 # /servo_vel_controlled     -   Int32MultiArray       -   to microcontroller          -   Array of two motor velocities with control
 
 # Subscriber (2)
-# /vel_setpoint             -   Float32MultiArray       -   from festival-teleop.py     -   Array of two motor velocity setpoints
+# /vel_setpoint             -   Float32MultiArray     -   from festival-teleop.py     -   Array of two motor velocity setpoints
 # /encoder_data             -   Float32MultiArray     -   from microcontroller        -   Array of two motor angular velocities
 
 class SerialComController:
@@ -33,7 +33,7 @@ class SerialComController:
         self.sub_vel_setpoint = rospy.Subscriber("/vel_setpoint", Float32MultiArray, self.callback_vel_setpoint)
         self.sub_encoder = rospy.Subscriber("/encoder_data", Float32MultiArray, self.callback_encoder)
         self.pub_servo_vel_control = rospy.Publisher("/servo_vel_controlled", Int32MultiArray, queue_size = 10)
-        self.servo_controlled_msg = Int32MultiArray()
+        self.servo_controlled_msg = Int32MultiArray(data = [1500, 1500])
         self.rate = rospy.Rate(10)
 
     def calculate_servo_velocity(self):
@@ -64,7 +64,7 @@ class SerialComController:
             rospy.loginfo("Executing!")
             self.rate.sleep()
 
-        self.pub_servo_vel_control.publish(Int32MultiArray(data=[1500, 1500]))
+        self.pub_servo_vel_control.publish(Int32MultiArray(data = [1500, 1500]))
 
 
 if __name__ == "__main__":
