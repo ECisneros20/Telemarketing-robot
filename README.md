@@ -72,13 +72,6 @@ To clone the latest release into your workspace:
 
 ### For the remote computer (RViz, URDF and Gazebo configuration + operator gui interaction + teleoperation node):
 
-  <arg name="rvizconfig" default="urdf_ir_us"/>
-  <arg name="show_gazebo" default="False"/>
-  <arg name="show_rviz" default="False"/>
-  <arg name="show_gui_operator" default="False"/>
-  <arg name="joy_config" default="ps4"/>
-
-
 <table align="center">
   <tr>
     <th>Arg name</th>
