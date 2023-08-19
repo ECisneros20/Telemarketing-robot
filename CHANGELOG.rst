@@ -1,17 +1,9 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Changelog for Telemarketing robot
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-0.3.9 (2023-08-16)
+0.3.10 (2023-08-18)
 ------------------
-* New folder for motor controller fine-tunning
-* Improve the README file documentation.
-* Several updates of sentiment_analysis, telemarketing_bringup, telemarketing_description, telemarketing_gazebo, telemarketing_microcontroller,
-    telemarketing_teleop packages.
-* Include ROS characteristics to sentiment_analysis package.
-* Update in the telemarketing_bringup launch files.
-* Basic teleoperation via ps4 controller connected to a remote PC with ROS in the telemarketing_microcontroller package.
-    - Python script (teleop) with the subscriber to /cmd_vel and the publisher /servo_vel to the .ino file
-    - .ino file with the subscriber to /servo_vel in order to use the servo commands for each motor
+* Include tts capabilities via ROS services
 * (ASP) TODO: First upgrade in teleoperation, second file in charge of the controller.
     - Python script (controller) with the subscriber to /encoder_data and /vel_setpoint, and the publisher /servo_vel_controlled to the .ino file
     - .ino file with the subscriber to /servo_vel_controlled and include the two encoder counters for the publisher /encoder_data
@@ -30,6 +22,18 @@ Changelog for Telemarketing robot
     - Encoders
     - IMU
 * TODO: Use tensorRT in order to simplify the sentiment analysis model and speed up while executing it.
+
+0.3.9 (2023-08-16)
+------------------
+* New folder for motor controller fine-tunning
+* Improve the README file documentation.
+* Several updates of sentiment_analysis, telemarketing_bringup, telemarketing_description, telemarketing_gazebo, telemarketing_microcontroller,
+    telemarketing_teleop packages.
+* Include ROS characteristics to sentiment_analysis package.
+* Update in the telemarketing_bringup launch files.
+* Basic teleoperation via ps4 controller connected to a remote PC with ROS in the telemarketing_microcontroller package.
+    - Python script (teleop) with the subscriber to /cmd_vel and the publisher /servo_vel to the .ino file
+    - .ino file with the subscriber to /servo_vel in order to use the servo commands for each motor
 
 0.3.8 (2023-07-27)
 ------------------
