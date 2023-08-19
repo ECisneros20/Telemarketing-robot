@@ -18,6 +18,7 @@
 
 # telemarketing_gui (Jetson Xavier NX and PC)
 - [OK] pip3 install PyQt5==5.14.1
+- [] PyTorch 2.0.0: https://docs.nvidia.com/deeplearning/frameworks/install-pytorch-jetson-platform/index.html
 
 # telemarketing_microcontroller (Jetson Nano)
 - [OK] sudo apt install ros-melodic-rosserial-python
