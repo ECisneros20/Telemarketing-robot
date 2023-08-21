@@ -37,6 +37,11 @@ while (1):
     
         text_prompt = "Los invitamos a conocer más sobre el 'Festival de Cine de Áncash', una iniciativa de difusión de cine descentralizada y liderada por jóvenes peruanos. En su tercera edición, este festival tiene como temática central el ODS 6: 'Agua limpia y saneamiento'. Los esperamos del 21 al 26 de agosto en Huaraz"
 
+    if text_prompt == "r2":
+    
+        text_prompt = "Los invitamos a conocer más sobre el 'Festival de Cine de Áncash' - somos agua, una iniciativa de difusión de cine descentralizada y liderada por jóvenes peruanos."
+        text_prompt2 = "En su tercera edición, este festival tiene como temática central el ODS 6: 'Agua limpia y saneamiento'. Los esperamos del 21 al 26 de agosto en Huaraz"
+
     for i in range(number_presets):
 
         voice_preset = f"v2/es_speaker_{i}"
@@ -44,7 +49,13 @@ while (1):
         inputs = processor(text = text_prompt, voice_preset = voice_preset)
         speech_output = model.generate(**inputs.to(device))
         sampling_rate = model.generation_config.sample_rate
-        filename = f"./telemarketing_gui/src/test/festival-msg-bark-{i}.wav"
+        filename = f"./telemarketing_gui/src/test/festival-msg-bark-{i}_v2_pt1.wav"
+        scipy.io.wavfile.write(filename, rate = sampling_rate, data = speech_output[0].cpu().numpy())
+
+        inputs = processor(text = text_prompt2, voice_preset = voice_preset)
+        speech_output = model.generate(**inputs.to(device))
+        sampling_rate = model.generation_config.sample_rate
+        filename = f"./telemarketing_gui/src/test/festival-msg-bark-{i}_v2_pt2.wav"
         scipy.io.wavfile.write(filename, rate = sampling_rate, data = speech_output[0].cpu().numpy())
 
         data, fs = sf.read(filename, dtype = "float32")
@@ -52,25 +63,25 @@ while (1):
         status = sd.wait()
 
     engine = pyttsx3.init()
-    engine.setProperty("rate", 100)
+    engine.setProperty("rate", 125)
     # print(engine.getProperty("volume"))
     engine.setProperty("volume", 0.6)
     voices = engine.getProperty("voices")
-    filename = f"./telemarketing_gui/src/test/festival-msg-pytts-{voices[19].id}.wav"
+    filename = f"./telemarketing_gui/src/test/festival-msg-pytts-1_v2.wav"
     engine.setProperty("voice", voices[19].id)
-    engine.say(text_prompt)
+    engine.say(text_prompt + text_prompt2)
     engine.runAndWait()
-    engine.save_to_file(text_prompt, filename)
-    filename = f"./telemarketing_gui/src/test/festival-msg-pytts-{voices[20].id}.wav"
+    engine.save_to_file(text_prompt + text_prompt2, filename)
+    filename = f"./telemarketing_gui/src/test/festival-msg-pytts-2_v2.wav"
     engine.setProperty("voice", voices[20].id)
-    engine.say(text_prompt)
+    engine.say(text_prompt + text_prompt2)
     engine.runAndWait()
-    engine.save_to_file(text_prompt, filename)
+    engine.save_to_file(text_prompt + text_prompt2, filename)
 
     for j in tld:
 
-        tts = gTTS(text_prompt, lang = "es", tld = j)
-        filename = f"./telemarketing_gui/src/test/festival-msg-gtts-{j}.wav"
+        tts = gTTS(text_prompt + text_prompt2, lang = "es", tld = j)
+        filename = f"./telemarketing_gui/src/test/festival-msg-gtts-{j}_v2.wav"
         tts.save(filename)
         data, fs = sf.read(filename, dtype = "float32")
         sd.play(data,fs)
