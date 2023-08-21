@@ -1,7 +1,7 @@
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Changelog for Telemarketing robot
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-0.3.10 (2023-08-18)
+0.3.10 (2023-08-21)
 ------------------
 * Include tts capabilities via ROS services
 * (ASP) TODO: First upgrade in teleoperation, second file in charge of the controller.
