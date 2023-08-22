@@ -1,8 +1,11 @@
 from PyQt5.QtGui import QPixmap
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QLabel
+from PyQt5.QtWidgets import QLabel, QMainWindow, QPushButton, QSlider, QSizePolicy, QStyle, QWidget, QHBoxLayout, QVBoxLayout, QFileDialog
+from PyQt5.QtCore import QDir, Qt, QUrl
 from PyQt5.QtCore import Qt, pyqtSignal
-import cv2
+from PyQt5.QtMultimedia import QMediaContent, QMediaPlayer
+from PyQt5.QtMultimediaWidgets import QVideoWidget
+#import cv2
 
 #from custom_qstacked_widgets import QStackedWidget as StackedWidget
 
@@ -41,6 +44,105 @@ HEIGHT_BUTTON_BACKTOHOME = 200
 DISTANCE_MAIN_TOP = 200
 DISTANCE_BUTTONS_TOP = 300
 '''
+
+class VideoPlayer(QMainWindow):
+    def __init__(self):
+        super().__init__()
+        self.setWindowTitle("PyQt5 Video Player") 
+ 
+        self.mediaPlayer = QMediaPlayer(None, QMediaPlayer.VideoSurface)
+ 
+        videoWidget = QVideoWidget()
+        self.videotag = None
+        self.playButton = QPushButton()
+        self.playButton.setEnabled(False)
+        self.playButton.setIcon(self.style().standardIcon(QStyle.SP_MediaPlay))
+        self.playButton.clicked.connect(self.play)
+ 
+        self.positionSlider = QSlider(Qt.Horizontal)
+        self.positionSlider.setRange(0, 0)
+        self.positionSlider.sliderMoved.connect(self.setPosition)
+ 
+        self.error = QLabel()
+        self.error.setSizePolicy(QSizePolicy.Preferred, QSizePolicy.Maximum)
+ 
+        #openButton = QPushButton("Open Video")   
+        #openButton.setToolTip("Open Video File")
+        #openButton.setStatusTip("Open Video File")
+        #openButton.setFixedHeight(24)
+        #openButton.clicked.connect(self.openFile)
+ 
+ 
+        # Create a widget for window contents
+        wid = QWidget(self)
+        self.setCentralWidget(wid)
+ 
+        # Create layouts to place inside widget
+        controlLayout = QHBoxLayout()
+        controlLayout.setContentsMargins(0, 0, 0, 0)
+        controlLayout.addWidget(self.playButton)
+        controlLayout.addWidget(self.positionSlider)
+ 
+        layout = QVBoxLayout()
+        layout.addWidget(videoWidget)
+        layout.addLayout(controlLayout)
+        layout.addWidget(self.error)
+        #layout.addWidget(openButton)
+ 
+        # Set widget to contain window contents
+        wid.setLayout(layout)
+
+        self.openVideo()
+        self.mediaPlayer.setVideoOutput(videoWidget)
+        self.mediaPlayer.stateChanged.connect(self.mediaStateChanged)
+        self.mediaPlayer.positionChanged.connect(self.positionChanged)
+        self.mediaPlayer.durationChanged.connect(self.durationChanged)
+        self.mediaPlayer.error.connect(self.handleError)
+ 
+    def openVideo(self):
+        self.mediaPlayer.setMedia(QMediaContent(QUrl.fromLocalFile("videos/cansat1.mp4")))
+        self.playButton.setEnabled(True)
+        self.mediaPlayer.play()
+        
+
+    def openFile(self):
+        fileName, _ = QFileDialog.getOpenFileName(self, "Open Movie",
+                QDir.homePath())
+ 
+        if fileName != '':
+            self.mediaPlayer.setMedia(
+                    QMediaContent(QUrl.fromLocalFile(fileName)))
+            self.playButton.setEnabled(True)
+ 
+    def exitCall(self):
+        sys.exit(app.exec_())
+ 
+    def play(self):
+        if self.mediaPlayer.state() == QMediaPlayer.PlayingState:
+            self.mediaPlayer.pause()
+        else:
+            self.mediaPlayer.play()
+ 
+    def mediaStateChanged(self, state):
+        if self.mediaPlayer.state() == QMediaPlayer.PlayingState:
+            self.playButton.setIcon(
+                    self.style().standardIcon(QStyle.SP_MediaPause))
+        else:
+            self.playButton.setIcon(
+                    self.style().standardIcon(QStyle.SP_MediaPlay))
+ 
+    def positionChanged(self, position):
+        self.positionSlider.setValue(position)
+ 
+    def durationChanged(self, duration):
+        self.positionSlider.setRange(0, duration)
+ 
+    def setPosition(self, position):
+        self.mediaPlayer.setPosition(position)
+ 
+    def handleError(self):
+        self.playButton.setEnabled(False)
+        self.error.setText("Error: " + self.mediaPlayer.errorString())
 
 class QLabelClickable(QLabel):
     clicked = pyqtSignal()
@@ -412,6 +514,25 @@ class Ui_MainWindow(object):
         for i in range(len(label_iberoamericana_list)):
             label_iberoamericana_list[i].setLayout(self.layoutImagesListIbero[i])
         
+        # INDEX 14
+        self.page_14 = QtWidgets.QWidget()
+        self.page_14.setObjectName("page_14")
+        self.layoutVideo1 = QtWidgets.QVBoxLayout(self.page_14)
+        self.layoutVideo1.setObjectName("layoutVideo1")
+        #self.label_nacional2 = QtWidgets.QLabel(self.page_14)
+        #self.label_nacional2.setObjectName("label_nacional2")
+        #pixmap_nacional2 = QPixmap("src/user/videos/Aeroespacial_GRP.mp4")
+        #pixmap_nacional2=pixmap_nacional2.scaled(WIDTH_FULL,HEIGHT_FULL)
+        #self.label_nacional2.setPixmap(pixmap_nacional2)
+        #self.label_nacional2.setScaledContents(True)
+        #self.layoutVideo1.addWidget(self.label_nacional2)
+        self.mediaPlayer = QMediaPlayer(None, QMediaPlayer.VideoSurface)
+        videoWidget = QVideoWidget()
+        self.mediaPlayer.setMedia(QMediaContent(QUrl.fromLocalFile("src/user/videos/Aeroespacial_GRP.mp4")))
+        self.mediaPlayer.setVideoOutput(videoWidget)
+        self.layoutVideo1.addWidget(videoWidget)
+        self.stackedWidget.addWidget(self.page_14)
+        
         ####
         self.verticalLayout.addWidget(self.stackedWidget)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -427,6 +548,9 @@ class Ui_MainWindow(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         #self.label.setText(_translate("MainWindow", "TextLabel"))
 
+        #Solo de prueba de video
+        self.label_button1.clicked.connect(self.gotoVideo1)
+        #
         self.label_button2.clicked.connect(self.gotoCortometrajesMenu)
         self.label_corto1.clicked.connect(self.gotoNacional)
         self.label_corto2.clicked.connect(self.gotoIberoamericana)
@@ -457,6 +581,10 @@ class Ui_MainWindow(object):
         
         for label in self.labelBacklist_ibero:
             label.clicked.connect(self.goback)
+
+    def gotoVideo1(self):
+        self.stackedWidget.setCurrentIndex(14)
+        self.mediaPlayer.play()
 
     def gotoIberoamericana(self):
         self.stackedWidget.setCurrentIndex(7)
