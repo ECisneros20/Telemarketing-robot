@@ -20,6 +20,8 @@
 - [OK] pip3 install PyQt5==5.14.1
 - [] PyTorch 2.0.0 and CUDA==11.7: https://docs.nvidia.com/deeplearning/frameworks/install-pytorch-jetson-platform/index.html
 - [] pip3 install transformers==4.31.0
+
+- [] sudo apt install libportaudio2
 - [] pip3 install sounddevice==0.4.6
 - [] pip3 install soundfile==0.12.1
 - [] pip3 install scipy==1.10.1
