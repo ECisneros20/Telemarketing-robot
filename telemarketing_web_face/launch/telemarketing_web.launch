@@ -1,0 +1,4 @@
+<launch>
+    <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch"/> 
+    <node pkg="telemarketing_web_face" type="face_server.py" name="face_server_node"/> 
+</launch>

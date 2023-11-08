@@ -1,16 +1,17 @@
 :root {
-  --face-color: whitesmoke;
+  --face-color: black; /*whitesmoke*/
   --face-height: 100vh;
   --face-width: 100vw;
   --eye-size: 33.33vmin;
-  --eye-color: black;
-  --eyelid-color: whitesmoke;
+  --eye-color: whitesmoke; /*black*/
+  --eyelid-color: black; /*whitesmoke*/
 }
 
 body {
-  background-color: white;
+  background-color: black; /*white*/
   margin: 0px;
 }
+
 
 .buttons {
   position: relative;
@@ -35,7 +36,7 @@ body {
   border-radius: 100%;
   height: var(--eye-size);
   width: var(--eye-size);
-  bottom: calc(var(--eye-size) / 3);
+  bottom: calc(var(--eye-size) / 1);
   z-index: 1;
   transform: rotateX(0);
 }

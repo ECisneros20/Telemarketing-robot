@@ -217,29 +217,17 @@ const eyes = new EyeController({
 
 //ROS
 var ros = new ROSLIB.Ros();
-// If there is an error on the backend, an 'error' emit will be emitted.
-ros.on('error', function(error) {
-  document.getElementById('connecting').style.display = 'none';
-  document.getElementById('connected').style.display = 'none';
-  document.getElementById('closed').style.display = 'none';
-  document.getElementById('error').style.display = 'inline';
-  console.log(error);
-});
 
-// Find out exactly when we made a connection.
 ros.on('connection', function() {
-  console.log('Connection made!');
-  document.getElementById('connecting').style.display = 'none';
-  document.getElementById('error').style.display = 'none';
-  document.getElementById('closed').style.display = 'none';
-  document.getElementById('connected').style.display = 'inline';
+  console.log('Connected to websocket server.');
 });
-
+ 
+ros.on('error', function(error) {
+  console.log('Error connecting to websocket server: ', error);
+});
+ 
 ros.on('close', function() {
-  console.log('Connection closed.');
-  document.getElementById('connecting').style.display = 'none';
-  document.getElementById('connected').style.display = 'none';
-  document.getElementById('closed').style.display = 'inline';
+  console.log('Connection to websocket server closed.');
 });
 
 ros.connect('ws://localhost:9090');
