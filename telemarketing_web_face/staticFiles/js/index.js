@@ -1,3 +1,4 @@
+//Eyes Controller
 class EyeController {
   constructor(elements = {}, eyeSize = '33.33vmin') {
     this._eyeSize = eyeSize;
@@ -211,4 +212,78 @@ const eyes = new EyeController({
   upperRightEyelid: document.querySelector('.right .eyelid.upper'),
   lowerLeftEyelid: document.querySelector('.left .eyelid.lower'),
   lowerRightEyelid: document.querySelector('.right .eyelid.lower'),
+});
+///////////////////////////////////////////////////////////////////////
+
+//ROS
+var ros = new ROSLIB.Ros();
+// If there is an error on the backend, an 'error' emit will be emitted.
+ros.on('error', function(error) {
+  document.getElementById('connecting').style.display = 'none';
+  document.getElementById('connected').style.display = 'none';
+  document.getElementById('closed').style.display = 'none';
+  document.getElementById('error').style.display = 'inline';
+  console.log(error);
+});
+
+// Find out exactly when we made a connection.
+ros.on('connection', function() {
+  console.log('Connection made!');
+  document.getElementById('connecting').style.display = 'none';
+  document.getElementById('error').style.display = 'none';
+  document.getElementById('closed').style.display = 'none';
+  document.getElementById('connected').style.display = 'inline';
+});
+
+ros.on('close', function() {
+  console.log('Connection closed.');
+  document.getElementById('connecting').style.display = 'none';
+  document.getElementById('connected').style.display = 'none';
+  document.getElementById('closed').style.display = 'inline';
+});
+
+ros.connect('ws://localhost:9090');
+
+var face_expression = new ROSLIB.Topic({
+  ros : ros,
+  name : '/face_expression',
+  messageType : 'std_msgs/String'
+});
+
+face_expression.subscribe(function(message) {
+  console.log('Received message on ' + face_expression.name + ': ' + message.data);
+  expression=message.data;
+  switch(expression){
+    case 'startBlinking':
+      eyes.startBlinking();
+      break;
+    
+    case 'stopBlinking':
+      eyes.stopBlinking();
+      break;
+    
+    case 'blink':
+      eyes.blink();
+      break;
+
+    case 'happy':
+      eyes.express({type: 'happy'});
+      break;
+    
+    case 'sad':
+      eyes.express({type: 'sad'});
+      break;
+    
+    case 'angry':
+      eyes.express({type: 'angry'});
+      break;
+    
+    case 'focused':
+      eyes.express({type: 'focused'});
+      break;
+    
+    case 'confused':
+      eyes.express({type: 'confused'});
+      break;
+  }
 });
