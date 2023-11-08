@@ -1,6 +1,0 @@
-<launch>
-
-  <!--<include file="$(find sentiment_analysis)/launch/sentiment_analysis.launch" />-->
-  <include file="$(find telemarketing_microcontroller)/launch/telemarketing_microcontroller.launch" />
-
-</launch>

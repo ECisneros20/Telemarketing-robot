@@ -6,12 +6,12 @@
 - [OK] sudo apt install ros-noetic-image-view
 
 # telemarketing_bringup (Jetson Nano, Jetson Xavier NX and PC)
-- 
-
-# telemarketing_description (Jetson Nano)
-- [OK] sudo apt install ros-melodic-joint-state-publisher-gui
+* Jetson Nano
 - [OK] sudo apt install ros-melodic-rplidar-ros
 - [OK] sudo apt install ros-melodic-realsense2-camera
+
+# telemarketing_description (PC)
+- [OK] sudo apt install ros-noetic-joint-state-publisher-gui
 
 # telemarketing_gazebo (PC)
 - 
