@@ -17,7 +17,7 @@ class SerialComTeleop:
 
         # Robot constants
         self.R = 0.1016 # Wheel radius (m)
-        self.L = 0.3219 # Distance between the wheels (m)
+        self.L = 0.43454 # Distance between the wheels (m)
         self.v_r = 0.0 # Angular velocity for right motor
         self.v_l = 0.0 # Angular velocity for left motor
 
@@ -34,9 +34,9 @@ class SerialComTeleop:
         # Convert linear x and angular z velocities into two velocities one for each wheel
         # max linear x = 0.3 m/s
         # max angular z = 1.5708 rad/s
-        self.v_r = -(2 * msg.linear.x + msg.angular.z * self.L) / (2 * self.R)
-        self.v_l = (2 * msg.linear.x - msg.angular.z * self.L) / (2 * self.R)
-        self.servo_msg.data = [int(50.80 * self.v_r + 1500), int(50.80 * self.v_l + 1500)]
+        self.v_r = (2 * msg.linear.x + msg.angular.z * self.L) / (2 * self.R)
+        self.v_l = -(2 * msg.linear.x - msg.angular.z * self.L) / (2 * self.R)
+        self.servo_msg.data = [int(25.80 * self.v_r + 1500), int(25.80 * self.v_l + 1500)]
 
     def publisherFunctions(self):
 
