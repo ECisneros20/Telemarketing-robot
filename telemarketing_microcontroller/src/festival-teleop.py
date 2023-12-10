@@ -24,9 +24,9 @@ class SerialComTeleop:
         # ROS setup
         rospy.init_node("serial_com_teleop_node")
         self.sub_teleop = rospy.Subscriber("/cmd_vel", Twist, self.callback_teleop)
-        self.pub_servo_vel = rospy.Publisher("/servo_vel", Int32MultiArray, queue_size = 10)
-        #self.pub_vel_setpoint = rospy.Publisher("/vel_setpoint", Float32MultiArray, queue_size = 10)
-        self.servo_msg = Int32MultiArray(data = [1500, 1500])
+        #self.pub_servo_vel = rospy.Publisher("/servo_vel", Int32MultiArray, queue_size = 10)
+        self.pub_vel_setpoint = rospy.Publisher("/vel_setpoint", Float32MultiArray, queue_size = 10)
+        self.setpoint_msg = Float32MultiArray(data = [0.0, 0.0])
         self.rate = rospy.Rate(10)
 
     def callback_teleop(self, msg):
@@ -34,19 +34,19 @@ class SerialComTeleop:
         # Convert linear x and angular z velocities into two velocities one for each wheel
         # max linear x = 0.3 m/s
         # max angular z = 1.5708 rad/s
-        self.v_r = (2 * msg.linear.x + msg.angular.z * self.L) / (2 * self.R)
-        self.v_l = -(2 * msg.linear.x - msg.angular.z * self.L) / (2 * self.R)
-        self.servo_msg.data = [int(25.80 * self.v_r + 1500), int(25.80 * self.v_l + 1500)]
+        self.v_r = -(2 * msg.linear.x + msg.angular.z * self.L) / (2 * self.R)
+        self.v_l = (2 * msg.linear.x - msg.angular.z * self.L) / (2 * self.R)
+        self.setpoint_msg.data = [self.v_r, self.v_l]
 
     def publisherFunctions(self):
 
         while not rospy.is_shutdown():
-            self.pub_servo_vel.publish(self.servo_msg)
-            rospy.loginfo(self.servo_msg)
+            self.pub_vel_setpoint.publish(self.setpoint_msg)
+            rospy.loginfo(self.setpoint_msg)
             self.rate.sleep()
 
         #self.pub_servo_vel.publish(Int32MultiArray(data = [1500, 1500]))
-
+        self.setpoint_msg = Float32MultiArray(data = [0.0, 0.0])
 
 if __name__ == "__main__":
 

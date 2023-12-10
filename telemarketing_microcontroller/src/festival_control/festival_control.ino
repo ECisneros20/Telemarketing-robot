@@ -10,7 +10,7 @@ volatile long int ticksL = 0;
 unsigned long TimeBackup = 0;
 const int encoderR[2] = {3, 2}; // {channelA, channelB}
 const int encoderL[2] = {19, 18}; // {channelA, channelB}
-const int TICKS_PER_REVOLUTION = 8000;
+const int TICKS_PER_REVOLUTION = 1600;
 // Reset bumper
 const int reset = 48;
 // Motors
@@ -38,6 +38,10 @@ void setup() {
     pinMode(reset, OUTPUT);
     MotorR.attach(5);
     MotorL.attach(6);
+    pinMode(encoderR[0],INPUT_PULLUP);
+    pinMode(encoderR[1],INPUT_PULLUP);
+    pinMode(encoderL[0],INPUT_PULLUP);
+    pinMode(encoderL[1],INPUT_PULLUP);
     attachInterrupt(digitalPinToInterrupt(encoderR[0]), encoderRcallback, FALLING);
     attachInterrupt(digitalPinToInterrupt(encoderL[0]), encoderLcallback, FALLING);
     setMotorR(1500);

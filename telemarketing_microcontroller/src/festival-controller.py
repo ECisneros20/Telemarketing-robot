@@ -17,10 +17,10 @@ class SerialComController:
     def __init__(self):
 
         # Controller constants
-        self.Kp_r = 0.12
+        self.Kp_r = 4.0
         self.Ki_r = 0.0
         self.Kd_r = 0.0
-        self.Kp_l = 0.1
+        self.Kp_l = 4.0
         self.Ki_l = 0.0
         self.Kd_l = 0.0
         self.setpointR = 0
@@ -36,16 +36,17 @@ class SerialComController:
         self.servo_controlled_msg = Int32MultiArray(data = [1500, 1500])
         self.rate = rospy.Rate(10)
 
+
     def calculate_servo_velocity(self):
 
         pid_R = PID(self.Kp_r, self.Ki_r, self.Kd_r, setpoint = self.setpointR)
         pid_L = PID(self.Kp_l, self.Ki_l, self.Kd_l, setpoint = self.setpointL)
-        pid_R.output_limits = (1200, 1800)
-        pid_L.output_limits = (1200, 1800)
+        pid_R.output_limits = (-300, 300)
+        pid_L.output_limits = (-300, 300)
         pid_R.sample_time = 0.001
         pid_L.sample_time = 0.001
 
-        return [pid_R(self.velRightWheel), pid_L(self.velLeftWheel)]
+        return [pid_R(self.velRightWheel)+1500, pid_L(self.velLeftWheel)+1500]
 
     def callback_vel_setpoint(self, msg):
 
