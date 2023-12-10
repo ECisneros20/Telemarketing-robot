@@ -54,10 +54,10 @@ void setup() {
 
 void loop() {
 
-    if (millis() - TimeBackup >= 100) { // 100 ms
+    if (millis() - TimeBackup >= 10) { // 10 ms
 
-        float wR = ticksR / (0.1 * TICKS_PER_REVOLUTION) * 2 * PI;
-        float wL = ticksL / (0.1 * TICKS_PER_REVOLUTION) * 2 * PI;
+        float wR = ticksR / (0.01 * TICKS_PER_REVOLUTION) * 2 * PI;
+        float wL = ticksL / (0.01 * TICKS_PER_REVOLUTION) * 2 * PI;
         float w[2] = {wR, wL};
         msg.data_length = 2;
         msg.data = w;
@@ -73,11 +73,15 @@ void loop() {
 }
 
 void setMotorR(int pulse) {
-    MotorR.writeMicroseconds(pulse);
+  if (pulse>1750 || pulse<1250)
+    pulse=1500;
+  MotorR.writeMicroseconds(pulse);
 }
 
 void setMotorL(int pulse) {
-    MotorL.writeMicroseconds(pulse);
+  if (pulse>1750 || pulse<1250)
+    pulse=1500;
+  MotorL.writeMicroseconds(pulse);
 }
 
 // Callback definition

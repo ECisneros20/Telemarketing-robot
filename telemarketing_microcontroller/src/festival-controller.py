@@ -17,12 +17,12 @@ class SerialComController:
     def __init__(self):
 
         # Controller constants
-        self.Kp_r = 7.0
+        self.Kp_r = 7.4
         self.Ki_r = 0.0
-        self.Kd_r = 0.0
-        self.Kp_l = 4.0
+        self.Kd_r = 0.8
+        self.Kp_l = 7.0
         self.Ki_l = 0.0
-        self.Kd_l = 0.0
+        self.Kd_l = 0.8
         self.setpointR = 0
         self.setpointL = 0
         self.velRightWheel = 0
