@@ -42,11 +42,13 @@ class SerialComTeleop:
 
     def publisherFunctions(self):
 
+	self.pub_vel_setpoint_left.publish(self.setpoint_left_msg)
+	self.pub_vel_setpoint_right.publish(self.setpoint_right_msg)
         while not rospy.is_shutdown():
-            self.pub_vel_setpoint_left.publish(self.setpoint_left_msg)
-            self.pub_vel_setpoint_right.publish(self.setpoint_right_msg)
-            rospy.loginfo(self.setpoint_left_msg)
-            rospy.loginfo(self.setpoint_right_msg)
+        #    self.pub_vel_setpoint_left.publish(self.setpoint_left_msg)
+        #    self.pub_vel_setpoint_right.publish(self.setpoint_right_msg)
+        #    rospy.loginfo(self.setpoint_left_msg)
+        #    rospy.loginfo(self.setpoint_right_msg)
             self.rate.sleep()
 
         #self.pub_servo_vel.publish(Int32MultiArray(data = [1500, 1500]))

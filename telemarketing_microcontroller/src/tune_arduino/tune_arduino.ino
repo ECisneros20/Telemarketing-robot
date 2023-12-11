@@ -81,13 +81,13 @@ void loop() {
 }
 
 void setMotorR(int pulse) {
-  if (pulse>1750 || pulse<1250)
+  if (pulse>1800 || pulse<1200)
     pulse=1500;
   MotorR.writeMicroseconds(pulse);
 }
 
 void setMotorL(int pulse) {
-  if (pulse>1750 || pulse<1250)
+  if (pulse>1800 || pulse<1200)
     pulse=1500;
   MotorL.writeMicroseconds(pulse);
 }
