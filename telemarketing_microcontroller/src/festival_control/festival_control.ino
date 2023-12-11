@@ -17,6 +17,9 @@ const int reset = 48;
 Servo MotorR;
 Servo MotorL;
 
+
+void encoderRcallback(); // Declaración de la función
+void encoderLcallback(); // Declaración de la función
 // Callback declaration
 void messageCb(const std_msgs::Int32MultiArray &msg);
 
@@ -62,32 +65,34 @@ void loop() {
         msg.data_length = 2;
         msg.data = w;
         pub.publish(&msg);
-        nh.spinOnce();
         TimeBackup = millis();
         ticksR = 0;
         ticksL = 0;
-        nh.spinOnce();
-
+        
     }
+    nh.spinOnce();
+
 
 }
 
 void setMotorR(int pulse) {
-  if (pulse>1750 || pulse<1250)
+  if (pulse>1800 || pulse<1200)
     pulse=1500;
   MotorR.writeMicroseconds(pulse);
 }
 
 void setMotorL(int pulse) {
-  if (pulse>1750 || pulse<1250)
+  if (pulse>1800 || pulse<1200)
     pulse=1500;
   MotorL.writeMicroseconds(pulse);
 }
 
 // Callback definition
 void messageCb(const std_msgs::Int32MultiArray &msg) {
-    setMotorR(msg.data[0]);
-    setMotorL(msg.data[1]);
+    int right_pulso = 1200 + (msg.data[0]-(-10))*1.0*(1800-1200)/(10-(-10));
+    int left_pulso = 1200 + (msg.data[1]-(-10))*1.0*(1800-1200)/(10-(-10));
+    setMotorR(right_pulso);
+    setMotorL(left_pulso);
 }
 
 void encoderRcallback() {

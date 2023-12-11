@@ -17,12 +17,12 @@ class SerialComController:
     def __init__(self):
 
         # Controller constants
-        self.Kp_r = 7.4
-        self.Ki_r = 0.0
-        self.Kd_r = 0.8
-        self.Kp_l = 7.0
-        self.Ki_l = 0.0
-        self.Kd_l = 0.8
+        self.Kp_r = 1.92
+        self.Ki_r = 2.82353
+        self.Kd_r = 0.3264
+        self.Kp_l = 2.76
+        self.Ki_l = 7.45946
+        self.Kd_l = 0.2553
         self.setpointR = 0
         self.setpointL = 0
         self.velRightWheel = 0
@@ -33,7 +33,7 @@ class SerialComController:
         self.sub_vel_setpoint = rospy.Subscriber("/vel_setpoint", Float32MultiArray, self.callback_vel_setpoint)
         self.sub_encoder = rospy.Subscriber("/encoder_data", Float32MultiArray, self.callback_encoder)
         self.pub_servo_vel_control = rospy.Publisher("/servo_vel_controlled", Int32MultiArray, queue_size = 10)
-        self.servo_controlled_msg = Int32MultiArray(data = [1500, 1500])
+        self.servo_controlled_msg = Int32MultiArray(data = [0, 0])
         self.rate = rospy.Rate(10)
 
 
@@ -41,12 +41,12 @@ class SerialComController:
 
         pid_R = PID(self.Kp_r, self.Ki_r, self.Kd_r, setpoint = self.setpointR)
         pid_L = PID(self.Kp_l, self.Ki_l, self.Kd_l, setpoint = self.setpointL)
-        pid_R.output_limits = (-300, 300)
-        pid_L.output_limits = (-300, 300)
+        pid_R.output_limits = (-10, 10)
+        pid_L.output_limits = (-10, 10)
         pid_R.sample_time = 0.001
         pid_L.sample_time = 0.001
 
-        return [pid_R(self.velRightWheel)+1500, pid_L(self.velLeftWheel)+1500]
+        return [pid_R(self.velRightWheel), pid_L(self.velLeftWheel)]
 
     def callback_vel_setpoint(self, msg):
 
@@ -65,7 +65,7 @@ class SerialComController:
             rospy.loginfo("Executing!")
             self.rate.sleep()
 
-        self.pub_servo_vel_control.publish(Int32MultiArray(data = [1500, 1500]))
+        self.pub_servo_vel_control.publish(Int32MultiArray(data = [0.0, 0.0]))
 
 
 if __name__ == "__main__":
