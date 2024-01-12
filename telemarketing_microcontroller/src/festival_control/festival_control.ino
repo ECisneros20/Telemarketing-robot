@@ -21,12 +21,12 @@ Servo MotorL;
 void encoderRcallback(); // Declaración de la función
 void encoderLcallback(); // Declaración de la función
 // Callback declaration
-void messageCb(const std_msgs::Int32MultiArray &msg);
+void messageCb(const std_msgs::Float32MultiArray &msg);
 
 // ROS node declaration
 ros::NodeHandle nh;
 // ROS subscriber
-ros::Subscriber<std_msgs::Int32MultiArray> sub("/servo_vel_controlled", &messageCb);
+ros::Subscriber<std_msgs::Float32MultiArray> sub("/servo_vel_controlled", &messageCb);
 // ROS publisher
 std_msgs::Float32MultiArray msg;
 ros::Publisher pub("/encoder_data", &msg);
@@ -88,7 +88,7 @@ void setMotorL(int pulse) {
 }
 
 // Callback definition
-void messageCb(const std_msgs::Int32MultiArray &msg) {
+void messageCb(const std_msgs::Float32MultiArray &msg) {
     int right_pulso = 1200 + (msg.data[0]-(-10))*1.0*(1800-1200)/(10-(-10));
     int left_pulso = 1200 + (msg.data[1]-(-10))*1.0*(1800-1200)/(10-(-10));
     setMotorR(right_pulso);

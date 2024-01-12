@@ -17,12 +17,12 @@ class SerialComController:
     def __init__(self):
 
         # Controller constants
-        self.Kp_r = 1.92
-        self.Ki_r = 2.82353
-        self.Kd_r = 0.3264
-        self.Kp_l = 2.76
-        self.Ki_l = 7.45946
-        self.Kd_l = 0.2553
+        self.Kp_r = 0.7
+        self.Ki_r = 0.0
+        self.Kd_r = 0.0
+        self.Kp_l = 0.7
+        self.Ki_l = 0.0
+        self.Kd_l = 0.0
         self.setpointR = 0
         self.setpointL = 0
         self.velRightWheel = 0
@@ -32,8 +32,8 @@ class SerialComController:
         rospy.init_node("serial_com_controller_node")
         self.sub_vel_setpoint = rospy.Subscriber("/vel_setpoint", Float32MultiArray, self.callback_vel_setpoint)
         self.sub_encoder = rospy.Subscriber("/encoder_data", Float32MultiArray, self.callback_encoder)
-        self.pub_servo_vel_control = rospy.Publisher("/servo_vel_controlled", Int32MultiArray, queue_size = 10)
-        self.servo_controlled_msg = Int32MultiArray(data = [0, 0])
+        self.pub_servo_vel_control = rospy.Publisher("/servo_vel_controlled", Float32MultiArray, queue_size = 10)
+        self.servo_controlled_msg = Float32MultiArray(data = [0, 0])
         self.rate = rospy.Rate(10)
 
 
